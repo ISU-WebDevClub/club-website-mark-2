@@ -1,0 +1,51 @@
+#background-div{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    min-width: 1000px;
+    height: 400px;
+    z-index:-1;
+}
+body{
+    margin: 400px 0 100px 0;
+}
+.title{
+    position: absolute;
+    top: -250px;
+    left: 150px;
+    font-size: 23px;
+    text-shadow: 4px 4px black;
+}
+.title p{
+    text-shadow: 3px 3px black;
+}
+
+#chalkshelf{
+    position: absolute;
+    top: -15px;
+    min-width:600px;
+    width: 100%;
+}
+#content{
+    background: -webkit-linear-gradient(left, #151515, #353535); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,  #151515, #353535); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,  #151515, #353535); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,  #151515, #353535); /* Standard syntax */
+    padding-top: 20px;
+    width: 100%;
+    margin: 0 auto;
+}
+#side_by_side{
+    margin-top: 50px;
+    display: inline-flex;
+    width: 80%;
+    margin-left: 10%;
+    justify-content: space-between;
+}
+#calendar_div{
+    height: 600px;
+    padding-bottom: 100px;
+    width: 90%;
+    margin-left: 5%;
+}
