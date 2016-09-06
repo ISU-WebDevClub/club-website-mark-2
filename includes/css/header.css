@@ -3,7 +3,7 @@ header{
     top: 0;
     width: 100%;
     z-index: 1;
-    height: 70px;
+    height: 50px;
     background-color: #f5f5f5;
 }
 header #menu_icon{
@@ -12,7 +12,7 @@ header #menu_icon{
     height: 40px;
     position: absolute;
     right: 30px;
-    top: 15px;
+    top: 5px;
     border: 1px solid black;
     opacity: .5;
     border-radius: 5px;
@@ -20,8 +20,8 @@ header #menu_icon{
     cursor: hand;
 }
 #header_logo{
-    width: 100px;
-    margin: 10px 20px;
+    width: 65px;
+    margin: 10px -20px 0 20px;
     filter: drop-shadow(-5px 5px 10px black);
 }
 #navbar{
@@ -29,7 +29,7 @@ header #menu_icon{
     display: inline-flex;
     position: absolute;
     margin: 0;
-    height: 70px;
+    height: 50px;
     top: 0;
 }
 #contact{
@@ -42,7 +42,7 @@ header #menu_icon{
 #navbar .header_title{
     font-size: 15px;
     display: block;
-    height: 70px;
+    height: 50px;
     margin: 0 10px 0 10px;
     text-align: center;
     text-decoration: none;
@@ -50,7 +50,7 @@ header #menu_icon{
 }
 .nav_text{
     height: 15px;
-    padding-top: 27px;
+    padding-top: 17px;
     margin: 0 10px 0 10px;
 }
 
@@ -79,18 +79,18 @@ header.small #navbar{
 }
 
 header.small #navbar.visible{
-    height: 450px;
+    height: 300px;
     width: 400px;
     display: block;
     background-color: #f5f5f5;
     position: absolute;
-    top: 75px;
+    top: 50px;
     right: 0;
     margin: 0;
     padding: 0;
 }
 header.small #navbar.visible li{
-    height: 75px;
+    height: 50px;
     width: 100%;
 }
 header.small #navbar.visible #contact{
