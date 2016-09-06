@@ -38,7 +38,9 @@
         <p>Iowa State University's craftiest code monkeys</p>
     </div>
 </div>
-<img src="includes/images/divider.png" alt="chalkboard shelf" id="chalkshelf">
+<div id="shelf_div">
+    <img src="includes/images/divider.png" alt="chalkboard shelf" id="chalkshelf">
+</div>
 
 <div class="container" id="content">
     <div id="side_by_side">
@@ -53,7 +55,7 @@
             </div>
             <div id="announcements">
                 <h2>Announcements</h2>
-                <h4>TEMP TEMP TEMP TEMP</h4>
+                <h4>TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP</h4>
                 <h4>TEMP TEMP TEMP TEMP</h4>
                 <h4>TEMP TEMP TEMP TEMP</h4>
                 <h4>TEMP TEMP TEMP TEMP</h4>
