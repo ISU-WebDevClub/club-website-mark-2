@@ -5,6 +5,12 @@
  * Date: 9/5/16
  * Time: 5:17 PM
  */
+
+$string =  getUrl("https://www.stuorg.iastate.edu/site/web-dev-club");
+//echo "At ---------------------- " . strpos($string, "News &");
+$string = substr($string, strpos($string, "<blockquote>"));
+$string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
+
 ?>
 
 <!DOCTYPE html>
@@ -55,16 +61,15 @@
             </div>
             <div id="announcements">
                 <h2>Announcements</h2>
-                <h4>TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
-                <h4>TEMP TEMP TEMP TEMP</h4>
+                <?php
+                    $announcements = explode("<blockquote>",$string);
+
+                    foreach($announcements as $curr){
+                        $result = parse_announcements($curr);
+                        echo $result['date'];
+                        //TODO print out results
+                    }
+                ?>
 
                 <!--The javascript at the bottom loads this with announcements from the Student Organization database.-->
 <!--                TODO pull announcements from the stuorg webpage.-->
@@ -101,3 +106,28 @@
 <?php include "includes/php/footer.php" ?>
 </html>
 
+<?php
+
+function getURL($url){
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $tmp = curl_exec($ch);
+    curl_close($ch);
+    if ($tmp != false){
+        return $tmp;
+    }
+}
+
+function parse_announcements($string){
+    
+    $announcements = array();
+//    $announcements['date'] = substr($string, strpos($string, "</i>"), strpos($string,"</div>"))
+    return $announcements;
+}
