@@ -4,10 +4,45 @@ body{
 #content{
     margin: 0;
     padding-top: 130px;
+    padding-bottom: 50px;
 }
 #content-sub{
     width: 90%;
     margin-left: 5%;
     padding-bottom: 5px;
 
+}
+.grid{
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.grid_item{
+    position: relative;
+    margin: 5px;
+    border: none;
+    font-size: 0;
+    background-color: rgba(0,0,0,.5);
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+
+.s_square{
+    width: 300px;
+    height: 300px;
+}
+.l_square{
+    width: 600px;
+    height: 600px;
+}
+.tall{
+    width: 300px;
+    height: 600px;
+}
+.wide{
+    width: 600px;
+    height: 300px;
 }

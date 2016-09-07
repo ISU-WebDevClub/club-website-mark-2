@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="../includes/css/header.css">
         <link rel="stylesheet" href="../includes/css/footer.css">
+
     </head>
 <?php include "../includes/php/header.php" ?>
 <body>
@@ -37,13 +38,55 @@
                 <hr>
             </div>
 
-            <!--<p>Here is a sample of the projects in which our club has been involved.  Click on a project to see more.</p>-->
-            <p>Since the Web Development Club is still quite new and hasn't completed anything (other than the club
-                website), you will have to settle for some Nick Cage humor in the meantime.</p>
+        </div>
+        <div class="grid" id="project_grid">
+            <div class="grid_item s_square">
 
+            </div>
+            <div class="grid_item tall">
+
+            </div>
+            <div class="grid_item wide">
+
+            </div>
+            <div class="grid_item s_square">
+
+            </div>
+            <div class="grid_item l_square">
+
+            </div>
+            <div class="grid_item wide">
+
+            </div>
+            <div class="grid_item tall">
+
+            </div>
+            <div class="grid_item s_square">
+
+            </div>
+            <div class="grid_item wide">
+
+            </div>
+            <div class="grid_item l_square">
+
+            </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+    var sizes = ['s_square','l_square','wide','tall'];
+    random_grid(5);
 
+
+    function random_grid(input){
+        var array = [];
+        for(i=0;i<input;i++){
+            var num = Math.floor((Math.random() * 3) + 1);
+            array[i] = sizes[num];
+        }
+        console.log(array);
+    }
+
+</script>
 <?php include "../includes/php/footer.php" ?>
