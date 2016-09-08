@@ -23,7 +23,7 @@
         <meta name="description" content="The Web Development Club at Iowa State University is a community of students who want to learn about and practice web development.">
         <meta name="author" content="ISU Web Dev Club members">
         <link rel="icon" href="/favicon.ico">
-        <title>About | Web Development Club</title>
+        <title>Portfolio | Web Development Club</title>
 
 
         <!-- Custom CSS -->
@@ -56,12 +56,13 @@
             //TODO once we have a database connection, we need to replace this for loop with a foreach($result as $curr)
             //That will go through each result from the query and place the content into the correct spot
             //Title, Background image, description, link, etc...
-                for($i =0; $i< 8;$i++){
+                for($i =0; $i< 20;$i++){
                 ?>
-                    <div class="grid-item " id="<?= $i ?>" style="background: url('/includes/images/cage-superman.jpg'); background-size: cover;">
+                    <div class="grid-item " id="<?= $i ?>" style="background: url('<?= random_pic() ?>') center; background-size: cover;">
                         <a href="#">
                             <div class="overlay"></div>
-                            <h1 class="title">Title</h1>
+                            <h2 class="title">Title</h2>
+                            <p class="description">This is just a description of the project that should be limited in length.</p>
                         </a>
 
                     </div>
@@ -78,6 +79,10 @@
 
     var classes = [
         '',
+        '',
+        '',
+        '',
+        '',
         ' grid-item--width2 grid-item--height2',
         ' grid-item--width3 grid-item--height3'
 
@@ -89,7 +94,7 @@
 
     function get_classes(item){
 
-        var num = Math.floor((Math.random()* 3));
+        var num = Math.floor((Math.random()* 7));
         if(num != 0){
             item.className += classes[num];
         }
@@ -105,4 +110,17 @@
 
 
 </script>
-<?php include "../includes/php/footer.php" ?>
+<?php
+
+include "../includes/php/footer.php";
+
+//TODO this function can be removed once we have actual urls for the projects.
+//I just added it to randomize the background pictures.
+function random_pic($dir = '../includes/images/')
+{
+    $files = glob($dir . '/*.*');
+    $file = array_rand($files);
+    return $files[$file];
+}
+
+?>

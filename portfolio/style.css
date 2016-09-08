@@ -39,25 +39,54 @@ body{
 }
 
 .grid-item {
+    position: relative;
     display: inline-block;
     height: 200px;
     background: gray;
     border: 1px solid black;
+
 }
 
 .overlay{
-    background-color: rgba(0,0,0,.5);
+    opacity: .8;
+    background: rgba(0,0,0,.8);
+    background: -webkit-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* Standard syntax */
     width: 100%;
     height: 100%;
     position: relative;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
 }
 
 .overlay:hover {
-    background-color: rgba(0,0,0,.8);
+    opacity: 1;
 }
 
 .title{
-    display: none;
+    opacity: 0;
+    color: white;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    text-align: center;
+    -webkit-transition: opacity .3s;
+    -moz-transition: opacity .3s;
+    -ms-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+}
+
+.description{
+    opacity: 0;
     color: white;
     position: absolute;
     top: 50%;
@@ -66,12 +95,25 @@ body{
     z-index: 0;
     pointer-events: none;
     text-align: center;
+    -webkit-transition: opacity .3s;
+    -moz-transition: opacity .3s;
+    -ms-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
 }
 
 .grid-item:hover .title{
     display: block;
+    opacity: 1;
 }
+
+.grid-item:hover .description{
+    display: block;
+    opacity: 1;
+}
+
 .grid-item--width2 { width: 400px; }
 .grid-item--height2 { height: 400px; }
 .grid-item--width3 { width: 600px; }
 .grid-item--height3 { height: 600px;}
+

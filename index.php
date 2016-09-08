@@ -21,7 +21,7 @@
     <meta name="description" content="The Web Development Club at Iowa State University is a community of students who want to learn about and practice web development.">
     <meta name="author" content="ISU Web Dev Club members">
     <link rel="icon" href="favicon.ico">
-    <title>Web Development Club | Iowa State University</title>
+    <title>Home | Web Development Club</title>
 
 
     <!-- Custom CSS -->
@@ -41,7 +41,7 @@
     </div>
 </div>
 <div id="shelf_div">
-    <img src="includes/images/divider.png" alt="chalkboard shelf" id="chalkshelf">
+    <img src="includes/images/icons/divider.png" alt="chalkboard shelf" id="chalkshelf">
 </div>
 
 <div class="container" id="content">
