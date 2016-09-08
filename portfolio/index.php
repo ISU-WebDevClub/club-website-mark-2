@@ -28,6 +28,10 @@
         <link rel="stylesheet" href="../includes/css/header.css">
         <link rel="stylesheet" href="../includes/css/footer.css">
 
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+
     </head>
 <?php include "../includes/php/header.php" ?>
 <body>
@@ -37,56 +41,56 @@
                 <h1>Portfolio</h1>
                 <hr>
             </div>
+        </div>
+        <div class="grid">
+            <div class="grid-sizer" ></div>
+            <?php
+                for($i =0; $i< 8;$i++){
+                ?>
+                    <div class="grid-item item" id="<?= $i ?>" ></div>
+                <?php
+                }
+            ?>
 
         </div>
-        <div class="grid" id="project_grid">
-            <div class="grid_item s_square">
 
-            </div>
-            <div class="grid_item tall">
-
-            </div>
-            <div class="grid_item wide">
-
-            </div>
-            <div class="grid_item s_square">
-
-            </div>
-            <div class="grid_item l_square">
-
-            </div>
-            <div class="grid_item wide">
-
-            </div>
-            <div class="grid_item tall">
-
-            </div>
-            <div class="grid_item s_square">
-
-            </div>
-            <div class="grid_item wide">
-
-            </div>
-            <div class="grid_item l_square">
-
-            </div>
-        </div>
     </div>
 </body>
 </html>
 <script>
-    var sizes = ['s_square','l_square','wide','tall'];
-    random_grid(5);
 
 
-    function random_grid(input){
-        var array = [];
-        for(i=0;i<input;i++){
-            var num = Math.floor((Math.random() * 3) + 1);
-            array[i] = sizes[num];
+    var classes = [
+        '',
+        ' grid-item--height2',
+        ' grid-item--height3',
+        ' grid-item--width2',
+        ' grid-item--width3',
+        ' grid-item--width2 grid-item--height2',
+        ' grid-item--width3 grid-item--height3',
+    ];
+
+    $('.item').each(function(){
+        get_classes(this)
+    });
+
+    function get_classes(item){
+
+        var num = Math.floor((Math.random()* 7));
+        console.log(num);
+        if(num != 0){
+            item.className += classes[num];
         }
-        console.log(array);
     }
+
+    $('.grid').masonry({
+        // options...
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        gutter: .1
+    });
+
+
 
 </script>
 <?php include "../includes/php/footer.php" ?>
