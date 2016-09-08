@@ -23,7 +23,7 @@
         <meta name="description" content="The Web Development Club at Iowa State University is a community of students who want to learn about and practice web development.">
         <meta name="author" content="ISU Web Dev Club members">
         <link rel="icon" href="/favicon.ico">
-        <title>About | Web Development Club</title>
+        <title>Resources | Web Development Club</title>
 
 
         <!-- Custom CSS -->
