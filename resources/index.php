@@ -5,6 +5,10 @@
  * Date: 9/5/16
  * Time: 5:41 PM
  */
+
+//include "../includes/php/general.php";
+//include "../includes/php/base.php";
+
 ?>
 
     <!DOCTYPE html>
@@ -31,139 +35,64 @@
 <?php include "../includes/php/header.php" ?>
 <body>
     <div id="content">
-        <div id="content-sub">
-            <div class="page-header">
-                <h1>Resources</h1>
-                <hr>
+
+        <div id="content_sub">
+            <h1>Resources</h1>
+            <hr>
+            <h2 id="social_media_title">Social Media</h2>
+            <hr>
+            <div class="topic" id="social_media">
+<!--                --><?php
+//                $sql = "SELECT * FROM resources WHERE category = 'social'";
+//                $query = mysqli_query($conn, $sql);
+//                $result = mysqli_fetch_assoc($query);
+//                foreach($result as $curr){
+//                    ?>
+<!--                    <a class="link" href="--><?//= $curr['url'] ?><!--"><h4>--><?//= $curr['title'] ?><!--</h4></a>-->
+<!--                    <p class="description">--><?//= $curr['description'] ?><!--</p>-->
+<!---->
+<!--                    --><?php
+//                }
+//
+//                ?>
             </div>
-            <!-- Dev Blog Here -->
-            <div class="page-header">
-                <h2>
-                    Social Media
-                </h2>
+            <h2 id="repo_title">Repo and Documents</h2>
+            <hr>
+            <div class="topic" id="documents">
+<!--                --><?php
+//                $sql = "SELECT * FROM resources WHERE category = 'documents'";
+//                $query = mysqli_query($conn, $sql);
+//                $result = mysqli_fetch_assoc($query);
+//                foreach($result as $curr){
+//                    ?>
+<!--                    <a class="link" href="--><?//= $curr['url'] ?><!--"><h4>--><?//= $curr['title'] ?><!--</h4></a>-->
+<!--                    <p class="description">--><?//= $curr['description'] ?><!--</p>-->
+<!---->
+<!--                    --><?php
+//                }
+//
+//                ?>
             </div>
-            <dl>
-                <dt>
-                    <a href="https://www.facebook.com/ISUWebDevelopment" target="_blank">
-                        FaceBook
-                    </a>
-                </dt>
-                <dt>
-                    <a href="https://twitter.com/ISU_Web_Dev" target="_blank">
-                        Twitter
-                    </a>
-                </dt>
-                <dt>
-                    <a href="https://isuwdc.slack.com" target="_blank">
-                        Slack
-                    </a>
-                </dt>
-                <dd>
-                    - A chat client for discussing projects, development, or random YouTube videos.
-                </dd>
-                <dt>
-                    <a href="https://www.stuorg.iastate.edu/site/web-dev-club" target="_blank">
-                        ISU Student Organization Database
-                    </a>
-                </dt>
-                <dd>
-                    - The club's official student organization page for Iowa State University.
-                </dd>
-            </dl>
-            <div class="page-header">
-                <h2>
-                    Repo and Documents
-                </h2>
+            <h2 id="development_title">Development</h2>
+            <hr>
+            <div class="topic" id="development">
+<!--                --><?php
+//                $sql = "SELECT * FROM resources WHERE category = 'development'";
+//                $query = mysqli_query($conn, $sql);
+//                $result = mysqli_fetch_assoc($query);
+//                foreach($result as $curr){
+//                    ?>
+<!--                    <a class="link" href="--><?//= $curr['url'] ?><!--"><h4>--><?//= $curr['title'] ?><!--</h4></a>-->
+<!--                    <p class="description">--><?//= $curr['description'] ?><!--</p>-->
+<!---->
+<!--                    --><?php
+//                }
+//
+//                ?>
             </div>
-            <dl>
-                <dt>
-                    <a href="https://github.com/ISU-webdevclub" target="_blank">
-                        GitHub
-                    </a>
-                </dt>
-                <dd>
-                    - The repository for all the club's code. It also contains the repository for club documents,
-                    such as the <a href="https://github.com/ISU-WebDevClub/club-documents/blob/master/constitution.md"
-                                   target="_blank">Constitution</a> and
-                    <a href="https://github.com/ISU-WebDevClub/club-documents/blob/master/operations-manual.md"
-                       target="_blank">Operations Manual</a>.
-                </dd>
-                <dt>
-                    <a href="https://drive.google.com/a/iastate.edu/folderview?id=0B4rWlTKPygEyfkw1YVdEZUtBUVZ2cjFSeUZIVEFKMkZjRlJoWldDcWhJckNuMkkzUm1DZlE&usp=sharing#" target="_blank">
-                        Google Drive
-                    </a>
-                </dt>
-                <dd>
-                    - Primarily documents, meeting minutes, etc.
-                </dd>
-            </dl>
-            <div class="page-header">
-                <h2>
-                    Development
-                </h2>
-            </div>
-            <dl>
-                <dt>
-                    <a href="http://www.w3schools.com/" target="_blank">
-                        W3Schools
-                    </a>
-                </dt>
-                <dd>
-                    - A fine source of knowledge about HTML, XML, CSS, Bootstrap, JavaScript, JQuery, SQL, and PHP.
-                </dd>
-                <dt>
-                    <a href="http://getbootstrap.com/" target="_blank">
-                        Bootstrap
-                    </a>
-                </dt>
-                <dd>
-                    - One of the most exhaustive sources of Bootstrap info.
-                </dd>
-                <dt>
-                    <a href="tutorials/github_for_windows.pdf" target="_blank">
-                        GitHub for Windows
-                    </a>
-                </dt>
-                <dd>
-                    - A tutorial created by one of our own covering the basics of Git and GitHub in a Windows environment.
-                </dd>
-                <dt>
-                    <a href="http://stackoverflow.com/" target="_blank">
-                        Stack Overflow
-                    </a>
-                </dt>
-                <dd>
-                    - Got a question?  Odds are, the answer's in here...
-                </dd>
-                <dt>
-                    <a href="http://www.lynda.com/" target="_blank">
-                        Lynda
-                    </a>
-                </dt>
-                <dd>
-                    - Learn technology, software development, creative skills, and business savvy from the
-                    professionals in these quality video courses. Free access for ISU students.
-                </dd>
-                <dt>
-                    <a href="https://www.thenewboston.com/" target="_blank">
-                        TheNewBoston
-                    </a>
-                </dt>
-                <dd>
-                    - Watch thousands of free educational video tutorials.
-                </dd>
-                <dt>
-                    <a href="https://www.bento.io/" target="_blank">
-                        Bento
-                    </a>
-                </dt>
-                <dd>
-                    - Everything you need to be a self-taught expert developer.
-                </dd>
-            </dl>
         </div>
     </div>
-    </body>
+</body>
 </html>
 
 <?php include "../includes/php/footer.php" ?>
