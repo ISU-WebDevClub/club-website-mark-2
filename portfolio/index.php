@@ -5,6 +5,10 @@
  * Date: 9/5/16
  * Time: 5:41 PM
  */
+//The following are for shared functions and database connections respectively.
+
+//includes "../includes/php/general.php";
+//include "../includes/php/base.php";
 ?>
 
     <!DOCTYPE html>
