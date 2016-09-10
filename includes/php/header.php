@@ -8,7 +8,7 @@
 $url = "";
 if(strpos($_SERVER['REQUEST_URI'], 'About') !== false){
     $url = "About";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false || strpos($_SERVER['REQUEST_URI'], 'Focus') !== false){
     $url = "Portfolio";
 }else if(strpos($_SERVER['REQUEST_URI'], 'Members') !== false){
     $url = "Members";
