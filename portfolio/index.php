@@ -7,8 +7,8 @@
  */
 //The following are for shared functions and database connections respectively.
 
-//includes "../includes/php/general.php";
-//include "../includes/php/base.php";
+include "../includes/php/general.php";
+include "../includes/php/base.php";
 ?>
 
     <!DOCTYPE html>
@@ -46,28 +46,34 @@
                 <hr>
             </div>
         </div>
+
         <div class="grid">
             <div class="grid-sizer" ></div>
             <?php
             //This is the sql for querying the projects, assuming the table name is projects.
-//            $sql = "SELECT * FROM projects";
-//            $query = mysqli_query($conn, $sql);
-//            $result = mysqli_fetch_assoc($query);
+            $sql = "SELECT * FROM WDC.projects WHERE active='yes'";
+            $query = mysqli_query($conn, $sql);
+            while($result = mysqli_fetch_assoc($query)){
+                //TODO remove this forloop
+                for($i =0; $i<10;$i++){
+                ?>
+                <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
+                    <a href="/focus/index.php?id=<?= $result['id'] ?>">
+                        <div class="overlay"></div>
+                        <h2 class="title"><?= $result['title'] ?></h2>
+                        <p class="description"><?= $result['short_desc'] ?></p>
+                    </a>
+                </div>
+                <?php
+                }
+
+            }
+
+
+
             //TODO once we have a database connection, we need to replace this for loop with a foreach($result as $curr)
             //That will go through each result from the query and place the content into the correct spot
             //Title, Background image, description, link, etc...
-                for($i =0; $i< 20;$i++){
-                ?>
-                    <div class="grid-item " id="<?= $i ?>" style="background: url('<?= random_pic() ?>') center; background-size: cover;">
-                        <a href="#">
-                            <div class="overlay"></div>
-                            <h2 class="title">Title</h2>
-                            <p class="description">This is just a description of the project that should be limited in length.</p>
-                        </a>
-
-                    </div>
-                <?php
-                }
             ?>
 
         </div>

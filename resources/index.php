@@ -5,6 +5,10 @@
  * Date: 9/5/16
  * Time: 5:41 PM
  */
+
+include "../includes/php/general.php";
+include "../includes/php/base.php";
+
 ?>
 
     <!DOCTYPE html>
@@ -42,7 +46,26 @@
                 </h2>
             </div>
             <?php
-            //TODO add the social media category resources here by querying the db.
+            $sql = "SELECT * FROM resources WHERE active='yes' AND category='social'";
+            $query = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($query) > 0){
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <a href="<?= $result['url'] ?>">
+                        <h3 class="resource social"><?= $result['title'] ?></h3>
+                    </a>
+                    <?php
+                    if($result['description'] != ''){
+                        ?>
+                        <p class="resource_text"> - <?= $result['description'] ?></p>
+                        <?php
+                    }
+                    ?>
+                    <br>
+                    <br>
+                    <?php
+                }
+            }
 
             ?>
             <div class="page-header">
@@ -51,7 +74,26 @@
                 </h2>
             </div>
             <?php
-            //TODO add the Documents category resources here by querying the db.
+            $sql = "SELECT * FROM resources WHERE active='yes' AND category='documents'";
+            $query = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($query) > 0){
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <a href="<?= $result['url'] ?>">
+                        <h3 class="resource documents"><?= $result['title'] ?></h3>
+                    </a>
+                    <?php
+                    if($result['description'] != ''){
+                        ?>
+                        <p class="resource_text"> - <?= $result['description'] ?></p>
+                        <?php
+                    }
+                    ?>
+                    <br>
+                    <br>
+                    <?php
+                }
+            }
 
             ?>
             <div class="page-header">
@@ -60,7 +102,26 @@
                 </h2>
             </div>
             <?php
-            //TODO add the Development category resources here by querying the db.
+            $sql = "SELECT * FROM resources WHERE active='yes' AND category='development'";
+            $query = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($query) > 0){
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <a href="<?= $result['url'] ?>">
+                        <h3 class="resource development"><?= $result['title'] ?></h3>
+                    </a>
+                    <?php
+                    if($result['description'] != ''){
+                        ?>
+                        <p class="resource_text"> - <?= $result['description'] ?></p>
+                        <?php
+                    }
+                    ?>
+                    <br>
+                    <br>
+                    <?php
+                }
+            }
 
             ?>
 

@@ -10,3 +10,16 @@ body{
     margin-left: 5%;
     padding-bottom: 5px;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.resource{
+    margin-left:45px;
+    display: inline;
+}
+
+.resource_text{
+    display: inline;
+    color: #808080;
+}

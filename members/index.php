@@ -8,8 +8,11 @@
 
 //The following are for shared functions and database connections respectively.
 //TODO uncomment when db is set up
-//include "../includes/php/general.php";
-//include "../includes/php/base.php";
+include "../includes/php/general.php";
+include "../includes/php/base.php";
+
+$sql = "SELECT * FROM WDC.members WHERE active='yes'";
+$query = mysqli_query($conn, $sql);
 
 
 
@@ -45,25 +48,19 @@
         </div>
         <div id="members_grid">
             <?php
-//            $sql = "SELECT * FROM members WHERE active = 'yes'";
-//            $query = mysqli_query($conn, $sql);
-//            $result = mysqli_fetch_assoc($query);
-//            foreach($result as $curr){
-//                //TODO add each member into the grid.
-//            }
 
-            //For now I'm just using a for loop to generate fake members.
-            for($i = 0;$i< 10;$i++){
+            while($result = mysqli_fetch_assoc($query)){
+
                 ?>
-                <a href="#">
-                    <div class="grid-item" style="background-image: url('<?= random_pic() ?>')">
+                <a href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
+                    <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
 
                         <div class="overlay_hover">
                             <div class="overlay"></div>
                         </div>
 
-                        <h2 class="name">Nicholas Cage</h2>
-                        <p class="description">This is a short description of the members which should be limited in length.</p>
+                        <h2 class="name"><?= $result['f_name'] ?>&nbsp<?=$result['l_name'] ?></h2>
+                        <p class="description"><?= $result['short_desc'] ?></p>
 
                     </div>
                 </a>

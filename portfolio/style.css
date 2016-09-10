@@ -72,7 +72,7 @@ body{
     opacity: 0;
     color: white;
     position: absolute;
-    top: 35%;
+    top: 15%;
     left: 0;
     width: 100%;
     z-index: 0;
@@ -90,8 +90,8 @@ body{
     color: white;
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
+    left: 5%;
+    width: 90%;
     z-index: 0;
     pointer-events: none;
     text-align: center;
@@ -105,6 +105,7 @@ body{
 .grid-item:hover .title{
     display: block;
     opacity: 1;
+
 }
 
 .grid-item:hover .description{
@@ -117,3 +118,9 @@ body{
 .grid-item--width3 { width: 600px; }
 .grid-item--height3 { height: 600px;}
 
+.grid-item--height2 .title{
+    top: 35%;
+}
+.grid-item--height3 .title{
+    top: 35%;
+}
