@@ -82,8 +82,8 @@ if(mysqli_num_rows($query) == 1){
             </div>
             <div id="announcements">
                 <h1>Announcements</h1>
-                <p>We cannot currently display announcement information on this page.</p>
-                <p>Visit the <a href="https://www.stuorg.iastate.edu/site/web-dev-club" style="color: rgb(108,118,200)" target="_blank">stuorg webpage</a> for current Web Dev Club announcements.</p>
+                <p>We are having trouble displaying announcement information.</p>
+                <p>Please visit the <a href="https://www.stuorg.iastate.edu/site/web-dev-club" style="color: rgb(108,118,200)" target="_blank">stuorg webpage</a> for current Web Dev Club announcements.</p>
             </div>
         </div>
         <div id="twitter_div">
