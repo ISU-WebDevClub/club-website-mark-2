@@ -11,15 +11,15 @@ session_start();
 
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-if(strpos($root,'public_html') !== false){
-    $dbhost = 'localhost:3306';
-}else{
-    //TODO
-    $dbhost = ""; // this will ususally be 'localhost', but can sometimes differ
-}
+//if(strpos($root,'public_html') !== false){
+    $dbhost = '127.0.0.1:3306';
+//}else{
+//    //TODO
+//    $dbhost = ""; // this will ususally be 'localhost', but can sometimes differ
+//}
 
 $dbname = "WDC"; // the name of the database that you are going to use for this project
-$dbuser = "wdc_user"; // the username that you created, or were given, to access your database
+$dbuser = "root"; // the username that you created, or were given, to access your database
 $dbpass = "stee1nhagen"; // the password that you created, or were given, to access your database
 
 

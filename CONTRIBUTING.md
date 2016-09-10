@@ -1,6 +1,43 @@
 # How to Contribute
 
 
+## Setup
+**Initial Steps:**
+- Install PHPStorm or some other php IDE
+- Download a php interpreter for your computer and redirect PHPStorm to it
+    1. Go to 'settings' or 'preferences' for OSX
+    2. Click the 'Languages' dropdown and select php
+    3. Click the '...' button to the right of the interpreter select box
+    4. In the pop up, Click the '+' on the top and select 'Other Local'
+    5. Name the interpreter and direct the php executable input to the php.ini file you just downloaded.
+    6. Click 'Ok' and make sure there are no warnings
+- Set up a local PHP server
+    1. Navigate to 'Run' >> 'Edit Configurations'
+    2. Click the '+' in the top left and create a new 'Built in PHP Web Server'
+    3. Name the server (Ex: Server 8080) and select a 4 digit port to run it on.
+    4. Set the document root the this projects directory
+    5. Click 'Ok' to exit.
+    6. To run the server, click the green play button at the top of the screen.
+    7. Navigate to ***localhost:'port'*** in the browser
+        - Where ***'port'*** is the four digit port number you selected beforehand.
+- To work on this project, you will need to install MySQL and MySQL Workbench.
+    - This project now relies on database information, so until we get a live database, you will need to host a local one.
+- Once MySQL Workbench and MySQL or some other mysql server (XAMPP) are downloaded, 
+    1. Start the mysql server
+    2. Open Workbench
+    3. create a new MySQL Connection by clicking the small + in the top left
+    4. Name the database 'WDC' and point it towards port 3306
+    5. Open up the connection 
+        - May have to type in root password (Hint: store it in your keychain)
+    6. On the left, under 'Management', click 'Data Import/Restore'
+    7. Select 'Import from Self-Contained File'
+        - Select the file 'WDCDataExport.sql' from this projects mysql directory
+    8. Under 'Default Schema to be Imported To' select 'WDC'
+    9. Click 'Start Import', and if successful, you are done.
+    10. IMPORTANT!! Go into this projects '/includes/php/base.php' file and change the root user and password information to match your own.
+    
+- Now the php files should be able to connect to the mysql server and select information from the database.
+
 ## New to git?
 
 No worries! This is a club to *learn and grow* after all. You can find a wonderful tutorial on getting started with git [here](https://github.com/GSoft-SharePoint/Dynamite/wiki/Getting-started-with-SourceTree,-Git-and-git-flow).

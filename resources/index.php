@@ -45,34 +45,37 @@ include "../includes/php/base.php";
                     Social Media
                 </h2>
             </div>
-            <?php
-            $sql = "SELECT * FROM resources WHERE active='yes' AND category='social'";
-            $query = mysqli_query($conn, $sql);
-            if(mysqli_num_rows($query) > 0){
-                while($result = mysqli_fetch_assoc($query)){
-                    ?>
-                    <a href="<?= $result['url'] ?>">
-                        <h3 class="resource social"><?= $result['title'] ?></h3>
-                    </a>
-                    <?php
-                    if($result['description'] != ''){
+            <div class="resource_div">
+                <?php
+                $sql = "SELECT * FROM resources WHERE active='yes' AND category='social'";
+                $query = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($query) > 0){
+                    while($result = mysqli_fetch_assoc($query)){
                         ?>
-                        <p class="resource_text"> - <?= $result['description'] ?></p>
+                        <a href="<?= $result['url'] ?>">
+                            <h3 class="resource social"><?= $result['title'] ?></h3>
+                        </a>
+                        <?php
+                        if($result['description'] != ''){
+                            ?>
+                            <p class="resource_text"> - <?= $result['description'] ?></p>
+                            <?php
+                        }
+                        ?>
+                        <br>
+                        <br>
                         <?php
                     }
-                    ?>
-                    <br>
-                    <br>
-                    <?php
                 }
-            }
 
-            ?>
+                ?>
+            </div>
             <div class="page-header">
                 <h2>
                     Repo and Documents
                 </h2>
             </div>
+            <div class="resource_div">
             <?php
             $sql = "SELECT * FROM resources WHERE active='yes' AND category='documents'";
             $query = mysqli_query($conn, $sql);
@@ -97,11 +100,13 @@ include "../includes/php/base.php";
             }
 
             ?>
+            </div>
             <div class="page-header">
                 <h2>
                     Development
                 </h2>
             </div>
+            <div class="resource_div">
             <?php
             $sql = "SELECT * FROM resources WHERE active='yes' AND category='development'";
             $query = mysqli_query($conn, $sql);
@@ -124,7 +129,7 @@ include "../includes/php/base.php";
                 }
             }
             ?>
-
+            </div>
 
         </div>
     </div>

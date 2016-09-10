@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: WDC
 -- ------------------------------------------------------
--- Server version	5.7.11
+-- Server version	5.7.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,37 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `meetings`
+--
+
+DROP TABLE IF EXISTS `meetings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `meetings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `day` varchar(10) NOT NULL,
+  `start_time` varchar(5) NOT NULL,
+  `end_time` varchar(5) NOT NULL,
+  `room` varchar(45) NOT NULL,
+  `building` varchar(45) NOT NULL,
+  `year` varchar(45) DEFAULT NULL,
+  `semester` varchar(45) DEFAULT NULL,
+  `active` varchar(45) DEFAULT 'no',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `meetings`
+--
+
+LOCK TABLES `meetings` WRITE;
+/*!40000 ALTER TABLE `meetings` DISABLE KEYS */;
+INSERT INTO `meetings` VALUES (1,'Tuesdays','6:00','7:00','1016','Coover Hall','2016','Fall','yes');
+/*!40000 ALTER TABLE `meetings` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `members`
@@ -28,7 +59,8 @@ CREATE TABLE `members` (
   `l_name` varchar(45) DEFAULT NULL,
   `year` varchar(45) DEFAULT NULL,
   `major` varchar(45) DEFAULT NULL,
-  `description` varchar(300) DEFAULT NULL,
+  `short_desc` varchar(60) DEFAULT NULL,
+  `long_desc` varchar(1000) DEFAULT NULL,
   `image` varchar(45) DEFAULT 'WDC-logo.png',
   `url` varchar(150) DEFAULT '#',
   `position` varchar(45) DEFAULT NULL,
@@ -44,7 +76,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'Gregory','Steenhagen','Senior','Software Engineering','WDC President. Drop dead handsome. Airbender.','Steenhagen-Gregory-md.jpg','http://www.stonestreetsoftware.com','President','yes','2016-09-09 20:19:16'),(2,'Nathan','Karasch','Senior','Software Engineering','WDC Treasurer. Retired rockstar. US Marine. Cookie Monster','Karasch-Nathan-md.jpg','#','Treasurer','yes','2016-09-09 20:19:16'),(3,'Leelabari','Fulbel',NULL,NULL,'WDC Vice President.','Fulbel-Leelabari-md.jpg','#','Vice President','yes','2016-09-09 20:19:16'),(4,'Christine','Hicaro',NULL,NULL,'WDC Outreach Coordinator','Hicaro-Christine-md.jpg','#','Outreach','yes','2016-09-09 20:19:16');
+INSERT INTO `members` VALUES (1,'Gregory','Steenhagen','Senior','Software Engineering','WDC President. Drop dead handsome. Airbender.',NULL,'Steenhagen-Charlie-md.jpg','http://www.stonestreetsoftware.com','President','yes','2016-09-09 20:19:16'),(2,'Nathan','Karasch','Senior','Software Engineering','WDC Treasurer. Retired rockstar. US Marine. Cookie Monster',NULL,'Karasch-Nathan-md.jpg','#','Treasurer','yes','2016-09-09 20:19:16'),(3,'Leelabari','Fulbel',NULL,NULL,'WDC Vice President.',NULL,'Fulbel-Leelabari-md.jpg','#','Vice President','yes','2016-09-09 20:19:16'),(4,'Christine','Hicaro',NULL,NULL,'WDC Outreach Coordinator',NULL,'Hicaro-Christine-md.jpg','#','Outreach','yes','2016-09-09 20:19:16');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +90,8 @@ DROP TABLE IF EXISTS `projects`;
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) DEFAULT NULL,
-  `description` varchar(300) DEFAULT NULL,
+  `short_desc` varchar(100) DEFAULT NULL,
+  `long_desc` varchar(1000) DEFAULT NULL,
   `image` varchar(45) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
@@ -73,7 +106,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow asked us to make this website for their new dental office located in Jewell, Iowa. This website serves as a point of contact for potential patients. ','WDC-logo.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
+INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow\'s website for their new dentist office located in Jewell, Iowa.',NULL,'WDC-logo.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,6 +123,7 @@ CREATE TABLE `resources` (
   `description` varchar(300) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL,
   `category` varchar(45) DEFAULT NULL,
+  `active` varchar(45) DEFAULT 'yes',
   `created` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
@@ -101,7 +135,7 @@ CREATE TABLE `resources` (
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
-INSERT INTO `resources` VALUES (1,'ISU Student Organization Database','The club\'s official student organization page for Iowa State University.\n','https://www.stuorg.iastate.edu/site/web-dev-club','social','2016-09-09 20:37:33'),(2,'Facebook',NULL,'https://www.facebook.com/ISUWebDevelopment','social','2016-09-09 20:37:33'),(3,'Twitter',NULL,'https://twitter.com/ISU_Web_Dev','social','2016-09-09 20:37:33'),(4,'Slack','A chat client for discussing projects, development, or random YouTube videos.','https://isuwdc.slack.com','social','2016-09-09 20:37:33'),(5,'Operations Manual','','https://github.com/ISU-WebDevClub/club-documents/blob/master/operations-manual.md','documents','2016-09-09 20:37:33'),(6,'Constitution','','https://github.com/ISU-WebDevClub/club-documents/blob/master/constitution.md','documents','2016-09-09 20:37:33'),(7,'Github','The repository for all the club\'s code.','https://github.com/ISU-webdevclub','documents','2016-09-09 20:37:33'),(8,'Google Drive','Primarily documents, meeting minutes, etc.','https://drive.google.com/a/iastate.edu/folderview?id=0B4rWlTKPygEyfkw1YVdEZUtBUVZ2cjFSeUZIVEFKMkZjRlJoWldDcWhJckNuMkkzUm1DZlE&usp=sharing#','documents','2016-09-09 20:37:33'),(9,'W3School','A fine source of knowledge about HTML, XML, CSS, Bootstrap, JavaScript, JQuery, SQL, and PHP.','http://www.w3schools.com/','development','2016-09-09 20:37:33'),(10,'Bootstrap','One of the most exhaustive sources of Bootstrap info.','http://getbootstrap.com/','development','2016-09-09 20:37:33'),(11,'Github For Windows','A tutorial created by one of our own covering the basics of Git and GitHub in a Windows environment.',NULL,'development','2016-09-09 20:37:33'),(12,'Stack Overflow','Got a question? Odds are, the answer\'s in here...','http://stackoverflow.com/','development','2016-09-09 20:37:33'),(13,'Lynda','Learn technology, software development, creative skills, and business savvy from the professionals in these quality video courses. Free access for ISU students.','http://www.lynda.com/','development','2016-09-09 20:37:33'),(14,'TheNewBoston','Watch thousands of free educational video tutorials.','https://www.thenewboston.com/','development','2016-09-09 20:37:33'),(15,'Bento','Everything you need to be a self-taught expert developer.','https://www.bento.io/','development','2016-09-09 20:37:33');
+INSERT INTO `resources` VALUES (1,'ISU Student Organization Database','The club\'s official student organization page for Iowa State University.\n','https://www.stuorg.iastate.edu/site/web-dev-club','social','yes','2016-09-09 20:37:33'),(2,'Facebook',NULL,'https://www.facebook.com/ISUWebDevelopment','social','yes','2016-09-09 20:37:33'),(3,'Twitter',NULL,'https://twitter.com/ISU_Web_Dev','social','yes','2016-09-09 20:37:33'),(4,'Slack','A chat client for discussing projects, development, or random YouTube videos.','https://isuwdc.slack.com','social','yes','2016-09-09 20:37:33'),(5,'Operations Manual','','https://github.com/ISU-WebDevClub/club-documents/blob/master/operations-manual.md','documents','yes','2016-09-09 20:37:33'),(6,'Constitution','','https://github.com/ISU-WebDevClub/club-documents/blob/master/constitution.md','documents','yes','2016-09-09 20:37:33'),(7,'Github','The repository for all the club\'s code.','https://github.com/ISU-webdevclub','documents','yes','2016-09-09 20:37:33'),(8,'Google Drive','Primarily documents, meeting minutes, etc.','https://drive.google.com/a/iastate.edu/folderview?id=0B4rWlTKPygEyfkw1YVdEZUtBUVZ2cjFSeUZIVEFKMkZjRlJoWldDcWhJckNuMkkzUm1DZlE&usp=sharing#','documents','yes','2016-09-09 20:37:33'),(9,'W3School','A fine source of knowledge about HTML, XML, CSS, Bootstrap, JavaScript, JQuery, SQL, and PHP.','http://www.w3schools.com/','development','yes','2016-09-09 20:37:33'),(10,'Bootstrap','One of the most exhaustive sources of Bootstrap info.','http://getbootstrap.com/','development','yes','2016-09-09 20:37:33'),(11,'Github For Windows','A tutorial created by one of our own covering the basics of Git and GitHub in a Windows environment.',NULL,'development','yes','2016-09-09 20:37:33'),(12,'Stack Overflow','Got a question? Odds are, the answer\'s in here...','http://stackoverflow.com/','development','yes','2016-09-09 20:37:33'),(13,'Lynda','Learn technology, software development, creative skills, and business savvy from the professionals in these quality video courses. Free access for ISU students.','http://www.lynda.com/','development','yes','2016-09-09 20:37:33'),(14,'TheNewBoston','Watch thousands of free educational video tutorials.','https://www.thenewboston.com/','development','yes','2016-09-09 20:37:33'),(15,'Bento','Everything you need to be a self-taught expert developer.','https://www.bento.io/','development','yes','2016-09-09 20:37:33');
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-09 20:38:34
+-- Dump completed on 2016-09-10  1:09:35

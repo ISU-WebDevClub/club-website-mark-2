@@ -9,3 +9,8 @@ MySQL Workbench and do the following.
 - Put the location of the file in the box to the right
     - click the box with '...' on the right side to find the file
 - Click 'Start Import' at the bottom right of Mysql Workbench
+
+## Uses
+
+- This data can be used for testing as well, so if you set up a local 
+    database connection, you can import this data into your db
