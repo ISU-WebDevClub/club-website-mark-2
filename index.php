@@ -6,7 +6,17 @@
  * Time: 5:17 PM
  */
 
+include "../includes/php/general.php";
+include "../includes/php/base.php";
 
+$sql = "SELECT * FROM meetings WHERE active='yes'";
+$query = mysqli_query($conn,$sql);
+$result = mysqli_fetch_assoc($query);
+
+$time = $result['time'];
+$day = $result['day'];
+$building = $result['building'];
+$room = $result['room'];
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +60,9 @@
             <div id="meetings">
                 <h2>Meetings</h2>
                 <div id="meeting-info" style="margin: 20px 0 50px 50px">
-                    <h3><span>When:&nbsp;</span>&nbsp;&nbsp;<?php //TODO pull from DB. ?></h3>
+                    <h3><span>When:&nbsp;</span>&nbsp;&nbsp;<?= $day. " at ".$time ?></h3>
 
-                    <h3><span>Where:</span>&nbsp;&nbsp;</h3>
+                    <h3><span>Where:</span>&nbsp;&nbsp;<?= $room." ".$building  ?></h3>
                 </div>
             </div>
             <div id="announcements">

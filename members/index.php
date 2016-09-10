@@ -16,6 +16,7 @@ $query = mysqli_query($conn, $sql);
 
 
 
+
 ?>
 
     <!DOCTYPE html>
@@ -55,6 +56,7 @@ $query = mysqli_query($conn, $sql);
                 <a href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
                     <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
 
+
                         <div class="overlay_hover">
                             <div class="overlay"></div>
                         </div>
@@ -62,11 +64,15 @@ $query = mysqli_query($conn, $sql);
                         <h2 class="name"><?= $result['f_name'] ?>&nbsp<?=$result['l_name'] ?></h2>
                         <p class="description"><?= $result['short_desc'] ?></p>
 
+
                     </div>
                 </a>
 
                 <?php
+
             }
+
+
 
 
             ?>
