@@ -60,7 +60,7 @@ CREATE TABLE `members` (
   `year` varchar(45) DEFAULT NULL,
   `major` varchar(45) DEFAULT NULL,
   `short_desc` varchar(60) DEFAULT NULL,
-  `long_desc` varchar(1000) DEFAULT NULL,
+  `long_desc` text,
   `image` varchar(45) DEFAULT 'WDC-logo.png',
   `url` varchar(150) DEFAULT '#',
   `position` varchar(45) DEFAULT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) DEFAULT NULL,
   `short_desc` varchar(100) DEFAULT NULL,
-  `long_desc` varchar(1000) DEFAULT NULL,
+  `long_desc` text,
   `image` varchar(45) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
@@ -106,7 +106,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow\'s website for their new dentist office located in Jewell, Iowa.',NULL,'WDC-logo.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
+INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow\'s website for their new dentist office located in Jewell, Iowa.','Dan and Meryl Scarrow first approached us in the spring of 2016 to develop the website for their new dental office in Jewell. They were renovating an historic brick building on the main street in Jewell, and wanted the website to reflect that. The site is fully responsive and shrinks with the browser. It also features an admin page to allow Dan and Meryl to upload photos, change the content, and activate and deactivate photos. It was built with PHP, CSS, HTML and Javascript.','WDC-logo.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-10  1:09:35
+-- Dump completed on 2016-09-11 10:30:29

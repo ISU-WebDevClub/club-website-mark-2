@@ -58,7 +58,7 @@ include "../includes/php/base.php";
                 for($i =0; $i<10;$i++){
                 ?>
                 <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
-                    <a href="/Focus/index.php?id=<?= $result['id'] ?>">
+                    <a href="/Focus/?id=<?= $result['id'] ?>">
                         <div class="overlay"></div>
                         <h2 class="title"><?= $result['title'] ?></h2>
                         <p class="description"><?= $result['short_desc'] ?></p>
