@@ -11,3 +11,102 @@ body{
     padding-bottom: 5px;
 
 }
+
+#members_grid{
+    width: 90%;
+    margin-left: 5%;
+    overflow:hidden;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.grid-item{
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 20px;
+    border: none;
+    background: center;
+    background-size: cover;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    color: white;
+    text-decoration: none;
+}
+.overlay{
+    width: 100%;
+    height: 100%;
+    background: none; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+    opacity: 1;
+}
+
+
+
+.overlay_hover{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+    opacity: 1;
+}
+.overlay_hover:hover{
+    background-color: rgba(0,0,0,.6);
+}
+
+.description{
+    opacity: 0;
+    text-align: center;
+    position: absolute;
+    pointer-events: none;
+    top: 65%;
+    width: 90%;
+    left: 50%;
+    margin-left: -45%;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+
+}
+.grid-item:hover .description{
+    opacity:1;
+}
+.name{
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    top: 75%;
+    text-align: center;
+    pointer-events: none;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+
+
+}
+.grid-item:hover .name{
+    top: 50%;
+}

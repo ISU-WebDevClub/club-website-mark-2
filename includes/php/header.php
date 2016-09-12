@@ -8,7 +8,7 @@
 $url = "";
 if(strpos($_SERVER['REQUEST_URI'], 'About') !== false){
     $url = "About";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false || strpos($_SERVER['REQUEST_URI'], 'Focus') !== false){
     $url = "Portfolio";
 }else if(strpos($_SERVER['REQUEST_URI'], 'Members') !== false){
     $url = "Members";
@@ -31,7 +31,7 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false){
         <li class="<?= $url == 'Resources' ? 'selected' : '' ?>"><a href="/Resources/" class="header_title"><div class="nav_text">Resources</div></a></li>
         <li class="<?= $url == 'Contact' ? 'selected' : '' ?>" id="contact"><a href="/Contact/" class="header_title"><div class="nav_text">Contact</div></a></li>
     </ul>
-    <img id="menu_icon" src="/includes/images/menu.png">
+    <img id="menu_icon" src="/includes/images/icons/menu.png">
 </header>
 <script>
     toggle_menu_icon();

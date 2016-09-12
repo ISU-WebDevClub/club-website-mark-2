@@ -10,3 +10,20 @@ body{
     margin-left: 5%;
     padding-bottom: 5px;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.resource_div{
+    margin-left: 45px;
+}
+
+.resource{
+    display: inline;
+}
+
+.resource_text{
+    display: inline;
+    color: #808080;
+}

@@ -1,13 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
 body{
     margin: 0px 0 75px 0;
 }
 #content{
     margin: 0;
     padding-top: 130px;
+    padding-bottom: 50px;
 }
 #content-sub{
     width: 90%;
     margin-left: 5%;
     padding-bottom: 5px;
 
+}
+
+/* ---- grid ---- */
+
+.grid {
+    width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+
+}
+
+/* ---- .element-item ---- */
+
+/* 5 columns, percentage width */
+.grid-sizer,
+.grid-item {
+    width: 200px;
+}
+
+.grid-item {
+    position: relative;
+    display: inline-block;
+    height: 200px;
+    background: gray;
+    border: 1px solid black;
+
+}
+
+.overlay{
+    opacity: .8;
+    background: rgba(0,0,0,.8);
+    background: -webkit-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(rgba(0,0,0,.5), rgba(0,0,0,1)); /* Standard syntax */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.overlay:hover {
+    opacity: 1;
+}
+
+.title{
+    opacity: 0;
+    color: white;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    text-align: center;
+    -webkit-transition: opacity .3s;
+    -moz-transition: opacity .3s;
+    -ms-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+}
+
+.description{
+    opacity: 0;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    z-index: 0;
+    pointer-events: none;
+    text-align: center;
+    -webkit-transition: opacity .3s;
+    -moz-transition: opacity .3s;
+    -ms-transition: opacity .3s;
+    -o-transition: opacity .3s;
+    transition: opacity .3s;
+}
+
+.grid-item:hover .title{
+    display: block;
+    opacity: 1;
+
+}
+
+.grid-item:hover .description{
+    display: block;
+    opacity: 1;
+}
+
+.grid-item--width2 { width: 400px; }
+.grid-item--height2 { height: 400px; }
+.grid-item--width3 { width: 600px; }
+.grid-item--height3 { height: 600px;}
+
+.grid-item--height2 .title{
+    top: 35%;
+}
+.grid-item--height3 .title{
+    top: 35%;
 }

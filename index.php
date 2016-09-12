@@ -6,11 +6,20 @@
  * Time: 5:17 PM
  */
 
-$string =  getUrl("https://www.stuorg.iastate.edu/site/web-dev-club");
-//echo "At ---------------------- " . strpos($string, "News &");
-$string = substr($string, strpos($string, "<blockquote>"));
-$string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
+include "includes/php/general.php";
+include "includes/php/base.php";
 
+$sql = "SELECT * FROM WDC.meetings WHERE active='yes'";
+$query = mysqli_query($conn,$sql);
+if(mysqli_num_rows($query) == 1){
+    $result = mysqli_fetch_assoc($query);
+
+    $start_time = $result['start_time'];
+    $end_time = $result['end_time'];
+    $day = $result['day'];
+    $building = $result['building'];
+    $room = $result['room'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +34,7 @@ $string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
     <meta name="description" content="The Web Development Club at Iowa State University is a community of students who want to learn about and practice web development.">
     <meta name="author" content="ISU Web Dev Club members">
     <link rel="icon" href="favicon.ico">
-    <title>Web Development Club | Iowa State University</title>
+    <title>Home | Web Development Club</title>
 
 
     <!-- Custom CSS -->
@@ -45,34 +54,36 @@ $string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
     </div>
 </div>
 <div id="shelf_div">
-    <img src="includes/images/divider.png" alt="chalkboard shelf" id="chalkshelf">
+    <img src="includes/images/icons/divider.png" alt="chalkboard shelf" id="chalkshelf">
 </div>
 
 <div class="container" id="content">
     <div id="side_by_side">
         <div id="meetings_div">
             <div id="meetings">
-                <h2>Meetings</h2>
+                <h1>Meetings</h1>
+                <?php
+                if(mysqli_num_rows($query) == 1){
+                ?>
                 <div id="meeting-info" style="margin: 20px 0 50px 50px">
-                    <h3><span>When:&nbsp;</span>&nbsp;&nbsp;<?php //TODO pull from DB. ?></h3>
+                    <h3><span>When:&nbsp;</span>&nbsp;&nbsp;<?= $day. " from ".$start_time." - ".$end_time ?></h3>
 
-                    <h3><span>Where:</span>&nbsp;&nbsp;</h3>
+                    <h3><span>Where:</span>&nbsp;&nbsp;<?= $room." ".$building  ?></h3>
                 </div>
+                <?php
+                }else {
+                    ?>
+                    <div id="meeting-info" style="margin: 20px 0 50px 50px">
+                        <h3>Meeting Information is not available at this time.</h3>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
             <div id="announcements">
-                <h2>Announcements</h2>
-                <?php
-                    $announcements = explode("<blockquote>",$string);
-
-                    foreach($announcements as $curr){
-                        $result = parse_announcements($curr);
-                        echo $result['date'];
-                        //TODO print out results
-                    }
-                ?>
-
-                <!--The javascript at the bottom loads this with announcements from the Student Organization database.-->
-<!--                TODO pull announcements from the stuorg webpage.-->
+                <h1>Announcements</h1>
+                <p>We are having trouble displaying announcement information.</p>
+                <p>Please visit the <a href="https://www.stuorg.iastate.edu/site/web-dev-club" style="color: rgb(108,118,200)" target="_blank">stuorg webpage</a> for current Web Dev Club announcements.</p>
             </div>
         </div>
         <div id="twitter_div">
@@ -92,7 +103,7 @@ $string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
     </div>
 
     <div id="calendar_div">
-        <h2 style="margin: 50px 0 25px 0">Calendar of Events</h2>
+        <h1 style="margin: 50px 0 25px 0">Calendar of Events</h1>
         <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=isuwebdevclub%40gmail.com&amp;color=%231B887A&amp;ctz=America%2FChicago"
                 style=" border-width:0 " width="100%" height="100%" frameborder="0" scrolling="no">
 
@@ -106,28 +117,3 @@ $string = substr($string, 0, strpos($string,"<h2>Membership Information</h2>"));
 <?php include "includes/php/footer.php" ?>
 </html>
 
-<?php
-
-function getURL($url){
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.52 Safari/537.17');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_VERBOSE, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    $tmp = curl_exec($ch);
-    curl_close($ch);
-    if ($tmp != false){
-        return $tmp;
-    }
-}
-
-function parse_announcements($string){
-    
-    $announcements = array();
-//    $announcements['date'] = substr($string, strpos($string, "</i>"), strpos($string,"</div>"))
-    return $announcements;
-}

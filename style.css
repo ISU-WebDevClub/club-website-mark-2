@@ -61,3 +61,14 @@ body{
     text-align: center;
     margin: 0 auto;
 }
+span{
+    background-color: #55acee;
+    padding: 10px;
+    border-radius: 10px;
+}
+#meeting-info{
+    text-align: left;
+}
+#meeting-info h3{
+    margin-bottom: 30px;
+}
