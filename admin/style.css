@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0px 0 75px 0;
+}
+#content{
+    margin: 0;
+    padding-top: 130px;
+    padding-bottom: 50px;
+}
+#content-sub{
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 5px;
+
+}
+.tab_item{
+
+}
