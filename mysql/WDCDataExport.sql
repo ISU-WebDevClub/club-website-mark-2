@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
 --
--- Host: 127.0.0.1    Database: WDC
+-- Host: 66.147.244.88    Database: stonesu0_WDC
 -- ------------------------------------------------------
--- Server version	5.7.15
+-- Server version	5.5.42-37.1-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,35 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) DEFAULT NULL,
+  `description` text,
+  `image` varchar(45) DEFAULT 'WDC-logo.png',
+  `date` date NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `active` varchar(45) DEFAULT 'yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'Founding','The club was officially recognized on August 24, 2015. At that time, there were only eight members.The first semester of the club\'s existence started out with a bang! Our numbers grew rapidly, and everyone was eager to get started. As expected, there was a massive amount of interest in the club even before we began to promote ourselves. People of all skill levels joined and brought a wide range of skills to the table.','WDC-logo.png','2015-08-24','2016-09-12 14:51:18','yes'),(2,'First Club Meeting','The first meeting was held September 2nd, 2015 in Coover Hall. The weather was nice, so we moved out to the courtyard to celebrate the club\'s founding with some soda and cookies. There were nine members in attendance, and we all had high hopes of doing great things with the club.','first_meeting.jpg','2015-09-02','2016-09-12 14:53:06','yes'),(3,'Going Public','The club made its first public appearance at the Fall 2015 ClubFest. We had sixty-eight people sign up for the mailing list. Membership more than doubled. In addition, we networked with other clubs and found out there was a huge interest in web development services around campus and around town. We would soon have our hands full!','ClubFest_table_Fall_2015_(small).JPG','2015-09-09','2016-09-12 14:54:10','yes'),(4,'HackISU','On September 19, 2015 we made excellent progress on the club website at HackISU, Iowa State\'s annual hackathon. Sleep was lost, caffeine was consumed, and Nicolas Cage image placeholders were used in abundance.','cage-superman.jpg','2015-09-19','2016-09-12 14:54:53','yes');
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `meetings`
@@ -65,7 +94,7 @@ CREATE TABLE `members` (
   `url` varchar(150) DEFAULT '#',
   `position` varchar(45) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -95,7 +124,7 @@ CREATE TABLE `projects` (
   `image` varchar(45) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,7 +153,7 @@ CREATE TABLE `resources` (
   `url` varchar(200) DEFAULT NULL,
   `category` varchar(45) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -148,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-11 10:30:29
+-- Dump completed on 2016-09-12 18:44:25

@@ -9,7 +9,7 @@
 include "includes/php/general.php";
 include "includes/php/base.php";
 
-$sql = "SELECT * FROM WDC.meetings WHERE active='yes'";
+$sql = "SELECT * FROM meetings WHERE active='yes'";
 $query = mysqli_query($conn,$sql);
 if(mysqli_num_rows($query) == 1){
     $result = mysqli_fetch_assoc($query);

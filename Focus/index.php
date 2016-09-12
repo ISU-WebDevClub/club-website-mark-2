@@ -9,7 +9,7 @@
 include "../includes/php/general.php";
 include "../includes/php/base.php";
 
-$sql = "SELECT * FROM WDC.projects WHERE id=".get_value('id');
+$sql = "SELECT * FROM projects WHERE id=".get_value('id');
 $query = mysqli_query($conn,$sql);
 if(mysqli_num_rows($query) == 1){
     $result = mysqli_fetch_assoc($query);
@@ -47,6 +47,7 @@ if(mysqli_num_rows($query) == 1){
 <div class="container" id="content">
     <div id="content-sub">
         <h1><?= $title ?></h1>
+        <p id="back_link"><a href="/portfolio/"><img src="../includes/images/back_arrow.png">Back to Projects</a></p>
         <hr>
         <img id="project_image" src="../includes/images/projects/<?= $img ?>">
         <p><?= $desc ?></p>
