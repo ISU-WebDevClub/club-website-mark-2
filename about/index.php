@@ -63,20 +63,36 @@ include "../includes/php/base.php";
         </div>
         <div id="history">
             <?php
-                $sql = "SELECT * FROM WDC.events WHERE active='yes' ORDER BY date";
+                $sql = "SELECT * FROM events WHERE active='yes' ORDER BY date";
                 $query = mysqli_query($conn, $sql);
                 $i = 0;
                 while($result = mysqli_fetch_assoc($query)){
                     if($i%2 == 0){
                         ?>
                         <div class="event event_left">
-                            <h1><?= $result['title'] ?></h1>
+                            <div class="event_img">
+                                <img src="../includes/images/events/<?= $result['image'] ?>">
+                            </div>
+                            <div class="event_text">
+                                <h2><?= $result['title'] ?></h2>
+                                <hr>
+                                <p><?= $result['description'] ?></p>
+                            </div>
+
                         </div>
                         <?php
                     }else{
                         ?>
                         <div class="event event_right">
-                            <h1><?= $result['title'] ?></h1>
+                            <div class="event_img">
+                                <img src="../includes/images/events/<?= $result['image'] ?>">
+                            </div>
+                            <div class="event_text">
+                                <h2><?= $result['title'] ?></h2>
+                                <hr>
+                                <p><?= $result['description'] ?></p>
+
+                            </div>
                         </div>
                         <?php
                     }

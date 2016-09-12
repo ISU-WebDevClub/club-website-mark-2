@@ -51,7 +51,7 @@ include "../includes/php/base.php";
             <div class="grid-sizer" ></div>
             <?php
             //This is the sql for querying the projects, assuming the table name is projects.
-            $sql = "SELECT * FROM WDC.projects WHERE active='yes'";
+            $sql = "SELECT * FROM projects WHERE active='yes'";
             $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
                 //TODO remove this forloop

@@ -65,7 +65,7 @@ CREATE TABLE `members` (
   `url` varchar(150) DEFAULT '#',
   `position` varchar(45) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -95,7 +95,7 @@ CREATE TABLE `projects` (
   `image` varchar(45) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,7 +124,7 @@ CREATE TABLE `resources` (
   `url` varchar(200) DEFAULT NULL,
   `category` varchar(45) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

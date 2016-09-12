@@ -11,7 +11,7 @@
 include "../includes/php/general.php";
 include "../includes/php/base.php";
 
-$sql = "SELECT * FROM WDC.members WHERE active='yes'";
+$sql = "SELECT * FROM members WHERE active='yes'";
 $query = mysqli_query($conn, $sql);
 
 

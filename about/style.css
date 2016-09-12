@@ -18,16 +18,46 @@ body{
     width: 100%;
 
 }
+#purpose{
+    margin-bottom: 50px;
+}
 .event{
-    width: 75%;
-    margin-left: 12.5%;
+    margin-bottom: 50px;
+}
+.event_left, .event_right{
     position: relative;
+    width: 90%;
+    margin-left: 5%;
+    overflow:hidden;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+
 }
-.event_left h1{
-    position: absolute;
-    left: 10px;
+.event_img img{
+    height: 200px;
 }
-.event_right h1{
-    position: absolute;
-    right: 10px;
+.event_text, .event_img{
+    position: relative;
+    width: 50%;
+    min-width: 400px;
+    margin: 0;
+    text-align: center;
 }
+
+@media screen and (min-width: 1005px ){
+    .event_left .event_img{
+        position: absolute;
+        left: 50%;
+    }
+    .event_left .event_text{
+        position: absolute;
+        right: 50%;
+    }
+    .event_left, .event_right{
+        height: 350px;
+    }
+}
+

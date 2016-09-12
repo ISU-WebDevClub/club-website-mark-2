@@ -11,3 +11,16 @@ body{
     padding-bottom: 5px;
 
 }
+#back_link{
+    position: absolute;
+    left: 55px;
+    color: white;
+    top: 100px;
+}
+#back_link a{
+    color: white;
+}
+#back_link img{
+    height: 20px;
+    padding-top: 5px;
+}
