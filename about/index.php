@@ -103,9 +103,20 @@ include "../includes/php/base.php";
             ?>
         </div>
         <div id="photo_gallery">
+            <h2>Photo Gallery</h2>
+            <div id="photo_grid">
             <?php
-                //TODO query the photos from the db and display them.
+            for($i =0;$i< 10;$i++) {
+                //TODO make this actually pull image links from the db. Instead of a for loop of the same image...
+                ?>
+                <div class="photo_item" style="background: url('../includes/images/WDC-logo.png') center no-repeat; background-size: contain;">
+
+                </div>
+                <?php
+            }
+
             ?>
+            </div>
         </div>
     </div>
 

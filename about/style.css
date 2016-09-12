@@ -62,3 +62,26 @@ body{
 
 }
 
+#photo_grid{
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    overflow:hidden;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.photo_item{
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid black;
+}
+.photo_item:hover{
+    cursor: hand;
+    cursor: pointer;
+}
