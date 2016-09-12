@@ -47,7 +47,7 @@ if(mysqli_num_rows($query) == 1){
 <div class="container" id="content">
     <div id="content-sub">
         <h1><?= $title ?></h1>
-        <p id="back_link"><img src="../includes/images/back_arrow.png"><a href="../">Back to Projects</a></p>
+        <p id="back_link"><a href="/portfolio/"><img src="../includes/images/back_arrow.png">Back to Projects</a></p>
         <hr>
         <img id="project_image" src="../includes/images/projects/<?= $img ?>">
         <p><?= $desc ?></p>

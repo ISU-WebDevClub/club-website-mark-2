@@ -5,16 +5,18 @@
  * Date: 9/5/16
  * Time: 5:23 PM
  */
+
+//TODO make this cleaner by lowercasing all the strings before comparing them.
 $url = "";
-if(strpos($_SERVER['REQUEST_URI'], 'About') !== false){
+if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUEST_URI'], 'about') !== false){
     $url = "About";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false || strpos($_SERVER['REQUEST_URI'], 'Focus') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false || strpos($_SERVER['REQUEST_URI'], 'Focus') !== false || strpos($_SERVER['REQUEST_URI'], 'portfolio') !== false|| strpos($_SERVER['REQUEST_URI'], 'focus') !== false){
     $url = "Portfolio";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Members') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Members') !== false || strpos($_SERVER['REQUEST_URI'], 'members') !== false){
     $url = "Members";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Resources') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Resources') !== false || strpos($_SERVER['REQUEST_URI'], 'resources') !== false){
     $url = "Resources";
-}else if(strpos($_SERVER['REQUEST_URI'], 'Contact') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Contact') !== false || strpos($_SERVER['REQUEST_URI'], 'contact') !== false){
     $url = 'Contact';
 } else{
     $url = "Home";

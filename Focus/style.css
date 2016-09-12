@@ -13,7 +13,7 @@ body{
 }
 #back_link{
     position: absolute;
-    left: 55px;
+    left: 80px;
     color: white;
     top: 100px;
 }
@@ -22,5 +22,5 @@ body{
 }
 #back_link img{
     height: 20px;
-    padding-top: 5px;
+    margin-bottom: -5px;
 }
