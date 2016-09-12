@@ -10,13 +10,11 @@ error_reporting(E_ALL | E_STRICT);
 session_start();
 
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-if(strpos($root,'public_html') !== false){
-    $dbhost = '127.0.0.1';
-}else{
-    //TODO
-    $dbhost = ""; // this will ususally be 'localhost', but can sometimes differ
-}
+//$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+
+//TODO change this for when the server is live.
+$dbhost = '127.0.0.1';
+
 
 $dbname = "WDC"; // the name of the database that you are going to use for this project
 
