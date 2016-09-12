@@ -62,6 +62,7 @@ include "../includes/php/base.php";
             ?>
         </div>
         <div id="history">
+            <h2>History</h2>
             <?php
                 $sql = "SELECT * FROM events WHERE active='yes' ORDER BY date";
                 $query = mysqli_query($conn, $sql);
