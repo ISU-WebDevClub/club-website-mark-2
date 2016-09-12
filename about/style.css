@@ -13,3 +13,21 @@ body{
 #club-photos{
     padding-bottom: 10px;
 }
+
+#history{
+    width: 100%;
+
+}
+.event{
+    width: 75%;
+    margin-left: 12.5%;
+    position: relative;
+}
+.event_left h1{
+    position: absolute;
+    left: 10px;
+}
+.event_right h1{
+    position: absolute;
+    right: 10px;
+}
