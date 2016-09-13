@@ -16,6 +16,38 @@ body{
     padding-bottom: 5px;
 
 }
-.tab_item{
 
+#menu_grid{
+    position: relative;
+    width: 100%;
+
+    overflow:hidden;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.tab_item{
+    text-align: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+    cursor: hand;
+
+}
+
+h2.selected_tab{
+    text-decoration: underline;
+}
+.tab_item_div{
+    display: none;
+    text-align: center;
+
+}
+.selected_div{
+    display: block;
+    height: 800px;
+    width: 90%;
+    margin-left: 5%;
 }
