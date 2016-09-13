@@ -22,7 +22,9 @@ a{
 .resource{
     display: inline;
 }
-
+.resource:hover{
+    color: rgb(200,200,200);
+}
 .resource_text{
     display: inline;
     color: #808080;

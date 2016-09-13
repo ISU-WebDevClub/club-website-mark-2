@@ -49,8 +49,12 @@ if(mysqli_num_rows($query) == 1){
         <h1><?= $title ?></h1>
         <p id="back_link"><a href="/portfolio/"><img src="../includes/images/back_arrow.png">Back to Projects</a></p>
         <hr>
-        <img id="project_image" src="../includes/images/projects/<?= $img ?>">
-        <p><?= $desc ?></p>
+        <div id="project">
+            <img id="project_image" src="../includes/images/projects/<?= $img ?>">
+            <div id="project_text">
+                <p><?= $desc ?></p>
+            </div>
+        </div>
 
     </div>
 </div>

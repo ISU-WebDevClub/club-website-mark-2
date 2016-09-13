@@ -14,11 +14,13 @@ $query = mysqli_query($conn,$sql);
 if(mysqli_num_rows($query) == 1){
     $result = mysqli_fetch_assoc($query);
 
-    $start_time = $result['start_time'];
-    $end_time = $result['end_time'];
     $day = $result['day'];
     $building = $result['building'];
     $room = $result['room'];
+
+    $start_time = convert_time($result['start_time']);
+    $end_time = convert_time($result['end_time']);
+
 }
 ?>
 

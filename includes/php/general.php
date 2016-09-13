@@ -108,14 +108,12 @@ function get_value($name, $target_array = null, $alternate_target_array = null, 
     }
 }// end function get_value(..)
 
-function first_login($username,$conn){
-    $query = "SELECT last_login FROM sql5124638.users WHERE username = '".$username."'";
-    $do_query = mysqli_query($conn, $query);
-    $result = mysqli_fetch_assoc($do_query);
 
-    if($result['last_login'] == null || $result['last_login'] == ""){
-        return true;
+function convert_time($time){
+    $temp = explode(":",$time);
+    if(intval($temp[0]) > 12){
+        $time = intval($temp[0]) - 12;
+        $time = $time.":00";
     }
-    return false;
+    return $time;
 }
-

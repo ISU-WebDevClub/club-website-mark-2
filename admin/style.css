@@ -14,13 +14,11 @@ body{
     width: 90%;
     margin-left: 5%;
     padding-bottom: 5px;
-
 }
 
 #menu_grid{
     position: relative;
     width: 100%;
-
     overflow:hidden;
     display: flex;
     display: -webkit-flex;
@@ -47,7 +45,39 @@ h2.selected_tab{
 }
 .selected_div{
     display: block;
-    height: 800px;
     width: 90%;
     margin-left: 5%;
+}
+
+.grid{
+    position: relative;
+    width: 100%;
+    padding-bottom: 50px;
+    overflow:hidden;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.admin_form{
+    background-color: rgba(0,0,0,.5);
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.admin_form input, .admin_form select{
+    margin: 10px;
+}
+.admin_form img{
+    height: 100px;
+}
+.admin_form .long_desc{
+    width: 90%;
+    height: 200px;
+}
+.admin_form .short_desc{
+    width: 90%;
+    height: 50px;
 }
