@@ -171,7 +171,7 @@ if($action != ""){
                         <label for="title">Title: </label>
                         <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
                         <br>
-                        <textarea name="text"><?= $result['description'] ?></textarea>
+                        <textarea class="long_desc" name="text"><?= $result['description'] ?></textarea>
                         <br>
                         <label for="active">Active: </label>
                         <select name="active">
@@ -196,7 +196,7 @@ if($action != ""){
                     <label for="title">Title: </label>
                     <input type="text" name="title" maxlength="25">
                     <br>
-                    <textarea name="text"></textarea>
+                    <textarea class="long_desc" name="text"></textarea>
                     <br>
                     <label for="active">Active: </label>
                     <select name="active">
