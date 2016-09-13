@@ -11,7 +11,7 @@
 include "../includes/php/general.php";
 include "../includes/php/base.php";
 
-$sql = "SELECT * FROM members WHERE active='yes'";
+$sql = "SELECT * FROM members WHERE active='yes' ORDER BY l_name,f_name ";
 $query = mysqli_query($conn, $sql);
 
 

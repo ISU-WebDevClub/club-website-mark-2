@@ -11,3 +11,50 @@ body{
     padding-bottom: 5px;
 
 }
+#contact_div{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 50%;
+    margin-left: -200px;
+    text-align: center;
+}
+
+.email_input{
+    width: 400px;
+    margin: 10px auto 10px auto;
+    background-color: #353535;
+    color: white;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: -5px;
+}
+.email_input:focus{
+    outline: 0px;
+    border: 1px solid #808080;
+}
+
+#name, #email,#subject{
+    height: 30px;
+}
+#message{
+    height: 200px;
+    resize: none;
+    padding-top: 5px;
+}
+#submit_email{
+    width: 100px;
+    font-size: 15px;
+    background-color: #353535;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    cursor: hand;
+}
+#submit_email:focus{
+    outline: 0px;
+    border: 1px solid #808080;
+}

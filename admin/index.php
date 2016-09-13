@@ -155,6 +155,27 @@ if($action != ""){
             <h1>About Page</h1>
             <hr>
             <div class="grid">
+                <form class="admin_form about_form" action="/admin/?action=add_event">
+                    <h2>Add Event</h2>
+                    <label for="image">Replace Image: </label>
+                    <input type="file" name="image">
+                    <br>
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" maxlength="25">
+                    <br>
+                    <textarea class="long_desc" name="text"></textarea>
+                    <br>
+                    <label for="active">Active: </label>
+                    <select name="active">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <br>
+                    <label for="date">Date: </label>
+                    <input type="date" name="date" >
+                    <br>
+                    <input type="submit" value="Add Project">
+                </form>
                 <?php
                 $sql = "SELECT * FROM events";
                 $query = mysqli_query($conn,$sql);
@@ -188,15 +209,28 @@ if($action != ""){
                 }
 
                 ?>
-                <form class="admin_form about_form" action="/admin/?action=add_event">
-                    <h2>Add Event</h2>
-                    <label for="image">Replace Image: </label>
+
+            </div>
+        </div>
+        <div id="portfolio_page" class="tab_item_div" hidden>
+            <h1>Portfolio Page</h1>
+            <hr>
+            <div class="grid">
+                <form class="admin_form project_form" action="/admin/?action=add_project">
+                    <h2>Add Project</h2>
+                    <label for="image">Image: </label>
                     <input type="file" name="image">
                     <br>
                     <label for="title">Title: </label>
-                    <input type="text" name="title" maxlength="25">
+                    <input type="text" name="title" maxlength="25" value="">
                     <br>
-                    <textarea class="long_desc" name="text"></textarea>
+                    <label for="short_desc">Short Description: </label>
+                    <br>
+                    <textarea class="short_desc" name="short_text"></textarea>
+                    <br>
+                    <br>
+                    <label for="long_desc">Long Description: </label>
+                    <textarea class="long_desc" name="long_text"></textarea>
                     <br>
                     <label for="active">Active: </label>
                     <select name="active">
@@ -205,16 +239,10 @@ if($action != ""){
                     </select>
                     <br>
                     <label for="date">Date: </label>
-                    <input type="date" name="date" >
+                    <input type="date" name="date" value="">
                     <br>
-                    <input type="submit" value="Add Project">
+                    <input type="submit" value="Submit">
                 </form>
-            </div>
-        </div>
-        <div id="portfolio_page" class="tab_item_div" hidden>
-            <h1>Portfolio Page</h1>
-            <hr>
-            <div class="grid">
                 <?php
                 $sql = "SELECT * FROM projects";
                 $query = mysqli_query($conn,$sql);
@@ -223,7 +251,10 @@ if($action != ""){
                     <form class="admin_form project_form" action="/admin/?action=edit_project">
                         <h2><?= $result['title'] ?></h2>
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <img src="../includes/images/events/<?= $result['image'] ?>">
+                        <img src="../includes/images/projects/<?= $result['image'] ?>">
+                        <br>
+                        <label for="image">Replace Image: </label>
+                        <input type="file" name="image">
                         <br>
                         <label for="title">Title: </label>
                         <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
@@ -251,12 +282,103 @@ if($action != ""){
                 }
 
                 ?>
+
             </div>
         </div>
         <div id="members_page" class="tab_item_div" hidden>
             <h1>Members Page</h1>
             <hr>
             <div class="grid">
+                <form class="admin_form membesr_form" action="/admin/?action=edit_members">
+                    <h2>Add Member</h2>
+                    <label for="image">Upload Image: </label>
+                    <input type="file" name="image">
+                    <br>
+                    <label for="f_name">First Name: </label>
+                    <input type="text" name="f_name" maxlength="25" value="">
+                    <br>
+                    <label for="l_name">First Name: </label>
+                    <input type="text" name="l_name" maxlength="25" value="">
+                    <br>
+                    <label for="year">Year: </label>
+                    <input type="text" name="year" value="">
+                    <br>
+                    <label for="major">Major: </label>
+                    <input type="text" name="major" value="">
+                    <br>
+                    <label for="position">Position: </label>
+                    <input type="text" name="position" value="">
+                    <br>
+                    <label for="url">URL: </label>
+                    <input type="text" name="url" value="">
+                    <br>
+                    <label for="short_desc">Short Description: </label>
+                    <br>
+                    <textarea class="short_desc" name="short_text"></textarea>
+                    <br>
+                    <br>
+                    <label for="long_desc">Long Description: </label>
+                    <textarea class="long_desc" name="long_text"></textarea>
+                    <br>
+                    <label for="active">Active: </label>
+                    <select name="active">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+                <?php
+                $sql = "SELECT * FROM members";
+                $query = mysqli_query($conn,$sql);
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <form class="admin_form membesr_form" action="/admin/?action=edit_members">
+                        <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
+                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        <img src="../includes/images/members/<?= $result['image'] ?>">
+                        <br>
+                        <label for="image">Replace Image: </label>
+                        <input type="file" name="image">
+                        <br>
+                        <label for="f_name">First Name: </label>
+                        <input type="text" name="f_name" maxlength="25" value="<?= $result['f_name'] ?>">
+                        <br>
+                        <label for="l_name">First Name: </label>
+                        <input type="text" name="l_name" maxlength="25" value="<?= $result['l_name'] ?>">
+                        <br>
+                        <label for="year">Year: </label>
+                        <input type="text" name="year" value="<?= $result['year'] ?>">
+                        <br>
+                        <label for="major">Major: </label>
+                        <input type="text" name="major" value="<?= $result['major'] ?>">
+                        <br>
+                        <label for="position">Position: </label>
+                        <input type="text" name="position" value="<?= $result['position'] ?>">
+                        <br>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url" value="<?= $result['url'] ?>">
+                        <br>
+                        <label for="short_desc">Short Description: </label>
+                        <br>
+                        <textarea class="short_desc" name="short_text"><?= $result['short_desc'] ?></textarea>
+                        <br>
+                        <br>
+                        <label for="long_desc">Long Description: </label>
+                        <textarea class="long_desc" name="long_text"><?= $result['long_desc'] ?></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                    </form>
+                    <?php
+                }
+
+                ?>
 
             </div>
         </div>
@@ -264,7 +386,51 @@ if($action != ""){
             <h1>Resources Page</h1>
             <hr>
             <div class="grid">
+                <form class="admin_form project_form" action="/admin/?action=edit_project">
+                    <h2>Add New Resource</h2>
+                    <input type="hidden" name="id" value="">
+                    <br>
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" maxlength="25" value="">
+                    <br>
+                    <label for="description">Long Description: </label>
+                    <textarea class="short_desc" name="long_text"></textarea>
+                    <br>
+                    <label for="active">Active: </label>
+                    <select name="active">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+                <?php
+                $sql = "SELECT * FROM resources";
+                $query = mysqli_query($conn,$sql);
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <form class="admin_form project_form" action="/admin/?action=edit_project">
+                        <h2><?= $result['title'] ?></h2>
+                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
+                        <br>
+                        <label for="description">Long Description: </label>
+                        <textarea class="short_desc" name="long_text"><?= $result['description'] ?></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                    </form>
+                    <?php
+                }
 
+                ?>
             </div>
         </div>
         <div id="contact_page" class="tab_item_div" hidden>
