@@ -31,7 +31,7 @@ include "../includes/php/base.php";
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="../includes/css/header.css">
         <link rel="stylesheet" href="../includes/css/footer.css">
-
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>

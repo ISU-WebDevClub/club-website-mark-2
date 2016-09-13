@@ -34,19 +34,23 @@ body{
 .email_input:focus{
     outline: 0px;
     border: 1px solid #808080;
+
 }
 
 #name, #email,#subject{
     height: 30px;
+    font-family: 'Ubuntu', san-serif;
 }
 #message{
+    font-family: 'Ubuntu', san-serif;
     height: 200px;
     resize: none;
     padding-top: 5px;
 }
 #submit_email{
+    font-family: 'Ubuntu', san-serif;
     width: 100px;
-    font-size: 15px;
+    font-size: 20px;
     background-color: #353535;
     color: white;
     border: 1px solid black;

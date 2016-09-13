@@ -57,7 +57,7 @@ if($action != ""){
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../includes/css/header.css">
     <link rel="stylesheet" href="../includes/css/footer.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <?php include "../includes/php/header.php" ?>
 <body>
@@ -82,8 +82,6 @@ if($action != ""){
                 $sql = "SELECT * FROM meetings WHERE active='yes'";
                 $query = mysqli_query($conn, $sql);
                 $result = mysqli_fetch_assoc($query);
-                //TODO convert time to 12 hour and back to 24 for database.
-
 
             ?>
             <div class="grid">
@@ -181,7 +179,7 @@ if($action != ""){
                 $query = mysqli_query($conn,$sql);
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <form class="admin_form about_form" action="/admin/?action=edit_event">
+                    <form class="admin_form about_form small" action="/admin/?action=edit_event" id="<?= $result['id'] ?>">
                         <h2><?= $result['title'] ?></h2>
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         <img src="../includes/images/events/<?= $result['image'] ?>">
@@ -204,6 +202,8 @@ if($action != ""){
                         <input type="date" name="date" value="<?= $result['date'] ?>">
                         <br>
                         <input type="submit" value="Submit">
+                        <button onclick="edit_form(<?= $result['id'] ?>)">Edit</button>
+                        <button onclick="cancel_edit(<?= $result['id'] ?>)" hidden>Cancel</button>
                     </form>
                     <?php
                 }
@@ -444,7 +444,11 @@ if($action != ""){
 
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
 <script src="admin.js" type="application/javascript"></script>
+
+
 </body>
 </html>
 

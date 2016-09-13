@@ -31,6 +31,7 @@ include "../includes/php/base.php";
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="../includes/css/header.css">
         <link rel="stylesheet" href="../includes/css/footer.css">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     </head>
 <?php include "../includes/php/header.php" ?>
 <body>
