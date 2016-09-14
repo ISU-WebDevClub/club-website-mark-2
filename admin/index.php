@@ -13,6 +13,8 @@ include "../includes/php/general.php";
 $action = get_value('action');
 if($action != ""){
     switch($action){
+        //TODO construct the query based on whether the value is set or not.
+        //Image names are being overwritten in the db because if the image input is null, it still tries to upload an image.
         case 'meeting_time':
             $run_sql = true;
             $start_time = mysqli_real_escape_string($conn, get_value('start_time'));
@@ -27,7 +29,6 @@ if($action != ""){
             $query = mysqli_query($conn, $sql);
 
             $sql = "INSERT INTO meetings (`day`,start_time, end_time, room, building, `year`, semester, active) VALUES ('".$days."','".$start_time."','".$end_time."','".$room."','".$building."','".$year."','".$semester."','yes')";
-            $query = mysqli_query($conn, $sql);
 
             break;
         case 'add_event':
@@ -40,7 +41,7 @@ if($action != ""){
             $file_title = str_replace(' ', '_',get_value('title'));
             $file_title = strtolower($file_title);
 
-            $file_name = upload_image('event', $title);
+            $file_name = upload_image('event', $file_title);
 
 
 
@@ -63,7 +64,7 @@ if($action != ""){
             $date = mysqli_real_escape_string($conn,get_value('date'));
             $file_title = str_replace(' ','_',get_value('title'));
             $file_title = strtolower($file_title);
-            $file_name = upload_image('event', $title);
+            $file_name = upload_image('event', $file_title);
 
             if(strpos($file_name,'ERROR')){
                 $run_sql = false;
@@ -80,7 +81,7 @@ if($action != ""){
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
 
-            $file_title = str_replace(' ','_',get_value('title');
+            $file_title = str_replace(' ','_',get_value('title'));
             $file_title = strtolower($file_title);
 
             $file_name = upload_image('event', $file_title);

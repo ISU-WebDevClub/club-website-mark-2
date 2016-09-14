@@ -44,10 +44,6 @@ function upload_image($type, $name){
         $target_file = $temp_file."_".$i.".".$imageFileType;
     }
 
-    // Check file size
-    if ($_FILES["image"]["size"] > 500000) {
-        return "ERROR: File is too large to upload.";
-    }
 
     // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
