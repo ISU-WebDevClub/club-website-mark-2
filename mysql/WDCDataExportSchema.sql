@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `stonesu0_WDC` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `stonesu0_WDC`;
 -- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
 --
 -- Host: 66.147.244.88    Database: stonesu0_WDC
@@ -177,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-14  1:41:50
+-- Dump completed on 2016-09-14  1:41:25

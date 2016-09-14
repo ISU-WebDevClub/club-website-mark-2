@@ -90,7 +90,7 @@ h2.selected_tab{
 .admin_form{
     background-color: rgba(0,0,0,.5);
     width: 400px;
-    margin: 10px auto;
+    margin: 10px;
     border-radius: 10px;
 }
 .add_icon{
@@ -110,10 +110,12 @@ h2.selected_tab{
 .admin_form .long_desc{
     width: 90%;
     height: 200px;
+    resize: none;
 }
 .admin_form .short_desc{
     width: 90%;
     height: 50px;
+    resize: none;
 }
 .small{
     height: 150px;

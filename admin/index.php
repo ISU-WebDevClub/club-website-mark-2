@@ -14,6 +14,7 @@ $action = get_value('action');
 if($action != ""){
     switch($action){
         case 'meeting_time':
+            $run_sql = true;
             $start_time = mysqli_real_escape_string($conn, get_value('start_time'));
             $end_time = mysqli_real_escape_string($conn,get_value('end_time'));
             $days = mysqli_real_escape_string($conn,get_value('days'));
@@ -25,13 +26,128 @@ if($action != ""){
             $sql = "UPDATE meetings SET active='no' WHERE active='yes'";
             $query = mysqli_query($conn, $sql);
 
-            $sql = "INSERT INTO meetings (day,start_time, end_time, room, building, year, semester, active) 
-                  VALUES ('".$days."','".$start_time."','".$end_time."','".$room."','".$building."','".$year."','".$semester."','yes')";
+            $sql = "INSERT INTO meetings (`day`,start_time, end_time, room, building, `year`, semester, active) VALUES ('".$days."','".$start_time."','".$end_time."','".$room."','".$building."','".$year."','".$semester."','yes')";
             $query = mysqli_query($conn, $sql);
 
             break;
-        //TODO add more cases as we add more functionality to the admin page.
+        case 'add_event':
+            $run_sql = true;
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $description = mysqli_real_escape_string($conn, get_value('description'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+            $date = mysqli_real_escape_string($conn,get_value('date'));
+
+            $sql = "INSERT INTO events (title,description,`date`,active) VALUES ('".$title."','".$description."','".$date."','".$active."')";
+
+            break;
+        case 'edit_event':
+            $run_sql = true;
+            $id = mysqli_real_escape_string($conn,get_value('id'));
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $description = mysqli_real_escape_string($conn, get_value('description'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+            $date = mysqli_real_escape_string($conn,get_value('date'));
+
+            $sql = "UPDATE events SET title='".$title."', description='".$description."', `date`='".$date."', active='".$active."' WHERE id=".$id;
+
+            break;
+        case 'add_project':
+            $run_sql = true;
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $url = mysqli_real_escape_string($conn, get_value('url'));
+            $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
+            $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+
+            $sql = "INSERT INTO projects (title, short_desc, long_desc, url, active) VALUES ('".$title."','".$short_desc."','".$long_desc."','".$url."','".$active."')";
+
+            break;
+        case 'edit_project':
+            $run_sql = true;
+            $id = mysqli_real_escape_string($conn,get_value('id'));
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $url = mysqli_real_escape_string($conn, get_value('url'));
+            $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
+            $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+
+            $sql = "UPDATE events SET title='".$title."', short_desc='".$short_desc."', long_desc='".$long_desc."', url='".$url."', active='".$active."' WHERE id=".$id;
+
+            break;
+        case 'add_member':
+            $run_sql = true;
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $f_name = mysqli_real_escape_string($conn,get_value('f_name'));
+            $l_name = mysqli_real_escape_string($conn,get_value('l_name'));
+            $year = mysqli_real_escape_string($conn,get_value('year'));
+            $major = mysqli_real_escape_string($conn,get_value('major'));
+            $position = mysqli_real_escape_string($conn,get_value('position'));
+            $url = mysqli_real_escape_string($conn,get_value('url'));
+            $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
+            $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+
+            $sql = "INSERT INTO members (f_name, l_name, `year`, major, short_desc, long_desc, url, `position`, active) VALUES ('".$f_name."','".$l_name."','".$year."','".$major."','".$short_desc."','".$long_desc."','".$url."','".$position."','".$active."')";
+
+
+            break;
+        case 'edit_member':
+            //TODO Still doesn't work. prolly a simple fix.
+            $run_sql = true;
+            $id = mysqli_real_escape_string($conn,get_value('id'));
+//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $f_name = mysqli_real_escape_string($conn,get_value('f_name'));
+            $l_name = mysqli_real_escape_string($conn,get_value('l_name'));
+            $year = mysqli_real_escape_string($conn,get_value('year'));
+            $major = mysqli_real_escape_string($conn,get_value('major'));
+            $position = mysqli_real_escape_string($conn,get_value('position'));
+            $url = mysqli_real_escape_string($conn,get_value('url'));
+            $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
+            $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+
+            $sql = "UPDATE members SET f_name='".$f_name."', l_name='".$l_name."', `year`='".$year."', major='".$major."', short_desc='".$short_desc."', long_desc='".$long_desc."', url='".$url."', `position`='".$position."', active='".$active."' WHERE id=".$id;
+
+            break;
+        case 'add_resource':
+            //TODO something doesn't work here either.
+            $run_sql = true;
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $description = mysqli_real_escape_string($conn,get_value('long_text'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+            $category = mysqli_real_escape_string($conn, get_value('category'));
+            $url = mysqli_real_escape_string($conn, get_value('url'));
+
+
+            $sql = "INSERT INTO resources (title, description, active,category, url) VALUES ('".$title."','".$description."','".$active."','".$category."','".$url."')";
+
+            break;
+        case 'edit_resource':
+            $run_sql = true;
+            $id = mysqli_real_escape_string($conn,get_value('id'));
+            $title = mysqli_real_escape_string($conn,get_value('title'));
+            $description = mysqli_real_escape_string($conn,get_value('long_text'));
+            $active = mysqli_real_escape_string($conn,get_value('active'));
+            $category = mysqli_real_escape_string($conn, get_value('category'));
+            $url = mysqli_real_escape_string($conn, get_value('url'));
+
+            $sql = "UPDATE resources SET title='".$title."', description='".$description."', category='".$category."', url='".$url."', active='".$active."' WHERE id=".$id;
+
+            break;
+        default:
+            $sql = "";
+            $run_sql = false;
+            break;
+
     }
+    if($run_sql){
+        $query = mysqli_query($conn, $sql);
+    }
+
 }
 
 
@@ -59,7 +175,7 @@ if($action != ""){
     <link rel="stylesheet" href="../includes/css/footer.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<?php include "../includes/php/header.php" ?>
+<?php //include "../includes/php/header.php" ?>
 <body>
 <div id="content">
 
@@ -85,10 +201,11 @@ if($action != ""){
 
             ?>
             <div class="grid">
-                <form id="home_page" class="admin_form" action="/admin/?action=meeting_time" method="post">
+                <form id="home_page" class="admin_form" action="/admin/" method="post">
                     <h2>Meeting Times</h2>
                     <label for="start_time">Start Time: </label>
-                    <select id="start_time" type="time" name="start_time">
+                    <input type="hidden" name="action" value="meeting_time">
+                    <select id="start_time" name="start_time">
                         <option value="10:00" <?= $result['start_time'] == "10:00" ? "selected" : "" ?> >10:00 AM</option>
                         <option value="11:00" <?= $result['start_time'] == "11:00" ? "selected" : "" ?> >11:00 AM</option>
                         <option value="12:00" <?= $result['start_time'] == "12:00" ? "selected" : "" ?> >12:00 PM</option>
@@ -106,7 +223,7 @@ if($action != ""){
                     <br>
 
                     <label for="end_time">End Time: </label>
-                    <select id="end_time" type="time" name="end_time">
+                    <select id="end_time" name="end_time">
                         <option value="10:00" <?= $result['end_time'] == "10:00" ? "selected" : "" ?> >10:00 AM</option>
                         <option value="11:00" <?= $result['end_time'] == "11:00" ? "selected" : "" ?> >11:00 AM</option>
                         <option value="12:00" <?= $result['end_time'] == "12:00" ? "selected" : "" ?> >12:00 PM</option>
@@ -161,8 +278,9 @@ if($action != ""){
                 </div>
 
                 <form id="add_event_form" class="admin_form about_form" action="/admin/" method="post" hidden>
-                    <input type="hidden" name="action" value="add_event">
+
                     <h2>Add Event</h2>
+                    <input type="hidden" name="action" value="add_event">
                     <label for="image">Replace Image: </label>
                     <input type="file" name="image">
                     <br>
@@ -206,7 +324,7 @@ if($action != ""){
                         <label for="title">Title: </label>
                         <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
                         <br>
-                        <textarea class="long_desc" name="text"><?= $result['description'] ?></textarea>
+                        <textarea class="long_desc" name="description"><?= $result['description'] ?></textarea>
                         <br>
                         <label for="active">Active: </label>
                         <select name="active">
@@ -237,13 +355,17 @@ if($action != ""){
                     </div>
                 </div>
                 <form class="admin_form project_form" id="add_project_form" action="/admin/" method="post" hidden >
-                    <input type="hidden" name="action" value="add_project">
+
                     <h2>Add Project</h2>
+                    <input type="hidden" name="action" value="add_project">
                     <label for="image">Image: </label>
                     <input type="file" name="image">
                     <br>
                     <label for="title">Title: </label>
                     <input type="text" name="title" maxlength="25" value="">
+                    <br>
+                    <label for="url">URL: </label>
+                    <input type="text" name="url">
                     <br>
                     <label for="short_desc">Short Description: </label>
                     <br>
@@ -259,25 +381,24 @@ if($action != ""){
                         <option value="no">No</option>
                     </select>
                     <br>
-                    <label for="date">Date: </label>
-                    <input type="date" name="date" value="">
-                    <br>
-                    <input type="submit" value="Submit">
 
+                    <input type="submit" value="Submit">
+                    <button onclick="cancel_add(event,'project')">Cancel</button>
                 </form>
                 <?php
                 $sql = "SELECT * FROM projects";
                 $query = mysqli_query($conn,$sql);
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <div class="grid_div" id="div_project_<?= $result['id'] ?>" style="background: url('../includes/images/events/<?= $result['image'] ?>') center no-repeat;background-size: contain;">
-                        <div class="div_overlay">
-                            <button class="edit_button" onclick="edit_form('project',<?= $result['id'] ?>)">Edit</button>
+                    <div class="grid_div" id="div_project_<?= $result['id'] ?>" style="background: url('../includes/images/projects/<?= $result['image'] ?>') center no-repeat;background-size: contain;">
+                        <div class="div_overlay"onclick="edit_form('project',<?= $result['id'] ?>)">
                             <h2><?= $result['title'] ?></h2>
+                            <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form project_form" action="/admin/?action=edit_project" id="form_project_<?= $result['id'] ?>" hidden>
+                    <form class="admin_form project_form" action="/admin/" id="form_project_<?= $result['id'] ?>" method="post" hidden>
                         <h2><?= $result['title'] ?></h2>
+                        <input type="hidden" name="action" value="edit_project">
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         <img src="../includes/images/projects/<?= $result['image'] ?>">
                         <br>
@@ -286,103 +407,6 @@ if($action != ""){
                         <br>
                         <label for="title">Title: </label>
                         <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
-                        <br>
-                        <label for="short_desc">Short Description: </label>
-                        <br>
-                        <textarea class="short_desc" name="short_text"><?= $result['short_desc'] ?></textarea>
-                        <br>
-                        <br>
-                        <label for="long_desc">Long Description: </label>
-                        <textarea class="long_desc" name="long_text"><?= $result['long_desc'] ?></textarea>
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <label for="date">Date: </label>
-                        <input type="date" name="date" value="<?= $result['date'] ?>">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                    <?php
-                }
-
-                ?>
-
-            </div>
-        </div>
-        <div id="members_page" class="tab_item_div" hidden>
-            <h1>Members Page</h1>
-            <hr>
-            <div class="grid">
-                <form class="admin_form membesr_form" action="/admin/?action=edit_members">
-                    <h2>Add Member</h2>
-                    <label for="image">Upload Image: </label>
-                    <input type="file" name="image">
-                    <br>
-                    <label for="f_name">First Name: </label>
-                    <input type="text" name="f_name" maxlength="25" value="">
-                    <br>
-                    <label for="l_name">First Name: </label>
-                    <input type="text" name="l_name" maxlength="25" value="">
-                    <br>
-                    <label for="year">Year: </label>
-                    <input type="text" name="year" value="">
-                    <br>
-                    <label for="major">Major: </label>
-                    <input type="text" name="major" value="">
-                    <br>
-                    <label for="position">Position: </label>
-                    <input type="text" name="position" value="">
-                    <br>
-                    <label for="url">URL: </label>
-                    <input type="text" name="url" value="">
-                    <br>
-                    <label for="short_desc">Short Description: </label>
-                    <br>
-                    <textarea class="short_desc" name="short_text"></textarea>
-                    <br>
-                    <br>
-                    <label for="long_desc">Long Description: </label>
-                    <textarea class="long_desc" name="long_text"></textarea>
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
-                    <input type="submit" value="Submit">
-                </form>
-                <?php
-                $sql = "SELECT * FROM members";
-                $query = mysqli_query($conn,$sql);
-                while($result = mysqli_fetch_assoc($query)){
-                    ?>
-                    <form class="admin_form membesr_form" action="/admin/?action=edit_members">
-                        <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <img src="../includes/images/members/<?= $result['image'] ?>">
-                        <br>
-                        <label for="image">Replace Image: </label>
-                        <input type="file" name="image">
-                        <br>
-                        <label for="f_name">First Name: </label>
-                        <input type="text" name="f_name" maxlength="25" value="<?= $result['f_name'] ?>">
-                        <br>
-                        <label for="l_name">First Name: </label>
-                        <input type="text" name="l_name" maxlength="25" value="<?= $result['l_name'] ?>">
-                        <br>
-                        <label for="year">Year: </label>
-                        <input type="text" name="year" value="<?= $result['year'] ?>">
-                        <br>
-                        <label for="major">Major: </label>
-                        <input type="text" name="major" value="<?= $result['major'] ?>">
-                        <br>
-                        <label for="position">Position: </label>
-                        <input type="text" name="position" value="<?= $result['position'] ?>">
                         <br>
                         <label for="url">URL: </label>
                         <input type="text" name="url" value="<?= $result['url'] ?>">
@@ -402,6 +426,121 @@ if($action != ""){
                         </select>
                         <br>
                         <input type="submit" value="Submit">
+                        <button onclick="cancel_edit(event,'project',<?= $result['id'] ?>)">Cancel</button>
+                    </form>
+                    <?php
+                }
+
+                ?>
+
+            </div>
+        </div>
+        <div id="members_page" class="tab_item_div" hidden>
+            <h1>Members Page</h1>
+            <hr>
+            <div class="grid">
+                <div class="grid_div" id="add_member">
+                    <img src="../includes/images/icons/plus.png"  class="add_icon">
+                    <div class="div_overlay" onclick="add_div('member')">
+                    </div>
+                </div>
+                <form class="admin_form members_form" id="add_member_form" action="/admin/" method="post" hidden>
+
+                    <h2>Add Member</h2>
+                    <input type="hidden" name="action" value="add_member">
+                    <label for="image">Upload Image: </label>
+                    <input type="file" name="image">
+                    <br>
+                    <label for="f_name">First Name: </label>
+                    <input type="text" name="f_name" maxlength="25" value="">
+                    <br>
+                    <label for="l_name">Last Name: </label>
+                    <input type="text" name="l_name" maxlength="25" value="">
+                    <br>
+                    <label for="year">Year: </label>
+                    <input type="text" name="year" value="">
+                    <br>
+                    <label for="major">Major: </label>
+                    <input type="text" name="major" value="">
+                    <br>
+                    <label for="position">Position: </label>
+                    <input type="text" name="position" value="">
+                    <br>
+                    <label for="url">URL: </label>
+                    <input type="text" name="url" value="">
+                    <br>
+                    <label for="short_desc">Short Description: </label>
+                    <br>
+                    <textarea class="short_desc" name="short_desc" ></textarea>
+                    <br>
+                    <br>
+                    <label for="long_desc">Long Description: </label>
+                    <textarea class="long_desc" name="long_desc"></textarea>
+                    <br>
+                    <label for="active">Active: </label>
+                    <select name="active">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                    <button onclick="cancel_add(event,'member')">Cancel</button>
+                </form>
+                <?php
+                $sql = "SELECT * FROM members";
+                $query = mysqli_query($conn,$sql);
+                while($result = mysqli_fetch_assoc($query)){
+                    ?>
+                    <div class="grid_div" id="div_member_<?= $result['id'] ?>" style="background: url('../includes/images/members/<?= $result['image'] ?>') center no-repeat;background-size: contain;">
+                        <div class="div_overlay" onclick="edit_form('member',<?= $result['id'] ?>)">
+                            <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
+                            <h3 class="click_to_edit">Click to Edit</h3>
+                        </div>
+                    </div>
+                    <form class="admin_form members_form" action="/admin/" id="form_member_<?= $result['id'] ?>" method="post" hidden>
+
+                        <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
+                        <input type="hidden" name="action" value="edit_member">
+                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        <img src="../includes/images/members/<?= $result['image'] ?>">
+                        <br>
+                        <label for="image">Replace Image: </label>
+                        <input type="file" name="image">
+                        <br>
+                        <label for="f_name">First Name: </label>
+                        <input type="text" name="f_name" maxlength="25" value="<?= $result['f_name'] ?>">
+                        <br>
+                        <label for="l_name">Last Name: </label>
+                        <input type="text" name="l_name" maxlength="25" value="<?= $result['l_name'] ?>">
+                        <br>
+                        <label for="year">Year: </label>
+                        <input type="text" name="year" value="<?= $result['year'] ?>">
+                        <br>
+                        <label for="major">Major: </label>
+                        <input type="text" name="major" value="<?= $result['major'] ?>">
+                        <br>
+                        <label for="position">Position: </label>
+                        <input type="text" name="position" value="<?= $result['position'] ?>">
+                        <br>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url" value="<?= $result['url'] ?>">
+                        <br>
+                        <label for="short_desc">Short Description: </label>
+                        <br>
+                        <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
+                        <br>
+                        <br>
+                        <label for="long_desc">Long Description: </label>
+                        <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_edit(event,'member',<?= $result['id'] ?>)">Cancel</button>
                     </form>
                     <?php
                 }
@@ -414,15 +553,31 @@ if($action != ""){
             <h1>Resources Page</h1>
             <hr>
             <div class="grid">
-                <form class="admin_form project_form" action="/admin/?action=edit_project">
+                <div class="grid_div" id="add_resource">
+                    <img src="../includes/images/icons/plus.png"  class="add_icon">
+                    <div class="div_overlay" onclick="add_div('resource')">
+                    </div>
+                </div>
+                <form class="admin_form resource_form" id="add_resource_form" action="/admin/" method="post" hidden>
+
                     <h2>Add New Resource</h2>
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="action" value="add_resource">
                     <br>
                     <label for="title">Title: </label>
                     <input type="text" name="title" maxlength="25" value="">
                     <br>
-                    <label for="description">Long Description: </label>
-                    <textarea class="short_desc" name="long_text"></textarea>
+                    <label for="url">URL: </label>
+                    <input type="text" name="url">
+                    <br>
+                    <label for="description">Description: </label>
+                    <textarea class="short_desc" name="description"></textarea>
+                    <br>
+                    <label for="category">Category: </label>
+                    <select name="category">
+                        <option value="social">Social</option>
+                        <option value="documents">Documents</option>
+                        <option value="development">Development</option>
+                    </select>
                     <br>
                     <label for="active">Active: </label>
                     <select name="active">
@@ -431,21 +586,40 @@ if($action != ""){
                     </select>
                     <br>
                     <input type="submit" value="Submit">
+                    <button onclick="cancel_add(event,'resource')">Cancel</button>
                 </form>
                 <?php
                 $sql = "SELECT * FROM resources";
                 $query = mysqli_query($conn,$sql);
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <form class="admin_form project_form" action="/admin/?action=edit_project">
+                    <div class="grid_div" id="div_resource_<?= $result['id'] ?>">
+                        <div class="div_overlay" onclick="edit_form('resource',<?= $result['id'] ?>)">
+                            <h2><?= $result['title']?></h2>
+                            <h3 class="click_to_edit">Click to Edit</h3>
+                        </div>
+                    </div>
+                    <form class="admin_form resource_form" id="form_resource_<?= $result['id'] ?>" action="/admin/" method="post" hidden>
+
                         <h2><?= $result['title'] ?></h2>
+                        <input type="hidden" name="action" value="edit_resource">
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         <br>
                         <label for="title">Title: </label>
                         <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
                         <br>
-                        <label for="description">Long Description: </label>
-                        <textarea class="short_desc" name="long_text"><?= $result['description'] ?></textarea>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url" value="<?= $result['url'] ?>">
+                        <br>
+                        <label for="description">Description: </label>
+                        <textarea class="short_desc" name="description"><?= $result['description'] ?></textarea>
+                        <br>
+                        <label for="category">Category: </label>
+                        <select name="category">
+                            <option value="social" <?= $result['category'] == 'social' ? 'selected' : '' ?>>Social</option>
+                            <option value="documents" <?= $result['category'] == 'documents' ? 'selected' : '' ?>>Documents</option>
+                            <option value="development" <?= $result['category'] == 'development' ? 'selected' : '' ?>>Development</option>
+                        </select>
                         <br>
                         <label for="active">Active: </label>
                         <select name="active">
@@ -454,6 +628,7 @@ if($action != ""){
                         </select>
                         <br>
                         <input type="submit" value="Submit">
+                        <button onclick="cancel_edit(event,'resource',<?= $result['id'] ?>)">Cancel</button>
                     </form>
                     <?php
                 }
@@ -465,7 +640,9 @@ if($action != ""){
             <h1>Contact Page</h1>
             <hr>
             <div class="grid">
-
+                <?php
+                //TODO add contact page edit stuff, maybe the send_to email address?
+                ?>
             </div>
         </div>
 
