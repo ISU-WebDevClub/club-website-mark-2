@@ -33,70 +33,154 @@ if($action != ""){
             break;
         case 'add_event':
             $run_sql = true;
-
+            $sql = "INSERT INTO events (";
+            $to_add = array();
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $description = mysqli_real_escape_string($conn, get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
-            $file_title = str_replace(' ', '_',get_value('title'));
-            $file_title = strtolower($file_title);
-
-            $file_name = upload_image('event', $file_title);
-
-
-
-            if(strpos($file_name,'ERROR')){
-                $run_sql = false;
-                $error = $file_name;
-                $file_name = "";
+            $image = "";
+            if($title != ""){
+                $to_add['title'] = mysqli_real_escape_string($conn, $title);
+            }
+            if($description != ''){
+                $to_add['description'] = $description;
+            }
+            if($active != ""){
+                $to_add['active'] = $active;
+            }
+            if($date != ''){
+                $to_add['date'] = $date;
             }
 
-            $sql = "INSERT INTO events (title,description,image ,`date`,active) VALUES ('".$title."','".$description."','".$file_name."','".$date."','".$active."')";
+            if($_FILES['image']['size'] != 0) {
+                $file_title = str_replace(' ', '_', get_value('title'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('event', $file_title);
+                $to_add['image'] = $image;
+            }
+
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
+
+            foreach($to_add as $key => $value){
+                $sql .= $key.",";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ") VALUES (";
+            foreach($to_add as $key => $value){
+                $sql .= "'".$to_add[$key]."',";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ")";
+
 
             break;
         case 'edit_event':
             $run_sql = true;
+            $to_add = array();
+            $sql = "INSERT INTO events (";
             $id = mysqli_real_escape_string($conn,get_value('id'));
-//            $image = mysqli_real_escape_string($conn,get_value('image'));
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $description = mysqli_real_escape_string($conn, get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
-            $file_title = str_replace(' ','_',get_value('title'));
-            $file_title = strtolower($file_title);
-            $file_name = upload_image('event', $file_title);
-
-            if(strpos($file_name,'ERROR')){
-                $run_sql = false;
-            }
-            $sql = "UPDATE events SET title='".$title."', description='".$description."', `date`='".$date."',image='".$file_name."', active='".$active."' WHERE id=".$id;
+            //TODO make sql say SET image='blah' etc...
+//            $image = "";
+//            if($title != ""){
+//                $to_add['title'] = mysqli_real_escape_string($conn, $title);
+//            }
+//            if($description != ''){
+//                $to_add['description'] = $description;
+//            }
+//            if($active != ""){
+//                $to_add['active'] = $active;
+//            }
+//            if($date != ''){
+//                $to_add['date'] = $date;
+//            }
+//
+//            if($_FILES['image']['size'] != 0) {
+//                $file_title = str_replace(' ', '_', get_value('title'));
+//                $file_title = strtolower($file_title);
+//                $image = upload_image('event', $file_title);
+//                $to_add['image'] = $image;
+//            }
+//
+//            if(strpos($image,'ERROR') !== false){
+//                $run_sql = false;
+//                $error = $image;
+//            }
+//
+//            foreach($to_add as $key => $value){
+//                $sql .= $key.",";
+//            }
+//            $sql = rtrim($sql, ",");
+//            $sql .= ") VALUES (";
+//            foreach($to_add as $key => $value){
+//                $sql .= "'".$to_add[$key]."',";
+//            }
+//            $sql = rtrim($sql, ",");
+//            $sql .= ") WHERE id=".$id;
+//
+//            if(strpos($image,'ERROR') !== false){
+//                $run_sql = false;
+//                $error = $image;
+//            }
 
             break;
         case 'add_project':
             $run_sql = true;
-//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $to_add = array();
+            $sql = "INSERT INTO projects (";
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $url = mysqli_real_escape_string($conn, get_value('url'));
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
+            $image = "";
 
-            $file_title = str_replace(' ','_',get_value('title'));
-            $file_title = strtolower($file_title);
+            $to_add['title'] = mysqli_real_escape_string($conn, $title);
+            //TODO short and long desc, url
+            $to_add['active'] = $active;
 
-            $file_name = upload_image('event', $file_title);
-
-            if(strpos($file_name,'ERROR')){
-                $run_sql = false;
+            if($_FILES['image']['size'] != 0) {
+                $file_title = str_replace(' ', '_', get_value('title'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('event', $file_title);
+                $to_add['image'] = $image;
             }
 
-            $sql = "INSERT INTO projects (title, short_desc, long_desc,image, url, active) VALUES ('".$title."','".$short_desc."','".$long_desc."','".$file_name."','".$url."','".$active."')";
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
+
+            foreach($to_add as $key => $value){
+                $sql .= $key.",";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ") VALUES (";
+            foreach($to_add as $key => $value){
+                $sql .= "'".$to_add[$key]."',";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ")";
+
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
+
 
             break;
         case 'edit_project':
             $run_sql = true;
+            $to_add = array();
+            $sql = "INSERT INTO projects (";
             $id = mysqli_real_escape_string($conn,get_value('id'));
-//            $image = mysqli_real_escape_string($conn,get_value('image'));
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $url = mysqli_real_escape_string($conn, get_value('url'));
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
