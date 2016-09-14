@@ -153,7 +153,15 @@ if($action != ""){
             <h1>About Page</h1>
             <hr>
             <div class="grid">
-                <form class="admin_form about_form" action="/admin/?action=add_event">
+                <div class="grid_div" id="add_event">
+                    <img class="add_icon" src="../includes/images/icons/plus.png"  >
+                    <div class="div_overlay" onclick="add_div('event')">
+                    </div>
+
+                </div>
+
+                <form id="add_event_form" class="admin_form about_form" action="/admin/" method="post" hidden>
+                    <input type="hidden" name="action" value="add_event">
                     <h2>Add Event</h2>
                     <label for="image">Replace Image: </label>
                     <input type="file" name="image">
@@ -173,14 +181,22 @@ if($action != ""){
                     <input type="date" name="date" >
                     <br>
                     <input type="submit" value="Add Project">
+                    <button onclick="cancel_add(event,'event',<?= $result['id'] ?>)">Cancel</button>
                 </form>
                 <?php
                 $sql = "SELECT * FROM events";
                 $query = mysqli_query($conn,$sql);
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <form class="admin_form about_form small" action="/admin/?action=edit_event" id="<?= $result['id'] ?>">
+                    <div class="grid_div" id="div_about_<?= $result['id'] ?>" style="background: url('../includes/images/events/<?= $result['image'] ?>') center no-repeat;background-size: contain;">
+                        <div class="div_overlay" onclick="edit_form('about',<?= $result['id'] ?>)">
+                            <h2><?= $result['title'] ?></h2>
+                            <h3 class="click_to_edit">Click to Edit</h3>
+                        </div>
+                    </div>
+                    <form class="admin_form about_form" action="/admin/" id="form_about_<?= $result['id'] ?>" method="post" hidden>
                         <h2><?= $result['title'] ?></h2>
+                        <input type="hidden" name="action" value="edit_event">
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         <img src="../includes/images/events/<?= $result['image'] ?>">
                         <br>
@@ -202,8 +218,7 @@ if($action != ""){
                         <input type="date" name="date" value="<?= $result['date'] ?>">
                         <br>
                         <input type="submit" value="Submit">
-                        <button onclick="edit_form(<?= $result['id'] ?>)">Edit</button>
-                        <button onclick="cancel_edit(<?= $result['id'] ?>)" hidden>Cancel</button>
+                        <button onclick="cancel_edit(event,'about',<?= $result['id'] ?>)">Cancel</button>
                     </form>
                     <?php
                 }
@@ -216,7 +231,13 @@ if($action != ""){
             <h1>Portfolio Page</h1>
             <hr>
             <div class="grid">
-                <form class="admin_form project_form" action="/admin/?action=add_project">
+                <div class="grid_div" id="add_project">
+                    <img src="../includes/images/icons/plus.png"  class="add_icon">
+                    <div class="div_overlay" onclick="add_div('project')">
+                    </div>
+                </div>
+                <form class="admin_form project_form" id="add_project_form" action="/admin/" method="post" hidden >
+                    <input type="hidden" name="action" value="add_project">
                     <h2>Add Project</h2>
                     <label for="image">Image: </label>
                     <input type="file" name="image">
@@ -242,13 +263,20 @@ if($action != ""){
                     <input type="date" name="date" value="">
                     <br>
                     <input type="submit" value="Submit">
+
                 </form>
                 <?php
                 $sql = "SELECT * FROM projects";
                 $query = mysqli_query($conn,$sql);
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <form class="admin_form project_form" action="/admin/?action=edit_project">
+                    <div class="grid_div" id="div_project_<?= $result['id'] ?>" style="background: url('../includes/images/events/<?= $result['image'] ?>') center no-repeat;background-size: contain;">
+                        <div class="div_overlay">
+                            <button class="edit_button" onclick="edit_form('project',<?= $result['id'] ?>)">Edit</button>
+                            <h2><?= $result['title'] ?></h2>
+                        </div>
+                    </div>
+                    <form class="admin_form project_form" action="/admin/?action=edit_project" id="form_project_<?= $result['id'] ?>" hidden>
                         <h2><?= $result['title'] ?></h2>
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         <img src="../includes/images/projects/<?= $result['image'] ?>">

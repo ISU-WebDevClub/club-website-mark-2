@@ -60,15 +60,47 @@ h2.selected_tab{
     justify-content: center;
     -webkit-justify-content: center;
 }
+.grid_div{
+    margin: 10px;
+    position: relative;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.div_overlay{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.5);
+    cursor: pointer;
+    cursor: hand;
+}
+.edit_button{
+    position: absolute;
+    bottom: 10px;
+    width: 50px;
+    left: 50%;
+    margin-left: -25px;
+
+}
 .admin_form{
     background-color: rgba(0,0,0,.5);
     width: 400px;
-    height: 400px;
-    overflow-y: scroll;
-    margin: 20px auto;
+    margin: 10px auto;
     border-radius: 10px;
 }
-
+.add_icon{
+    height: 50%;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    cursor: pointer;
+    cursor: hand;
+}
 .admin_form input, .admin_form select{
     margin: 10px;
 }
@@ -82,4 +114,21 @@ h2.selected_tab{
 .admin_form .short_desc{
     width: 90%;
     height: 50px;
+}
+.small{
+    height: 150px;
+    width: 150px;
+}
+.click_to_edit{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    color: grey;
+    display: none;
+}
+.div_overlay:hover{
+    background-color: rgba(0,0,0,.8);
+}
+.div_overlay:hover .click_to_edit{
+    display: block;
 }
