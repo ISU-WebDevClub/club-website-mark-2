@@ -49,22 +49,26 @@ function hide_all(){
 }
 
 function edit_form(tab,id){
-    $('#div_'+tab+'_'+id).hide();
+    // $('#div_'+tab+'_'+id).hide();
+    $('#page_overlay').show();
     $('#form_'+tab+'_'+id).show();
 }
 
 function add_div(tab){
-    $('#add_'+tab).hide();
+    // $('#add_'+tab).hide();
+    $('#page_overlay').show();
     $('#add_'+tab+'_form').show();
 }
 
 function cancel_edit(event,tab, id){
     event.preventDefault();
-    $('#div_'+tab+'_'+id).show();
+    $('#page_overlay').hide();
+    // $('#div_'+tab+'_'+id).show();
     $('#form_'+tab+'_'+id).hide();
 }
 function cancel_add(event,tab){
     event.preventDefault();
+    $('#page_overlay').hide();
     $('#add_'+tab+'_form').hide();
-    $('#add_'+tab).show();
+    // $('#add_'+tab).show();
 }

@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
 }
-
 body{
     margin: 0px 0 75px 0;
 }
@@ -15,7 +14,19 @@ body{
     margin-left: 5%;
     padding-bottom: 5px;
 }
+#page_overlay{
+    background-color: rgba(0,0,0,.7);
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: none;
+}
 
+
+/*menu selection items*/
 #menu_grid{
     position: relative;
     width: 100%;
@@ -34,21 +45,22 @@ body{
     cursor: hand;
 
 }
-
 h2.selected_tab{
     text-decoration: underline;
 }
+/*###########################*/
+
+
+/*Divs that contain the forms*/
 .tab_item_div{
     display: none;
     text-align: center;
-
 }
 .selected_div{
     display: block;
     width: 90%;
     margin-left: 5%;
 }
-
 .grid{
     position: relative;
     width: 100%;
@@ -87,19 +99,27 @@ h2.selected_tab{
     margin-left: -25px;
 
 }
-.admin_form{
+#home_page_form{
     background-color: rgba(0,0,0,.5);
     width: 400px;
     margin: 10px;
     border-radius: 10px;
 }
-.add_icon{
-    height: 50%;
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    cursor: pointer;
-    cursor: hand;
+#home_page_form input, #home_page_form select{
+    margin: 10px;
+}
+.admin_form{
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    margin-top: -300px;
+    left: 50%;
+    margin-left: -300px;
+    background-color: rgba(40,40,40,1);
+    width: 600px;
+    height: 600px;
+    border-radius: 10px;
+    overflow-y: scroll;
 }
 .admin_form input, .admin_form select{
     margin: 10px;
@@ -117,9 +137,13 @@ h2.selected_tab{
     height: 50px;
     resize: none;
 }
-.small{
-    height: 150px;
-    width: 150px;
+.add_icon{
+    height: 50%;
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    cursor: pointer;
+    cursor: hand;
 }
 .click_to_edit{
     position: absolute;

@@ -32,13 +32,25 @@ if($action != ""){
             break;
         case 'add_event':
             $run_sql = true;
-//            $image = mysqli_real_escape_string($conn,get_value('image'));
+
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $description = mysqli_real_escape_string($conn, get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
+            $file_title = str_replace(' ', '_',get_value('title'));
+            $file_title = strtolower($file_title);
 
-            $sql = "INSERT INTO events (title,description,`date`,active) VALUES ('".$title."','".$description."','".$date."','".$active."')";
+            $file_name = upload_image('event', $title);
+
+
+
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+                $error = $file_name;
+                $file_name = "";
+            }
+
+            $sql = "INSERT INTO events (title,description,image ,`date`,active) VALUES ('".$title."','".$description."','".$file_name."','".$date."','".$active."')";
 
             break;
         case 'edit_event':
@@ -49,8 +61,14 @@ if($action != ""){
             $description = mysqli_real_escape_string($conn, get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
+            $file_title = str_replace(' ','_',get_value('title'));
+            $file_title = strtolower($file_title);
+            $file_name = upload_image('event', $title);
 
-            $sql = "UPDATE events SET title='".$title."', description='".$description."', `date`='".$date."', active='".$active."' WHERE id=".$id;
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+            }
+            $sql = "UPDATE events SET title='".$title."', description='".$description."', `date`='".$date."',image='".$file_name."', active='".$active."' WHERE id=".$id;
 
             break;
         case 'add_project':
@@ -62,7 +80,16 @@ if($action != ""){
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
 
-            $sql = "INSERT INTO projects (title, short_desc, long_desc, url, active) VALUES ('".$title."','".$short_desc."','".$long_desc."','".$url."','".$active."')";
+            $file_title = str_replace(' ','_',get_value('title');
+            $file_title = strtolower($file_title);
+
+            $file_name = upload_image('event', $file_title);
+
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+            }
+
+            $sql = "INSERT INTO projects (title, short_desc, long_desc,image, url, active) VALUES ('".$title."','".$short_desc."','".$long_desc."','".$file_name."','".$url."','".$active."')";
 
             break;
         case 'edit_project':
@@ -74,8 +101,15 @@ if($action != ""){
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
+            $file_title = str_replace(' ','_',get_value('title'));
+            $file_title = strtolower($file_title);
+            $file_name = upload_image('event', $title);
 
-            $sql = "UPDATE events SET title='".$title."', short_desc='".$short_desc."', long_desc='".$long_desc."', url='".$url."', active='".$active."' WHERE id=".$id;
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+            }
+
+            $sql = "UPDATE events SET title='".$title."', short_desc='".$short_desc."', long_desc='".$long_desc."',image='".$file_name."', url='".$url."', active='".$active."' WHERE id=".$id;
 
             break;
         case 'add_member':
@@ -90,8 +124,15 @@ if($action != ""){
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
+            $file_title = str_replace(' ','_',get_value('title'));
+            $file_title = strtolower($file_title);
+            $file_name = upload_image('event', $title);
 
-            $sql = "INSERT INTO members (f_name, l_name, `year`, major, short_desc, long_desc, url, `position`, active) VALUES ('".$f_name."','".$l_name."','".$year."','".$major."','".$short_desc."','".$long_desc."','".$url."','".$position."','".$active."')";
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+            }
+
+            $sql = "INSERT INTO members (f_name, l_name, `year`, major, short_desc, long_desc,image, url, `position`, active) VALUES ('".$f_name."','".$l_name."','".$year."','".$major."','".$short_desc."','".$long_desc."','".$file_name."','".$url."','".$position."','".$active."')";
 
 
             break;
@@ -109,8 +150,15 @@ if($action != ""){
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
+            $file_title = str_replace(' ','_',get_value('title'));
+            $file_title = strtolower($file_title);
+            $file_name = upload_image('event', $title);
 
-            $sql = "UPDATE members SET f_name='".$f_name."', l_name='".$l_name."', `year`='".$year."', major='".$major."', short_desc='".$short_desc."', long_desc='".$long_desc."', url='".$url."', `position`='".$position."', active='".$active."' WHERE id=".$id;
+            if(strpos($file_name,'ERROR')){
+                $run_sql = false;
+            }
+
+            $sql = "UPDATE members SET f_name='".$f_name."', l_name='".$l_name."', `year`='".$year."', major='".$major."', short_desc='".$short_desc."', long_desc='".$long_desc."',image='".$file_name."', url='".$url."', `position`='".$position."', active='".$active."' WHERE id=".$id;
 
             break;
         case 'add_resource':
@@ -146,6 +194,8 @@ if($action != ""){
     }
     if($run_sql){
         $query = mysqli_query($conn, $sql);
+    }else{
+        echo $file_name;
     }
 
 }
@@ -178,7 +228,7 @@ if($action != ""){
 <?php //include "../includes/php/header.php" ?>
 <body>
 <div id="content">
-
+    <div id="page_overlay"></div>
     <div id="content-sub">
         <h1>Admin Page</h1>
         <hr>
@@ -201,7 +251,7 @@ if($action != ""){
 
             ?>
             <div class="grid">
-                <form id="home_page" class="admin_form" action="/admin/" method="post">
+                <form id="home_page_form" action="/admin/" method="post">
                     <h2>Meeting Times</h2>
                     <label for="start_time">Start Time: </label>
                     <input type="hidden" name="action" value="meeting_time">
@@ -277,7 +327,7 @@ if($action != ""){
 
                 </div>
 
-                <form id="add_event_form" class="admin_form about_form" action="/admin/" method="post" hidden>
+                <form id="add_event_form" class="admin_form about_form" action="/admin/" method="post" enctype="multipart/form-data" hidden>
 
                     <h2>Add Event</h2>
                     <input type="hidden" name="action" value="add_event">
@@ -287,7 +337,7 @@ if($action != ""){
                     <label for="title">Title: </label>
                     <input type="text" name="title" maxlength="25">
                     <br>
-                    <textarea class="long_desc" name="text"></textarea>
+                    <textarea class="long_desc" name="description"></textarea>
                     <br>
                     <label for="active">Active: </label>
                     <select name="active">
@@ -312,7 +362,7 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form about_form" action="/admin/" id="form_about_<?= $result['id'] ?>" method="post" hidden>
+                    <form class="admin_form about_form" action="/admin/" id="form_about_<?= $result['id'] ?>" enctype="multipart/form-data" method="post" hidden>
                         <h2><?= $result['title'] ?></h2>
                         <input type="hidden" name="action" value="edit_event">
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
@@ -354,7 +404,7 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('project')">
                     </div>
                 </div>
-                <form class="admin_form project_form" id="add_project_form" action="/admin/" method="post" hidden >
+                <form class="admin_form project_form" id="add_project_form" action="/admin/" method="post" enctype="multipart/form-data" hidden >
 
                     <h2>Add Project</h2>
                     <input type="hidden" name="action" value="add_project">
@@ -396,7 +446,7 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form project_form" action="/admin/" id="form_project_<?= $result['id'] ?>" method="post" hidden>
+                    <form class="admin_form project_form" action="/admin/" id="form_project_<?= $result['id'] ?>" method="post" enctype="multipart/form-data" hidden>
                         <h2><?= $result['title'] ?></h2>
                         <input type="hidden" name="action" value="edit_project">
                         <input type="hidden" name="id" value="<?= $result['id'] ?>">
@@ -444,8 +494,7 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('member')">
                     </div>
                 </div>
-                <form class="admin_form members_form" id="add_member_form" action="/admin/" method="post" hidden>
-
+                <form class="admin_form members_form" id="add_member_form" action="/admin/" method="post" enctype="multipart/form-data" hidden>
                     <h2>Add Member</h2>
                     <input type="hidden" name="action" value="add_member">
                     <label for="image">Upload Image: </label>
@@ -497,7 +546,7 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form members_form" action="/admin/" id="form_member_<?= $result['id'] ?>" method="post" hidden>
+                    <form class="admin_form members_form" action="/admin/" id="form_member_<?= $result['id'] ?>" method="post" enctype="multipart/form-data" hidden>
 
                         <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
                         <input type="hidden" name="action" value="edit_member">
@@ -657,4 +706,8 @@ if($action != ""){
 </body>
 </html>
 
-<?php include "../includes/php/footer.php"?>
+<?php
+include "../includes/php/footer.php";
+
+
+?>

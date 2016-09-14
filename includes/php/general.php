@@ -6,6 +6,69 @@
  * Time: 7:56 PM
  */
 
+function upload_image($type, $name){
+    switch($type){
+        case 'event':
+            $target_dir = "../includes/images/events/";
+            break;
+        case 'project':
+            $target_dir = "../includes/images/projects/";
+            break;
+        case 'member':
+            $target_dir = "../includes/images/projects/";
+            break;
+    }
+
+    $target_file = basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    $temp_file = $target_dir.$name;
+    $target_file = $target_dir.$name.".".$imageFileType;
+
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if($check !== false) {
+            $uploadOk = 1;
+        } else {
+            return "ERROR: File is not an Image";
+        }
+    }
+
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        $i = 1;
+        while(file_exists($temp_file."_".$i.".".$imageFileType)){
+            $i++;
+        }
+        $target_file = $temp_file."_".$i.".".$imageFileType;
+    }
+
+    // Check file size
+    if ($_FILES["image"]["size"] > 500000) {
+        return "ERROR: File is too large to upload.";
+    }
+
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+        return "ERROR: ".$imageFileType." File types are not permitted.";
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "ERROR: File failed to upload.";
+        // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $names = explode('/',$target_file);
+
+            return $names[sizeof($names)-1];
+        } else {
+            echo "ERROR: File failed to upload.";
+        }
+    }
+}
+
 /**
  * @param $name -- Name of variable you want to get.
  * @param null $target_array    -- Specifying where you want to get the variable from.
