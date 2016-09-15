@@ -71,17 +71,46 @@ if($action != ""){
         <div id="content-sub">
             <h1>Contact</h1>
             <hr>
-            <div id="contact_div">
+
+            <div id="contact_title">
                 <h2>Want us to make your website?</h2>
-                <form id="email_form" action="/contact/" method="post">
-                    <input name="action" value="email" type="hidden">
-                    <input class="email_input" id="name" type="text" name="name" placeholder="Name">
-                    <input class="email_input" id="email" type="text" name="email" placeholder="Email">
-                    <input class="email_input" id="subject" type="text" name="subject" placeholder="Subject">
-                    <textarea class="email_input"  id="message" name="message" placeholder="Message"></textarea>
-                    <br>
-                    <input id="submit_email" type="submit" value="Send">
-                </form>
+            </div>
+            <div id="grid">
+
+                <div id="text_div">
+                    <p>Shoot us an email if you're interested in WDC making your next website.
+                        Make sure you try to include as much detail as necessary to convey the scope of the project.
+                        That helps members determine if they have the time/resources to tackle it.</p>
+                    <p>Below are a few of the questions we consider when approaching a possible project:
+                    </p>
+                    <ul id="contact_list">
+                        <li>What do want the website to accomplish?</li>
+                        <li>When does it need to be finished? Is that deadline flexible?</li>
+                        <li>Is this a re-design of a previous website? If so, what changes are you looking for?</li>
+                        <li>Do you have a few examples of existing websites that have a similar look/feel as what you're trying to achieve?</li>
+                        <li>Are you wanting a simple landing page website? Or will it have multiple pages and sub-pages?</li>
+                        <li>Is design-work needed or do you already have a design for the website?</li>
+                        <li>Is there already content (written text, artwork, etc) or will that need to be created?</li>
+                        <li>Will there be a blog or any other kind of serialized content?</li>
+                        <li>Will the website be selling anything? (Not sure we can do those as a university club, but individual members may still want to tackle it)</li>
+                        <li>What other features are you looking for in the website?</li>
+                        <li>If you don't know the answers to all those questions right away, that's ok! But it will help us better determine if we'll be able to help you.</li>
+                    </ul>
+
+
+                    One more thing: You'll have better luck if you approach us towards the beginning of the semester, since everyone tends to get really busy with schoolwork about halfway through the semester.
+                </div>
+                <div id="contact_div">
+                    <form id="email_form" action="/contact/" method="post">
+                        <input name="action" value="email" type="hidden">
+                        <input class="email_input" id="name" type="text" name="name" placeholder="Name">
+                        <input class="email_input" id="email" type="text" name="email" placeholder="Email">
+                        <input class="email_input" id="subject" type="text" name="subject" placeholder="Subject">
+                        <textarea class="email_input"  id="message" name="message" placeholder="Message"></textarea>
+                        <br>
+                        <input id="submit_email" type="submit" value="Send">
+                    </form>
+                </div>
             </div>
 
         </div>

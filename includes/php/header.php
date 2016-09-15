@@ -35,21 +35,25 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUES
         <li class="<?= $url == 'Resources' ? 'selected' : '' ?>"><a href="/resources/" class="header_title"><div class="nav_text">Resources</div></a></li>
         <li id="contact"><a href="/contact/" class="header_title"><div class="nav_text" id="contact_text">Contact</div></a></li>
     </ul>
-    <form id="contact_button_form" action="/contact/" method="post">
+    <div id="contact_button_form">
         <button id="contact_us">Contact Us</button>
-    </form>
+    </div>
     <img id="menu_icon" src="/includes/images/icons/menu.png">
 </header>
 <script>
     toggle_menu_icon();
     window.onresize = function(){
         toggle_menu_icon();
-    }
+    };
     var menu_icon = document.getElementById('menu_icon');
 
     menu_icon.onclick = function(){
         toggle_menu();
-    }
+    };
+    var contact = document.getElementById('contact_button_form');
+    contact.onclick = function(){
+        window.location = '/contact/';
+    };
     function toggle_menu(){
         var menu = document.getElementById('navbar');
         if(menu.classList.contains('visible')){
