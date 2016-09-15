@@ -13,21 +13,9 @@ session_start();
 //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 //TODO change this for when the server is live.
-
-
-//TODO if you have a local instance of mysql running, use the following settings.
-//$dbhost = 'localhost';
-//
-//$dbname = 'WDC';
-//$dbuser = "root";
-//$dbpass = "stee1nhagen";
-
-
-//TODO comment these out if you are running the mysql locally.
 $dbhost = '66.147.244.88';
 $dbname = "stonesu0_WDC"; // the name of the database that you are going to use for this project
 
-//TODO set these variable to reflect your system's variables.
 $dbuser = "stonesu0_csteen"; // the username that you created, or were given, to access your database
 $dbpass = "Stee1nhagen@)!^"; // the password that you created, or were given, to access your database
 $port = 3306;

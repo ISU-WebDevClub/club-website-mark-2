@@ -9,11 +9,9 @@
 include "../includes/php/base.php";
 include "../includes/php/general.php";
 
-//TODO add for preprocessing here.
 $action = get_value('action');
 if($action != ""){
     switch($action){
-        //TODO construct the query based on whether the value is set or not.
         //Image names are being overwritten in the db because if the image input is null, it still tries to upload an image.
         case 'meeting_time':
             $run_sql = true;
@@ -40,15 +38,23 @@ if($action != ""){
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
             $image = "";
+
+            //They must have a title
             if($title != ""){
                 $to_add['title'] = mysqli_real_escape_string($conn, $title);
+            }else{
+                $run_sql = false;
+                break;
             }
+
             if($description != ''){
                 $to_add['description'] = $description;
             }
+
             if($active != ""){
                 $to_add['active'] = $active;
             }
+
             if($date != ''){
                 $to_add['date'] = $date;
             }
@@ -80,55 +86,35 @@ if($action != ""){
             break;
         case 'edit_event':
             $run_sql = true;
-            $to_add = array();
-            $sql = "INSERT INTO events (";
+            $sql = "UPDATE events SET ";
             $id = mysqli_real_escape_string($conn,get_value('id'));
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $description = mysqli_real_escape_string($conn, get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $date = mysqli_real_escape_string($conn,get_value('date'));
-            //TODO make sql say SET image='blah' etc...
-//            $image = "";
-//            if($title != ""){
-//                $to_add['title'] = mysqli_real_escape_string($conn, $title);
-//            }
-//            if($description != ''){
-//                $to_add['description'] = $description;
-//            }
-//            if($active != ""){
-//                $to_add['active'] = $active;
-//            }
-//            if($date != ''){
-//                $to_add['date'] = $date;
-//            }
-//
-//            if($_FILES['image']['size'] != 0) {
-//                $file_title = str_replace(' ', '_', get_value('title'));
-//                $file_title = strtolower($file_title);
-//                $image = upload_image('event', $file_title);
-//                $to_add['image'] = $image;
-//            }
-//
-//            if(strpos($image,'ERROR') !== false){
-//                $run_sql = false;
-//                $error = $image;
-//            }
-//
-//            foreach($to_add as $key => $value){
-//                $sql .= $key.",";
-//            }
-//            $sql = rtrim($sql, ",");
-//            $sql .= ") VALUES (";
-//            foreach($to_add as $key => $value){
-//                $sql .= "'".$to_add[$key]."',";
-//            }
-//            $sql = rtrim($sql, ",");
-//            $sql .= ") WHERE id=".$id;
-//
-//            if(strpos($image,'ERROR') !== false){
-//                $run_sql = false;
-//                $error = $image;
-//            }
+            $image = "";
+            if($title == ""){
+                $run_sql = false;
+                break;
+            }
+            $sql .= " title='".$title."', description='".$description."', active='".$active."', date='".$date."' ";
+
+
+            if($_FILES['image']['size'] != 0) {
+                $file_title = str_replace(' ', '_', get_value('title'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('event', $file_title);
+                $to_add['image'] = $image;
+
+                if(strpos($image,'ERROR') !== false){
+                    $run_sql = false;
+                    $error = $image;
+                }
+                $sql .= ", image='".$image."'";
+            }
+
+            $sql  .= " WHERE id=".$id;
+
 
             break;
         case 'add_project':
@@ -142,14 +128,31 @@ if($action != ""){
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $image = "";
 
-            $to_add['title'] = mysqli_real_escape_string($conn, $title);
-            //TODO short and long desc, url
-            $to_add['active'] = $active;
+            if($title != ""){
+                $to_add['title'] = $title;
+            }else{
+                $run_sql = false;
+                break;
+            }
+
+            if($active != ""){
+                $to_add['active'] = $active;
+            }
+
+            if($url != ""){
+                $to_add['url'] = $url;
+            }
+            if($short_desc != ""){
+                $to_add['short_desc'] = $short_desc;
+            }
+            if($long_desc != ""){
+                $to_add['long_desc'] = $long_desc;
+            }
 
             if($_FILES['image']['size'] != 0) {
                 $file_title = str_replace(' ', '_', get_value('title'));
                 $file_title = strtolower($file_title);
-                $image = upload_image('event', $file_title);
+                $image = upload_image('project', $file_title);
                 $to_add['image'] = $image;
             }
 
@@ -179,27 +182,42 @@ if($action != ""){
         case 'edit_project':
             $run_sql = true;
             $to_add = array();
-            $sql = "INSERT INTO projects (";
+            $sql = "UPDATE projects SET ";
             $id = mysqli_real_escape_string($conn,get_value('id'));
             $title = mysqli_real_escape_string($conn,get_value('title'));
             $url = mysqli_real_escape_string($conn, get_value('url'));
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
-            $file_title = str_replace(' ','_',get_value('title'));
-            $file_title = strtolower($file_title);
-            $file_name = upload_image('event', $title);
 
-            if(strpos($file_name,'ERROR')){
+            if($title == ""){
                 $run_sql = false;
+                break;
+            }
+            $sql .= " title='".$title."', short_desc='".$short_desc."',long_desc='".$long_desc."',url='".$url."', active='".$active."' ";
+
+            if($_FILES['image']['size'] != 0) {
+                $file_title = str_replace(' ', '_', get_value('title'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('project', $file_title);
+                $to_add['image'] = $image;
+
+                if(strpos($image,'ERROR') !== false){
+                    $run_sql = false;
+                    $error = $image;
+                }
+                $sql .= ", image='".$image."'";
             }
 
-            $sql = "UPDATE events SET title='".$title."', short_desc='".$short_desc."', long_desc='".$long_desc."',image='".$file_name."', url='".$url."', active='".$active."' WHERE id=".$id;
+            $sql .= " WHERE id=".$id;
+
+
 
             break;
         case 'add_member':
             $run_sql = true;
-//            $image = mysqli_real_escape_string($conn,get_value('image'));
+            $to_add = array();
+            $sql = "INSERT INTO members (";
             $f_name = mysqli_real_escape_string($conn,get_value('f_name'));
             $l_name = mysqli_real_escape_string($conn,get_value('l_name'));
             $year = mysqli_real_escape_string($conn,get_value('year'));
@@ -209,21 +227,76 @@ if($action != ""){
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
-            $file_title = str_replace(' ','_',get_value('title'));
-            $file_title = strtolower($file_title);
-            $file_name = upload_image('event', $title);
 
-            if(strpos($file_name,'ERROR')){
+
+            $image = "";
+
+            if($f_name != "" && $l_name != ""){
+                $to_add['f_name'] = $f_name;
+                $to_add['l_name'] = $l_name;
+            }else{
                 $run_sql = false;
+                break;
             }
 
-            $sql = "INSERT INTO members (f_name, l_name, `year`, major, short_desc, long_desc,image, url, `position`, active) VALUES ('".$f_name."','".$l_name."','".$year."','".$major."','".$short_desc."','".$long_desc."','".$file_name."','".$url."','".$position."','".$active."')";
+            if($active != ""){
+                $to_add['active'] = $active;
+            }
+
+            if($url != ""){
+                $to_add['url'] = $url;
+            }
+            if($short_desc != ""){
+                $to_add['short_desc'] = $short_desc;
+            }
+            if($long_desc != ""){
+                $to_add['long_desc'] = $long_desc;
+            }
+            if($position != ""){
+                $to_add['position'] = $position;
+            }
+            if($major != ""){
+                $to_add['major'] = $major;
+            }
+            if($year != ""){
+                $to_add['year'] = $year;
+            }
+
+
+            if($_FILES['image']['size'] != 0 && $run_sql) {
+                $file_title = str_replace(' ', '', get_value('f_name'))."_".str_replace(' ','',get_value('l_name'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('member', $file_title);
+                $to_add['image'] = $image;
+
+            }
+
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
+
+            foreach($to_add as $key => $value){
+                $sql .= $key.",";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ") VALUES (";
+            foreach($to_add as $key => $value){
+                $sql .= "'".$to_add[$key]."',";
+            }
+            $sql = rtrim($sql, ",");
+            $sql .= ")";
+
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
 
 
             break;
         case 'edit_member':
-            //TODO Still doesn't work. prolly a simple fix.
             $run_sql = true;
+            $sql = "UPDATE members SET ";
             $id = mysqli_real_escape_string($conn,get_value('id'));
 //            $image = mysqli_real_escape_string($conn,get_value('image'));
             $f_name = mysqli_real_escape_string($conn,get_value('f_name'));
@@ -235,26 +308,41 @@ if($action != ""){
             $short_desc = mysqli_real_escape_string($conn,get_value('short_desc'));
             $long_desc = mysqli_real_escape_string($conn,get_value('long_desc'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
-            $file_title = str_replace(' ','_',get_value('title'));
-            $file_title = strtolower($file_title);
-            $file_name = upload_image('event', $title);
 
-            if(strpos($file_name,'ERROR')){
+            if($f_name == "" && $l_name == ""){
                 $run_sql = false;
+                break;
             }
 
-            $sql = "UPDATE members SET f_name='".$f_name."', l_name='".$l_name."', `year`='".$year."', major='".$major."', short_desc='".$short_desc."', long_desc='".$long_desc."',image='".$file_name."', url='".$url."', `position`='".$position."', active='".$active."' WHERE id=".$id;
+            $sql .= "f_name='".$f_name."', l_name='".$l_name."', `year`='".$year."', major='".$major."', short_desc='".$short_desc."', long_desc='".$long_desc."', url='".$url."', `position`='".$position."', active='".$active."' ";
+
+            if($_FILES['image']['size'] != 0) {
+                $file_title = str_replace(' ', '', get_value('f_name'))."_".str_replace(' ','',get_value('l_name'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('member', $file_title);
+                $to_add['image'] = $image;
+
+                if(strpos($image,'ERROR') !== false){
+                    $run_sql = false;
+                    $error = $image;
+                }
+                $sql .= ", image='".$image."'";
+            }
+
+            $sql .= " WHERE id=".$id;
+
 
             break;
         case 'add_resource':
-            //TODO something doesn't work here either.
             $run_sql = true;
             $title = mysqli_real_escape_string($conn,get_value('title'));
-            $description = mysqli_real_escape_string($conn,get_value('long_text'));
+            $description = mysqli_real_escape_string($conn,get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $category = mysqli_real_escape_string($conn, get_value('category'));
             $url = mysqli_real_escape_string($conn, get_value('url'));
-
+            if($title == ""){
+                $run_sql = false;
+            }
 
             $sql = "INSERT INTO resources (title, description, active,category, url) VALUES ('".$title."','".$description."','".$active."','".$category."','".$url."')";
 
@@ -263,12 +351,32 @@ if($action != ""){
             $run_sql = true;
             $id = mysqli_real_escape_string($conn,get_value('id'));
             $title = mysqli_real_escape_string($conn,get_value('title'));
-            $description = mysqli_real_escape_string($conn,get_value('long_text'));
+            $description = mysqli_real_escape_string($conn,get_value('description'));
             $active = mysqli_real_escape_string($conn,get_value('active'));
             $category = mysqli_real_escape_string($conn, get_value('category'));
             $url = mysqli_real_escape_string($conn, get_value('url'));
 
+            if($title == ""){
+                $run_sql = false;
+            }
+
             $sql = "UPDATE resources SET title='".$title."', description='".$description."', category='".$category."', url='".$url."', active='".$active."' WHERE id=".$id;
+
+            break;
+        case 'delete':
+            $table = mysqli_real_escape_string($conn, get_value('type'));
+            $id = mysqli_real_escape_string($conn, get_value('id'));
+            $sql = "DELETE FROM ".$table." WHERE id=".$id;
+            $image = "";
+            $run_sql = true;
+
+            if(($table == 'events' || $table == 'projects' || $table == 'members') && $run_sql){
+                $select_image = "SELECT image FROM ".$table." WHERE id=".$id;
+                $query_image = mysqli_query($conn, $select_image);
+                $result=mysqli_fetch_assoc($query_image);
+                $img = "../includes/images/".$table."/".$result['image'];
+                unlink($img);
+            }
 
             break;
         default:
@@ -276,11 +384,12 @@ if($action != ""){
             $run_sql = false;
             break;
 
+
     }
     if($run_sql){
         $query = mysqli_query($conn, $sql);
     }else{
-        echo $file_name;
+        echo $image;
     }
 
 }
@@ -310,7 +419,7 @@ if($action != ""){
     <link rel="stylesheet" href="../includes/css/footer.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
-<?php //include "../includes/php/header.php" ?>
+<?php include "../includes/php/header.php" ?>
 <body>
 <div id="content">
     <div id="page_overlay"></div>
@@ -472,6 +581,15 @@ if($action != ""){
                         <br>
                         <input type="submit" value="Submit">
                         <button onclick="cancel_edit(event,'about',<?= $result['id'] ?>)">Cancel</button>
+                        <br>
+                        <hr>
+                        <br>
+                        <form class="delete_form" action="/admin/" method="post" >
+                            <input type="submit" value="Delete Event" style="background-color: red">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="type" value="events">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        </form>
                     </form>
                     <?php
                 }
@@ -504,11 +622,11 @@ if($action != ""){
                     <br>
                     <label for="short_desc">Short Description: </label>
                     <br>
-                    <textarea class="short_desc" name="short_text"></textarea>
+                    <textarea class="short_desc" name="short_desc"></textarea>
                     <br>
                     <br>
                     <label for="long_desc">Long Description: </label>
-                    <textarea class="long_desc" name="long_text"></textarea>
+                    <textarea class="long_desc" name="long_desc"></textarea>
                     <br>
                     <label for="active">Active: </label>
                     <select name="active">
@@ -548,11 +666,11 @@ if($action != ""){
                         <br>
                         <label for="short_desc">Short Description: </label>
                         <br>
-                        <textarea class="short_desc" name="short_text"><?= $result['short_desc'] ?></textarea>
+                        <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
                         <br>
                         <br>
                         <label for="long_desc">Long Description: </label>
-                        <textarea class="long_desc" name="long_text"><?= $result['long_desc'] ?></textarea>
+                        <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
                         <br>
                         <label for="active">Active: </label>
                         <select name="active">
@@ -562,6 +680,15 @@ if($action != ""){
                         <br>
                         <input type="submit" value="Submit">
                         <button onclick="cancel_edit(event,'project',<?= $result['id'] ?>)">Cancel</button>
+                        <br>
+                        <hr>
+                        <br>
+                        <form class="delete_form" action="/admin/" method="post" >
+                            <input type="submit" value="Delete Project" style="background-color: red">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="type" value="projects">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        </form>
                     </form>
                     <?php
                 }
@@ -675,6 +802,15 @@ if($action != ""){
                         <br>
                         <input type="submit" value="Submit">
                         <button onclick="cancel_edit(event,'member',<?= $result['id'] ?>)">Cancel</button>
+                        <br>
+                        <hr>
+                        <br>
+                        <form class="delete_form" action="/admin/" method="post" >
+                            <input type="submit" value="Delete Member" style="background-color: red">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="type" value="members">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        </form>
                     </form>
                     <?php
                 }
@@ -763,6 +899,15 @@ if($action != ""){
                         <br>
                         <input type="submit" value="Submit">
                         <button onclick="cancel_edit(event,'resource',<?= $result['id'] ?>)">Cancel</button>
+                        <br>
+                        <hr>
+                        <br>
+                        <form class="delete_form" action="/admin/" method="post" >
+                            <input type="submit" value="Delete Resource" style="background-color: red">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="type" value="resources">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        </form>
                     </form>
                     <?php
                 }

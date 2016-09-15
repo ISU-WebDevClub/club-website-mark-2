@@ -15,7 +15,7 @@ function upload_image($type, $name){
             $target_dir = "../includes/images/projects/";
             break;
         case 'member':
-            $target_dir = "../includes/images/projects/";
+            $target_dir = "../includes/images/members/";
             break;
     }
 

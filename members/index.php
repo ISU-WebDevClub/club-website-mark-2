@@ -7,7 +7,6 @@
  */
 
 //The following are for shared functions and database connections respectively.
-//TODO uncomment when db is set up
 include "../includes/php/general.php";
 include "../includes/php/base.php";
 

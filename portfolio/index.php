@@ -54,7 +54,6 @@ include "../includes/php/base.php";
             $sql = "SELECT * FROM projects WHERE active='yes'";
             $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
-                //TODO remove this forloop
                 for($i =0; $i<10;$i++){
                 ?>
                 <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
@@ -120,13 +119,5 @@ include "../includes/php/base.php";
 
 include "../includes/php/footer.php";
 
-//TODO this function can be removed once we have actual urls for the projects.
-//I just added it to randomize the background pictures.
-function random_pic($dir = '../includes/images/')
-{
-    $files = glob($dir . '/*.*');
-    $file = array_rand($files);
-    return $files[$file];
-}
 
 ?>
