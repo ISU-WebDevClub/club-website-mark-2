@@ -120,11 +120,11 @@ header.small #navbar.visible #contact{
     color: rgb(241,190,72);
     /*border: 1px solid rgb(82,71,39);*/
     border: none;
-    background: rgb(82,71,39); /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* Standard syntax */
+    background: rgb(100, 0 , 0); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* Standard syntax */
     cursor: pointer;
     cursor: hand;
 }
@@ -137,14 +137,13 @@ header.small #navbar.visible #contact{
 }
 
 #contact{
-    background: rgb(82,71,39); /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgba(82,71,39,.6),rgba(82,71,39,1)); /* Standard syntax */
-    -webkit-box-shadow: inset 0px 0px 5px rgb(82,71,39);
-    -moz-box-shadow: inset 0px 0px 5px rgb(82,71,39);
-    box-shadow: inset 0px 0px 5px rgb(82,71,39);
+    background: rgb(100, 0 , 0); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(100, 0, 0,.6),rgba(100, 0, 0,1)); /* Standard syntax */
+    -moz-box-shadow: inset 0px 0px 5px rgb(100,0,0);
+    box-shadow: inset 0px 0px 5px rgb(100,0,0);
 }
 #contact_us:focus{
     outline: none;
@@ -153,12 +152,12 @@ header.small #navbar.visible #contact{
     color: rgb(241,190,72);
 }
 #contact_us:hover {
-    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
-    -moz-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
-    box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
+    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(100,0,0);
+    -moz-box-shadow: inset 0px 0px 10px 5px rgb(100,0,0);
+    box-shadow: inset 0px 0px 10px 5px rgb(100,0,0);
 }
 #contact:hover{
-    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
-    -moz-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
-    box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
+    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(100,0,0) !important;
+    -moz-box-shadow: inset 0px 0px 10px 5px rgb(100,0,0) !important;
+    box-shadow: inset 0px 0px 10px 5px rgb(100,0,0) !important;
 }

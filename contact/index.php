@@ -101,6 +101,9 @@ if($action != ""){
                     One more thing: You'll have better luck if you approach us towards the beginning of the semester, since everyone tends to get really busy with schoolwork about halfway through the semester.
                 </div>
                 <div id="contact_div">
+                    <p>Email us at:</p>
+                    <h2>isuwebdevclub@gmail.com</h2>
+                    <p>Or use the form below</p>
                     <form id="email_form" action="/contact/" method="post">
                         <input name="action" value="email" type="hidden">
                         <input class="email_input" id="name" type="text" name="name" placeholder="Name">
