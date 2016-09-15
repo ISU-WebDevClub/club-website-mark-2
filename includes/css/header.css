@@ -56,7 +56,20 @@ header #menu_icon{
 
 #navbar li.selected{
     background-color: #d3d3d3;
+    -webkit-box-shadow: inset 0px 0px 5px gray;
+    -moz-box-shadow: inset 0px 0px 5px gray;
     box-shadow: inset 0px 0px 5px gray;
+}
+#navbar li:hover{
+    /*background-color: #d3d3d3;*/
+    -webkit-box-shadow: inset 0px 0px 5px gray;
+    -moz-box-shadow: inset 0px 0px 5px gray;
+    box-shadow: inset 0px 0px 5px gray;
+}
+#navbar li.selected:hover{
+    -webkit-box-shadow: inset 0px 0px 5px rgb(50,50,50);
+    -moz-box-shadow: inset 0px 0px 5px rgb(50,50,50);
+    box-shadow: inset 0px 0px 5px rgb(50,50,50);
 }
 
 
@@ -80,7 +93,8 @@ header.small #navbar{
 
 header.small #navbar.visible{
     height: 300px;
-    width: 400px;
+    width: 100%;
+    z-index: -1;
     display: block;
     background-color: #f5f5f5;
     position: absolute;
@@ -95,4 +109,52 @@ header.small #navbar.visible li{
 }
 header.small #navbar.visible #contact{
     display: block;
+}
+#contact_us{
+    position: absolute;
+    right: 50px;
+    height: 50px;
+    width: 125px;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    color: rgb(241,190,72);
+    border: 1px solid rgb(82,71,39);
+    background: rgb(82,71,39); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* Standard syntax */
+    cursor: pointer;
+    cursor: hand;
+}
+#contact_button_form{
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+}
+
+#contact{
+    background: rgb(82,71,39); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(82,71,39,.7),rgba(82,71,39,1)); /* Standard syntax */
+    -webkit-box-shadow: inset 0px 0px 5px rgb(82,71,39);
+    -moz-box-shadow: inset 0px 0px 5px rgb(82,71,39);
+    box-shadow: inset 0px 0px 5px rgb(82,71,39);
+}
+#contact_text {
+    color: rgb(241,190,72);
+}
+#contact_us:hover {
+    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
+    -moz-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
+    box-shadow: inset 0px 0px 10px 5px rgb(82,71,39);
+}
+#contact:hover{
+    -webkit-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
+    -moz-box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
+    box-shadow: inset 0px 0px 10px 5px rgb(82,71,39) !important;
 }

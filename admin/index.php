@@ -379,12 +379,42 @@ if($action != ""){
             }
 
             break;
+        case 'add_photo':
+            $run_sql = true;
+            $title = mysqli_real_escape_string($conn, get_value('title'));
+            $active = mysqli_real_escape_string($conn, get_value('active'));
+            $image = "";
+            
+           
+            if($_FILES['image']['size'] != 0 && $title != "") {
+                $file_title = str_replace(' ', '', get_value('title'));
+                $file_title = strtolower($file_title);
+                $image = upload_image('photo', $file_title);
+                
+            }else if($_FILES['image']['size'] != 0 ){
+                $file_title = basename($_FILES['image']['name']);
+                $file_title = strtolower($file_title);
+                $image = upload_image('photo', $file_title);
+            }else{
+                $run_sql = false;
+
+            }
+            if(strpos($image,'ERROR') !== false){
+                $run_sql = false;
+                $error = $image;
+            }
+            $sql = "INSERT INTO photos (title, image, active) VALUES ('".$title."', '".$image."','".$active."')";
+
+            break;
+        case 'delete_photo':
+            $id = mysqli_real_escape_string($conn, get_value('id'));
+            $sql = "DELETE FROM photos WHERE id=".$id;
+            break;
         default:
             $sql = "";
             $run_sql = false;
             break;
-
-
+        
     }
     if($run_sql){
         $query = mysqli_query($conn, $sql);
@@ -433,6 +463,7 @@ if($action != ""){
             <h2 class="tab_item" id="members_tab">Members</h2>
             <h2 class="tab_item" id="resources_tab">Resources</h2>
             <h2 class="tab_item" id="contact_tab">Contact</h2>
+            <h2 class="tab_item" id="gallery_tab">Gallery</h2>
         </div>
         
         <div id="home_page" class="tab_item_div selected_div">
@@ -924,7 +955,79 @@ if($action != ""){
                 ?>
             </div>
         </div>
+        <div id="gallery_page" class="tab_item_div" hidden>
+            <h1>Photo Gallery</h1>
+            <hr>
+            <div class="grid">
+                <div class="grid_div" id="add_photo">
+                    <img src="../includes/images/icons/plus.png"  class="add_icon">
+                    <div class="div_overlay" onclick="add_div('photo')">
+                    </div>
+                </div>
+                <form class="admin_form photo_form" id="add_photo_form" enctype="multipart/form-data" action="/admin/" method="post" hidden>
 
+                    <h2>Add New Photo</h2>
+                    <input type="hidden" name="action" value="add_photo">
+                    <br>
+                    <label for="image">Upload Photo: </label>
+                    <input type="file" name="image">
+                    <br>
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" maxlength="25" value="">
+                    <br>
+                    <label for="active">Active: </label>
+                    <select name="active">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                    <button onclick="cancel_add(event,'photo')">Cancel</button>
+                </form>
+                <?php
+                $sql = "SELECT * FROM photos";
+                $query = mysqli_query($conn,$sql);
+                while($result = mysqli_fetch_assoc($query)) {
+                    ?>
+                    <div class="grid_div" id="div_photo_<?= $result['id'] ?>" style="background: url('../includes/images/gallery/<?= $result['image'] ?>') center no-repeat;background-size: contain;" >
+                        <div class="div_overlay" onclick="edit_form('photo',<?= $result['id'] ?>)">
+                            <h2><?= $result['title'] ?></h2>
+                            <h3 class="click_to_edit">Click to Edit</h3>
+                        </div>
+                    </div>
+                    <form class="admin_form photo_form" id="form_photo_<?= $result['id'] ?>" action="/admin/"
+                          method="post" hidden>
+                        <img src="../includes/images/gallery/<?= $result['image'] ?>" style="height: 200px; width: 200px; margin: 20px;">
+                        <h2><?= $result['title'] ?></h2>
+                        <input type="hidden" name="action" value="delete_photo">
+                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_edit(event,'photo',<?= $result['id'] ?>)">Cancel</button>
+                        <br>
+                        <hr>
+                        <br>
+                        <form class="delete_form" action="/admin/" method="post">
+                            <input type="submit" value="Delete Photo" style="background-color: red">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="type" value="photos">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                        </form>
+                    </form>
+                    <?php
+                }
+                    ?>
+            </div>
+        </div>
 
     </div>
 </div>

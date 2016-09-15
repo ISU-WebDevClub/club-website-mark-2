@@ -34,6 +34,11 @@ $('#contact_tab').click(function(){
     $('#contact_page').show();
     $('#contact_tab').addClass('selected_tab');
 });
+$('#gallery_tab').click(function(){
+   hide_all();
+    $('#gallery_page').show();
+    $('#gallery_tab').addClass('selected_tab');
+});
 
 function hide_all(){
     $('#home_tab').removeClass('selected_tab');
@@ -42,7 +47,7 @@ function hide_all(){
     $('#members_tab').removeClass('selected_tab');
     $('#resources_tab').removeClass('selected_tab');
     $('#contact_tab').removeClass('selected_tab');
-
+    $('#gallery_tab').removeClass('selected_tab');
     $('.tab_item_div').each(function(){
         $(this).hide();
     });

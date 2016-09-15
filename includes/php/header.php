@@ -6,20 +6,19 @@
  * Time: 5:23 PM
  */
 
+//TODO make this cleaner by lowercasing all the strings before comparing them.
 $url = "";
-$server_uri = $_SERVER['REQUEST_URI'];
-$server_uri = strtolower($server_uri);
-if(strpos($server_uri, 'about') !== false){
+if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUEST_URI'], 'about') !== false){
     $url = "About";
-}else if(strpos($server_uri, 'focus') !== false || strpos($server_uri, 'portfolio') !== false|| strpos($server_uri, 'focus') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Portfolio') !== false || strpos($_SERVER['REQUEST_URI'], 'focus') !== false || strpos($_SERVER['REQUEST_URI'], 'portfolio') !== false|| strpos($_SERVER['REQUEST_URI'], 'focus') !== false){
     $url = "Portfolio";
-}else if(strpos($server_uri, 'members') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Members') !== false || strpos($_SERVER['REQUEST_URI'], 'members') !== false){
     $url = "Members";
-}else if(strpos($server_uri, 'resources') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Resources') !== false || strpos($_SERVER['REQUEST_URI'], 'resources') !== false){
     $url = "Resources";
-}else if(strpos($server_uri, 'contact') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Contact') !== false || strpos($_SERVER['REQUEST_URI'], 'contact') !== false){
     $url = 'Contact';
-}else if(strpos($server_uri, 'admin') !== false){
+}else if(strpos($_SERVER['REQUEST_URI'], 'Admin') !== false || strpos($_SERVER['REQUEST_URI'], 'admin') !== false){
     $url = 'Admin';
 }else{
     $url = "Home";
@@ -34,8 +33,11 @@ if(strpos($server_uri, 'about') !== false){
         <li class="<?= $url == 'Portfolio' ? 'selected' : '' ?>"><a href="/portfolio/" class="header_title"><div class="nav_text">Portfolio</div></a></li>
         <li class="<?= $url == 'Members' ? 'selected' : '' ?>"><a href="/members/" class="header_title"><div class="nav_text">Members</div></a></li>
         <li class="<?= $url == 'Resources' ? 'selected' : '' ?>"><a href="/resources/" class="header_title"><div class="nav_text">Resources</div></a></li>
-        <li class="<?= $url == 'Contact' ? 'selected' : '' ?>" id="contact"><a href="/contact/" class="header_title"><div class="nav_text">Contact</div></a></li>
+        <li id="contact"><a href="/contact/" class="header_title"><div class="nav_text" id="contact_text">Contact</div></a></li>
     </ul>
+    <form id="contact_button_form" action="/contact/" method="post">
+        <button id="contact_us">Contact Us</button>
+    </form>
     <img id="menu_icon" src="/includes/images/icons/menu.png">
 </header>
 <script>
@@ -44,6 +46,7 @@ if(strpos($server_uri, 'about') !== false){
         toggle_menu_icon();
     }
     var menu_icon = document.getElementById('menu_icon');
+
     menu_icon.onclick = function(){
         toggle_menu();
     }
@@ -57,12 +60,14 @@ if(strpos($server_uri, 'about') !== false){
     }
     function toggle_menu_icon(){
         var header = document.getElementById('header');
+        var contact_button = document.getElementById('contact_us');
         if(window.innerWidth > 820){
             header.classList.remove('small');
-//            var navbar = document.getElementById('navbar');
-//            navbar.classList.remove('visible');
+            contact_button.style.display = 'inline';
+
         }else{
             header.classList.add('small');
+            contact_button.style.display = 'none';
         }
     }
 </script>

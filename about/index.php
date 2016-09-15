@@ -107,10 +107,13 @@ include "../includes/php/base.php";
             <h2>Photo Gallery</h2>
             <div id="photo_grid">
             <?php
-            for($i =0;$i< 10;$i++) {
+            $sql = "SELECT * FROM photos WHERE active='yes'";
+            $query = mysqli_query($conn, $sql);
+
+            while($result = mysqli_fetch_assoc($query)){
                 //TODO make this actually pull image links from the db. Instead of a for loop of the same image...
                 ?>
-                <div class="photo_item" style="background: url('../includes/images/WDC-logo.png') center no-repeat; background-size: contain;">
+                <div class="photo_item" style="background: url('../includes/images/gallery/<?= $result['image'] ?>') center no-repeat; background-size: contain;">
 
                 </div>
                 <?php

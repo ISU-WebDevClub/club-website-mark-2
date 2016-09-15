@@ -17,6 +17,9 @@ function upload_image($type, $name){
         case 'member':
             $target_dir = "../includes/images/members/";
             break;
+        case 'photo':
+            $target_dir = "../includes/images/gallery/";
+            break;
     }
 
     $target_file = basename($_FILES["image"]["name"]);
