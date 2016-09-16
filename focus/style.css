@@ -29,10 +29,12 @@ body{
     text-align: center;
 }
 #project_image{
-    height:300px;
+    width: 90%;
+    max-width:600px;
     margin-bottom: 50px;
 }
 #project_text{
-    width: 75%;
-    margin-left: 12.5%;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
 }

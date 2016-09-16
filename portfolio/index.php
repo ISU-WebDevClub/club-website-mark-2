@@ -64,8 +64,6 @@ include "../includes/php/base.php";
 
             }
 
-
-
             ?>
         </div>
 

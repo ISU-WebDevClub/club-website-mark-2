@@ -51,6 +51,7 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUES
         }
     });
 
+
     $("#header").click(function(event) {
 
         event.stopPropagation();

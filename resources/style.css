@@ -18,7 +18,17 @@ a{
 .resource_div{
     margin-left: 45px;
 }
-
+.category_hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #808080;
+    margin: 1em 0;
+    padding: 0;
+}
+body.mobile .resource_div{
+    margin-left: 20px;
+}
 .resource{
     display: inline;
 }

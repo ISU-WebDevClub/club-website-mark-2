@@ -3,6 +3,10 @@
 }
 body{
     margin: 0px 0 75px 0;
+    overflow: auto;
+}
+.no_scroll{
+    overflow: hidden;
 }
 #content{
     margin: 0;
@@ -118,7 +122,15 @@ h2.selected_tab{
     background-color: rgba(40,40,40,1);
     width: 600px;
     height: 600px;
+    overflow-y: auto;
     border-radius: 10px;
+
+}
+body.mobile .form_div{
+    width: 100%;
+    left: 0;
+    height: 600px;
+    margin-left: 0;
     overflow-y: scroll;
 }
 .admin_form input, .admin_form select{

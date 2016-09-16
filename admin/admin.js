@@ -175,12 +175,14 @@ function edit_form(tab,id){
     // $('#div_'+tab+'_'+id).hide();
     $('#page_overlay').show();
     $('#form_'+tab+'_'+id).show();
+    $('body').addClass('no_scroll');
 }
 
 function add_div(tab){
     // $('#add_'+tab).hide();
     $('#page_overlay').show();
     $('#add_'+tab+'_form').show();
+    $('body').addClass('no_scroll');
 }
 
 function cancel_edit(event,tab, id){
@@ -188,10 +190,12 @@ function cancel_edit(event,tab, id){
     $('#page_overlay').hide();
     // $('#div_'+tab+'_'+id).show();
     $('#form_'+tab+'_'+id).hide();
+    $('body').removeClass('no_scroll');
 }
 function cancel_add(event,tab){
     event.preventDefault();
     $('#page_overlay').hide();
     $('#add_'+tab+'_form').hide();
     // $('#add_'+tab).show();
+    $('body').removeClass('no_scroll');
 }

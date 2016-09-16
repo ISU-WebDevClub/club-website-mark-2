@@ -14,7 +14,7 @@ body{
 }
 #grid{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     overflow:hidden;
     display: flex;
     display: -webkit-flex;
@@ -31,25 +31,18 @@ body{
 #contact_div{
     width: 500px;
     margin: 20px;
-    /*height: 400px;*/
-    /*position: absolute;*/
-    /*left: 50%;*/
-    /*margin-left: -200px;*/
     text-align: center;
 }
+
 #contact_list {
     text-align: left;
 }
 #contact_title{
     text-align: center;
-    width: 500px;
-    height: 50px;
-    position: absolute;
-    left: 50%;
-    margin-left: -250px;
+    margin: 0 auto;
 }
 .email_input{
-    width: 400px;
+    width: 100%;
     margin: 10px auto 10px auto;
     background-color: #353535;
     color: white;

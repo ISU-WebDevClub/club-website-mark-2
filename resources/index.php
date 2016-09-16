@@ -45,6 +45,8 @@ include "../includes/php/base.php";
                 <h2>
                     Social Media
                 </h2>
+                <hr class="category_hr">
+
             </div>
             <div class="resource_div">
                 <?php
@@ -75,6 +77,8 @@ include "../includes/php/base.php";
                 <h2>
                     Repo and Documents
                 </h2>
+                <hr class="category_hr">
+
             </div>
             <div class="resource_div">
             <?php
@@ -83,7 +87,7 @@ include "../includes/php/base.php";
             if(mysqli_num_rows($query) > 0){
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <a href="<?= $result['url'] ?>">
+                    <a href="<?= $result['url'] ?>" target="_blank">
                         <h3 class="resource documents"><?= $result['title'] ?></h3>
                     </a>
                     <?php
@@ -106,6 +110,7 @@ include "../includes/php/base.php";
                 <h2>
                     Development
                 </h2>
+                <hr class="category_hr">
             </div>
             <div class="resource_div">
             <?php
@@ -114,7 +119,7 @@ include "../includes/php/base.php";
             if(mysqli_num_rows($query) > 0){
                 while($result = mysqli_fetch_assoc($query)){
                     ?>
-                    <a href="<?= $result['url'] ?>">
+                    <a href="<?= $result['url'] ?>" target="_blank">
                         <h3 class="resource development"><?= $result['title'] ?></h3>
                     </a>
                     <?php
@@ -134,7 +139,14 @@ include "../includes/php/base.php";
 
         </div>
     </div>
-    </body>
+</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../includes/js/shared.js" type="application/javascript"></script>
+<script>
+    if(is_mobile()){
+        $('body').addClass('mobile');
+    }
+</script>
 </html>
 
 <?php include "../includes/php/footer.php" ?>
