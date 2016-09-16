@@ -54,7 +54,6 @@ include "../includes/php/base.php";
             $sql = "SELECT * FROM projects WHERE active='yes'";
             $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
-                for($i =0; $i<10;$i++){
                 ?>
                 <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
                     <a href="/focus/?id=<?= $result['id'] ?>">
@@ -64,15 +63,11 @@ include "../includes/php/base.php";
                     </a>
                 </div>
                 <?php
-                }
+
 
             }
 
 
-
-            //TODO once we have a database connection, we need to replace this for loop with a foreach($result as $curr)
-            //That will go through each result from the query and place the content into the correct spot
-            //Title, Background image, description, link, etc...
 
             ?>
         </div>

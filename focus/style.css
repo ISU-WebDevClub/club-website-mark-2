@@ -1,0 +1,38 @@
+body{
+    margin: 0px 0 75px 0;
+}
+#content{
+    margin: 0;
+    padding-top: 130px;
+}
+#content-sub{
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 5px;
+}
+#back_link{
+    position: absolute;
+    left: 5%;
+    color: white;
+    top: 100px;
+}
+#back_link a{
+    color: white;
+}
+#back_link img{
+    height: 20px;
+    margin-bottom: -5px;
+}
+#project{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+#project_image{
+    height:300px;
+    margin-bottom: 50px;
+}
+#project_text{
+    width: 75%;
+    margin-left: 12.5%;
+}

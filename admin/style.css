@@ -108,7 +108,7 @@ h2.selected_tab{
 #home_page_form input, #home_page_form select{
     margin: 10px;
 }
-.admin_form{
+.form_div{
     z-index: 2;
     position: fixed;
     top: 50%;
@@ -157,4 +157,34 @@ h2.selected_tab{
 }
 .div_overlay:hover .click_to_edit{
     display: block;
+}
+#error_message{
+    position: fixed;
+    height: 200px;
+    width: 600px;
+    top: 50%;
+    margin-top: -10px;
+    left: 50%;
+    margin-left: -300px;
+    background-color: #353535;
+    color: red;
+    z-index: 5;
+    text-align: center;
+    border-radius: 10px;
+
+}
+#close_error{
+    font-family: 'Ubuntu', san-serif;
+    width: 100px;
+    font-size: 20px;
+    background-color: #353535;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    cursor: hand;
+}
+#close_error:focus{
+    outline: 0px;
+    border: 1px solid #808080;
 }

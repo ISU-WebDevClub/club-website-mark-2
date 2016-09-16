@@ -46,6 +46,11 @@ function upload_image($type, $name){
         }
         $target_file = $temp_file."_".$i.".".$imageFileType;
     }
+    // Check file size
+    if ($_FILES["image"]["size"] > 500000) {
+        return "ERROR: File Too Large to Upload";
+        $uploadOk = 0;
+    }
 
 
     // Allow certain file formats
@@ -55,7 +60,7 @@ function upload_image($type, $name){
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        echo "ERROR: File failed to upload.";
+        return "ERROR: File failed to upload.";
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -63,7 +68,7 @@ function upload_image($type, $name){
 
             return $names[sizeof($names)-1];
         } else {
-            echo "ERROR: File failed to upload.";
+            return "ERROR: File failed to upload.";
         }
     }
 }

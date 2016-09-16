@@ -10,6 +10,7 @@ include "../includes/php/base.php";
 include "../includes/php/general.php";
 
 $action = get_value('action');
+$error = "";
 if($action != ""){
     switch($action){
         //Image names are being overwritten in the db because if the image input is null, it still tries to upload an image.
@@ -39,6 +40,7 @@ if($action != ""){
             $date = mysqli_real_escape_string($conn,get_value('date'));
             $image = "";
 
+
             //They must have a title
             if($title != ""){
                 $to_add['title'] = mysqli_real_escape_string($conn, $title);
@@ -64,6 +66,10 @@ if($action != ""){
                 $file_title = strtolower($file_title);
                 $image = upload_image('event', $file_title);
                 $to_add['image'] = $image;
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             if(strpos($image,'ERROR') !== false){
@@ -100,7 +106,7 @@ if($action != ""){
             $sql .= " title='".$title."', description='".$description."', active='".$active."', date='".$date."' ";
 
 
-            if($_FILES['image']['size'] != 0) {
+            if($_FILES['image']['size'] != 0 ) {
                 $file_title = str_replace(' ', '_', get_value('title'));
                 $file_title = strtolower($file_title);
                 $image = upload_image('event', $file_title);
@@ -111,6 +117,10 @@ if($action != ""){
                     $error = $image;
                 }
                 $sql .= ", image='".$image."'";
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             $sql  .= " WHERE id=".$id;
@@ -154,6 +164,10 @@ if($action != ""){
                 $file_title = strtolower($file_title);
                 $image = upload_image('project', $file_title);
                 $to_add['image'] = $image;
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             if(strpos($image,'ERROR') !== false){
@@ -207,6 +221,10 @@ if($action != ""){
                     $error = $image;
                 }
                 $sql .= ", image='".$image."'";
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             $sql .= " WHERE id=".$id;
@@ -269,6 +287,10 @@ if($action != ""){
                 $image = upload_image('member', $file_title);
                 $to_add['image'] = $image;
 
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             if(strpos($image,'ERROR') !== false){
@@ -327,6 +349,10 @@ if($action != ""){
                     $error = $image;
                 }
                 $sql .= ", image='".$image."'";
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }
 
             $sql .= " WHERE id=".$id;
@@ -374,8 +400,10 @@ if($action != ""){
                 $select_image = "SELECT image FROM ".$table." WHERE id=".$id;
                 $query_image = mysqli_query($conn, $select_image);
                 $result=mysqli_fetch_assoc($query_image);
-                $img = "../includes/images/".$table."/".$result['image'];
-                unlink($img);
+                if($result['image'] != "WDC-logo.png"){
+                    $img = "../includes/images/".$table."/".$result['image'];
+                    unlink($img);
+                }
             }
 
             break;
@@ -391,13 +419,16 @@ if($action != ""){
                 $file_title = strtolower($file_title);
                 $image = upload_image('photo', $file_title);
                 
-            }else if($_FILES['image']['size'] != 0 ){
+            }else if($_FILES['image']['size'] != 0){
                 $file_title = basename($_FILES['image']['name']);
                 $file_title = strtolower($file_title);
                 $image = upload_image('photo', $file_title);
+            }else if($_FILES['image']['size'] == 0 &&  $_FILES['image']['name'] != ""){
+                $error = "ERROR: File to large to upload";
+                $run_sql = false;
+                break;
             }else{
                 $run_sql = false;
-
             }
             if(strpos($image,'ERROR') !== false){
                 $run_sql = false;
@@ -407,6 +438,7 @@ if($action != ""){
 
             break;
         case 'delete_photo':
+            //TODO maybe query the db for the files name and unlink the file?
             $id = mysqli_real_escape_string($conn, get_value('id'));
             $sql = "DELETE FROM photos WHERE id=".$id;
             break;
@@ -416,10 +448,9 @@ if($action != ""){
             break;
         
     }
+
     if($run_sql){
         $query = mysqli_query($conn, $sql);
-    }else{
-        echo $image;
     }
 
 }
@@ -465,7 +496,10 @@ if($action != ""){
             <h2 class="tab_item" id="contact_tab">Contact</h2>
             <h2 class="tab_item" id="gallery_tab">Gallery</h2>
         </div>
-        
+        <div id="error_message" <?= $error != "" ? "" : "hidden" ?>>
+            <h2 id="error_h2"><?= $error ?></h2>
+            <button id="close_error">Ok</button>
+        </div>
         <div id="home_page" class="tab_item_div selected_div">
             <h1>Home Page</h1>
             <hr>
@@ -476,7 +510,7 @@ if($action != ""){
 
             ?>
             <div class="grid">
-                <form id="home_page_form" action="/admin/" method="post">
+                <form id="home_page_form" action="/admin/" onsubmit="validate_input(event,'','meeting','')" method="post">
                     <h2>Meeting Times</h2>
                     <label for="start_time">Start Time: </label>
                     <input type="hidden" name="action" value="meeting_time">
@@ -552,30 +586,32 @@ if($action != ""){
 
                 </div>
 
-                <form id="add_event_form" class="admin_form about_form" action="/admin/" method="post" enctype="multipart/form-data" hidden>
+                <div class="form_div" id="add_event_form" hidden>
+                    <form  class="admin_form about_form" action="/admin/" onsubmit="validate_input(event,'add','event','')" method="post" enctype="multipart/form-data">
 
-                    <h2>Add Event</h2>
-                    <input type="hidden" name="action" value="add_event">
-                    <label for="image">Replace Image: </label>
-                    <input type="file" name="image">
-                    <br>
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" maxlength="25">
-                    <br>
-                    <textarea class="long_desc" name="description"></textarea>
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
-                    <label for="date">Date: </label>
-                    <input type="date" name="date" >
-                    <br>
-                    <input type="submit" value="Add Project">
-                    <button onclick="cancel_add(event,'event',<?= $result['id'] ?>)">Cancel</button>
-                </form>
+                        <h2>Add Event</h2>
+                        <input type="hidden" name="action" value="add_event">
+                        <label for="image">Replace Image: </label>
+                        <input type="file" id="image_add_event" name="image">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" name="title" id="title_add_event" maxlength="25">
+                        <br>
+                        <textarea class="long_desc" name="description"></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <br>
+                        <label for="date">Date: </label>
+                        <input type="date" name="date" >
+                        <br>
+                        <input type="submit" value="Add Project">
+                        <button onclick="cancel_add(event,'event',<?= $result['id'] ?>)">Cancel</button>
+                    </form>
+                </div>
                 <?php
                 $sql = "SELECT * FROM events";
                 $query = mysqli_query($conn,$sql);
@@ -587,41 +623,43 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form about_form" action="/admin/" id="form_about_<?= $result['id'] ?>" enctype="multipart/form-data" method="post" hidden>
-                        <h2><?= $result['title'] ?></h2>
-                        <input type="hidden" name="action" value="edit_event">
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <img src="../includes/images/events/<?= $result['image'] ?>">
-                        <br>
-                        <label for="image">Replace Image: </label>
-                        <input type="file" name="image">
-                        <br>
-                        <label for="title">Title: </label>
-                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
-                        <br>
-                        <textarea class="long_desc" name="description"><?= $result['description'] ?></textarea>
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <label for="date">Date: </label>
-                        <input type="date" name="date" value="<?= $result['date'] ?>">
-                        <br>
-                        <input type="submit" value="Submit">
-                        <button onclick="cancel_edit(event,'about',<?= $result['id'] ?>)">Cancel</button>
-                        <br>
-                        <hr>
-                        <br>
-                        <form class="delete_form" action="/admin/" method="post" >
+                    <div class="form_div" id="form_about_<?= $result['id'] ?>" hidden>
+                        <form class="admin_form about_form" action="/admin/" onsubmit="validate_input(event,'edit','event',<?= $result['id'] ?>)"  enctype="multipart/form-data" method="post">
+                            <h2><?= $result['title'] ?></h2>
+                            <input type="hidden" name="action" value="edit_event">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                            <img src="../includes/images/events/<?= $result['image'] ?>">
+                            <br>
+                            <label for="image">Replace Image: </label>
+                            <input type="file" name="image" id="image_edit_event<?= $result['id'] ?>">
+                            <br>
+                            <label for="title">Title: </label>
+                            <input type="text" name="title" id="title_edit_event<?= $result['id'] ?>" maxlength="25" value="<?= $result['title'] ?>">
+                            <br>
+                            <textarea class="long_desc" name="description"><?= $result['description'] ?></textarea>
+                            <br>
+                            <label for="active">Active: </label>
+                            <select name="active">
+                                <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                                <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                            </select>
+                            <br>
+                            <label for="date">Date: </label>
+                            <input type="date" name="date" value="<?= $result['date'] ?>">
+                            <br>
+                            <input type="submit" value="Submit">
+                            <button onclick="cancel_edit(event,'about',<?= $result['id'] ?>)">Cancel</button>
+                            <br>
+                            <hr>
+                            <br>
+                        </form>
+                        <form class="delete_form" action="/admin/" method="post">
                             <input type="submit" value="Delete Event" style="background-color: red">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="type" value="events">
                             <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         </form>
-                    </form>
+                    </div>
                     <?php
                 }
 
@@ -638,37 +676,39 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('project')">
                     </div>
                 </div>
-                <form class="admin_form project_form" id="add_project_form" action="/admin/" method="post" enctype="multipart/form-data" hidden >
+                <div class="form_div" id="add_project_form"  hidden>
+                    <form class="admin_form project_form"  action="/admin/" onsubmit="validate_input(event,'add','project','')" method="post" enctype="multipart/form-data" >
 
-                    <h2>Add Project</h2>
-                    <input type="hidden" name="action" value="add_project">
-                    <label for="image">Image: </label>
-                    <input type="file" name="image">
-                    <br>
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" maxlength="25" value="">
-                    <br>
-                    <label for="url">URL: </label>
-                    <input type="text" name="url">
-                    <br>
-                    <label for="short_desc">Short Description: </label>
-                    <br>
-                    <textarea class="short_desc" name="short_desc"></textarea>
-                    <br>
-                    <br>
-                    <label for="long_desc">Long Description: </label>
-                    <textarea class="long_desc" name="long_desc"></textarea>
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
+                        <h2>Add Project</h2>
+                        <input type="hidden" name="action" value="add_project">
+                        <label for="image">Image: </label>
+                        <input type="file" id="image_add_project" name="image">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" name="title" id="title_add_project" maxlength="25" value="">
+                        <br>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url">
+                        <br>
+                        <label for="short_desc">Short Description: </label>
+                        <br>
+                        <textarea class="short_desc" name="short_desc"></textarea>
+                        <br>
+                        <br>
+                        <label for="long_desc">Long Description: </label>
+                        <textarea class="long_desc" name="long_desc"></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <br>
 
-                    <input type="submit" value="Submit">
-                    <button onclick="cancel_add(event,'project')">Cancel</button>
-                </form>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_add(event,'project')">Cancel</button>
+                    </form>
+                </div>
                 <?php
                 $sql = "SELECT * FROM projects";
                 $query = mysqli_query($conn,$sql);
@@ -680,47 +720,50 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form project_form" action="/admin/" id="form_project_<?= $result['id'] ?>" method="post" enctype="multipart/form-data" hidden>
-                        <h2><?= $result['title'] ?></h2>
-                        <input type="hidden" name="action" value="edit_project">
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <img src="../includes/images/projects/<?= $result['image'] ?>">
-                        <br>
-                        <label for="image">Replace Image: </label>
-                        <input type="file" name="image">
-                        <br>
-                        <label for="title">Title: </label>
-                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
-                        <br>
-                        <label for="url">URL: </label>
-                        <input type="text" name="url" value="<?= $result['url'] ?>">
-                        <br>
-                        <label for="short_desc">Short Description: </label>
-                        <br>
-                        <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
-                        <br>
-                        <br>
-                        <label for="long_desc">Long Description: </label>
-                        <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <input type="submit" value="Submit">
-                        <button onclick="cancel_edit(event,'project',<?= $result['id'] ?>)">Cancel</button>
-                        <br>
-                        <hr>
-                        <br>
+                    <div class="form_div" id="form_project_<?= $result['id'] ?>" hidden>
+                        <form class="admin_form project_form" action="/admin/" onsubmit="validate_input(event,'edit','project',<?= $result['id'] ?>)"  method="post" enctype="multipart/form-data">
+                            <h2><?= $result['title'] ?></h2>
+                            <input type="hidden" name="action" value="edit_project">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                            <img src="../includes/images/projects/<?= $result['image'] ?>">
+                            <br>
+                            <label for="image">Replace Image: </label>
+                            <input type="file" id="image_edit_project<?= $result['id'] ?>" name="image">
+                            <br>
+                            <label for="title">Title: </label>
+                            <input type="text" name="title" id="title_edit_project<?= $result['id'] ?>" maxlength="25" value="<?= $result['title'] ?>">
+                            <br>
+                            <label for="url">URL: </label>
+                            <input type="text" name="url" value="<?= $result['url'] ?>">
+                            <br>
+                            <label for="short_desc">Short Description: </label>
+                            <br>
+                            <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
+                            <br>
+                            <br>
+                            <label for="long_desc">Long Description: </label>
+                            <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
+                            <br>
+                            <label for="active">Active: </label>
+                            <select name="active">
+                                <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                                <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                            </select>
+                            <br>
+                            <input type="submit" value="Submit">
+                            <button onclick="cancel_edit(event,'project',<?= $result['id'] ?>)">Cancel</button>
+                            <br>
+                            <hr>
+                            <br>
+
+                        </form>
                         <form class="delete_form" action="/admin/" method="post" >
                             <input type="submit" value="Delete Project" style="background-color: red">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="type" value="projects">
                             <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         </form>
-                    </form>
+                    </div>
                     <?php
                 }
 
@@ -737,47 +780,49 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('member')">
                     </div>
                 </div>
-                <form class="admin_form members_form" id="add_member_form" action="/admin/" method="post" enctype="multipart/form-data" hidden>
-                    <h2>Add Member</h2>
-                    <input type="hidden" name="action" value="add_member">
-                    <label for="image">Upload Image: </label>
-                    <input type="file" name="image">
-                    <br>
-                    <label for="f_name">First Name: </label>
-                    <input type="text" name="f_name" maxlength="25" value="">
-                    <br>
-                    <label for="l_name">Last Name: </label>
-                    <input type="text" name="l_name" maxlength="25" value="">
-                    <br>
-                    <label for="year">Year: </label>
-                    <input type="text" name="year" value="">
-                    <br>
-                    <label for="major">Major: </label>
-                    <input type="text" name="major" value="">
-                    <br>
-                    <label for="position">Position: </label>
-                    <input type="text" name="position" value="">
-                    <br>
-                    <label for="url">URL: </label>
-                    <input type="text" name="url" value="">
-                    <br>
-                    <label for="short_desc">Short Description: </label>
-                    <br>
-                    <textarea class="short_desc" name="short_desc" ></textarea>
-                    <br>
-                    <br>
-                    <label for="long_desc">Long Description: </label>
-                    <textarea class="long_desc" name="long_desc"></textarea>
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
-                    <input type="submit" value="Submit">
-                    <button onclick="cancel_add(event,'member')">Cancel</button>
-                </form>
+                <div class="form_div" id="add_member_form" hidden>
+                    <form class="admin_form members_form"  action="/admin/" onsubmit="validate_input(event,'add','member','')" method="post" enctype="multipart/form-data">
+                        <h2>Add Member</h2>
+                        <input type="hidden" name="action" value="add_member">
+                        <label for="image">Upload Image: </label>
+                        <input type="file" id="image_add_member" name="image">
+                        <br>
+                        <label for="f_name">First Name: </label>
+                        <input type="text" name="f_name" id="f_name_add_member" maxlength="25" value="">
+                        <br>
+                        <label for="l_name">Last Name: </label>
+                        <input type="text" name="l_name" id="l_name_add_member" maxlength="25" value="">
+                        <br>
+                        <label for="year">Year: </label>
+                        <input type="text" name="year" value="">
+                        <br>
+                        <label for="major">Major: </label>
+                        <input type="text" name="major" value="">
+                        <br>
+                        <label for="position">Position: </label>
+                        <input type="text" name="position" value="">
+                        <br>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url" value="">
+                        <br>
+                        <label for="short_desc">Short Description: </label>
+                        <br>
+                        <textarea class="short_desc" name="short_desc" ></textarea>
+                        <br>
+                        <br>
+                        <label for="long_desc">Long Description: </label>
+                        <textarea class="long_desc" name="long_desc"></textarea>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_add(event,'member')">Cancel</button>
+                    </form>
+                </div>
                 <?php
                 $sql = "SELECT * FROM members";
                 $query = mysqli_query($conn,$sql);
@@ -789,60 +834,63 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form members_form" action="/admin/" id="form_member_<?= $result['id'] ?>" method="post" enctype="multipart/form-data" hidden>
+                    <div class="form_div" id="form_member_<?= $result['id'] ?>" hidden>
+                        <form class="admin_form members_form" action="/admin/" onsubmit="validate_input(event,'edit','member',<?= $result['id'] ?>)"  method="post" enctype="multipart/form-data">
 
-                        <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
-                        <input type="hidden" name="action" value="edit_member">
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <img src="../includes/images/members/<?= $result['image'] ?>">
-                        <br>
-                        <label for="image">Replace Image: </label>
-                        <input type="file" name="image">
-                        <br>
-                        <label for="f_name">First Name: </label>
-                        <input type="text" name="f_name" maxlength="25" value="<?= $result['f_name'] ?>">
-                        <br>
-                        <label for="l_name">Last Name: </label>
-                        <input type="text" name="l_name" maxlength="25" value="<?= $result['l_name'] ?>">
-                        <br>
-                        <label for="year">Year: </label>
-                        <input type="text" name="year" value="<?= $result['year'] ?>">
-                        <br>
-                        <label for="major">Major: </label>
-                        <input type="text" name="major" value="<?= $result['major'] ?>">
-                        <br>
-                        <label for="position">Position: </label>
-                        <input type="text" name="position" value="<?= $result['position'] ?>">
-                        <br>
-                        <label for="url">URL: </label>
-                        <input type="text" name="url" value="<?= $result['url'] ?>">
-                        <br>
-                        <label for="short_desc">Short Description: </label>
-                        <br>
-                        <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
-                        <br>
-                        <br>
-                        <label for="long_desc">Long Description: </label>
-                        <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <input type="submit" value="Submit">
-                        <button onclick="cancel_edit(event,'member',<?= $result['id'] ?>)">Cancel</button>
-                        <br>
-                        <hr>
-                        <br>
+                            <h2><?= $result['f_name']." ".$result['l_name'] ?></h2>
+                            <input type="hidden" name="action" value="edit_member">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                            <img src="../includes/images/members/<?= $result['image'] ?>">
+                            <br>
+                            <label for="image">Replace Image: </label>
+                            <input type="file" id="image_edit_member<?= $result['id'] ?>" name="image">
+                            <br>
+                            <label for="f_name">First Name: </label>
+                            <input type="text" name="f_name" id="f_name_edit_member<?= $result['id'] ?>" maxlength="25" value="<?= $result['f_name'] ?>">
+                            <br>
+                            <label for="l_name">Last Name: </label>
+                            <input type="text" name="l_name" id="l_name_edit_member<?= $result['id'] ?>" maxlength="25" value="<?= $result['l_name'] ?>">
+                            <br>
+                            <label for="year">Year: </label>
+                            <input type="text" name="year" value="<?= $result['year'] ?>">
+                            <br>
+                            <label for="major">Major: </label>
+                            <input type="text" name="major" value="<?= $result['major'] ?>">
+                            <br>
+                            <label for="position">Position: </label>
+                            <input type="text" name="position" value="<?= $result['position'] ?>">
+                            <br>
+                            <label for="url">URL: </label>
+                            <input type="text" name="url" value="<?= $result['url'] ?>">
+                            <br>
+                            <label for="short_desc">Short Description: </label>
+                            <br>
+                            <textarea class="short_desc" name="short_desc"><?= $result['short_desc'] ?></textarea>
+                            <br>
+                            <br>
+                            <label for="long_desc">Long Description: </label>
+                            <textarea class="long_desc" name="long_desc"><?= $result['long_desc'] ?></textarea>
+                            <br>
+                            <label for="active">Active: </label>
+                            <select name="active">
+                                <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                                <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                            </select>
+                            <br>
+                            <input type="submit" value="Submit">
+                            <button onclick="cancel_edit(event,'member',<?= $result['id'] ?>)">Cancel</button>
+                            <br>
+                            <hr>
+                            <br>
+
+                        </form>
                         <form class="delete_form" action="/admin/" method="post" >
                             <input type="submit" value="Delete Member" style="background-color: red">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="type" value="members">
                             <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         </form>
-                    </form>
+                    </div>
                     <?php
                 }
 
@@ -859,36 +907,38 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('resource')">
                     </div>
                 </div>
-                <form class="admin_form resource_form" id="add_resource_form" action="/admin/" method="post" hidden>
+                <div class="form_div" id="add_resource_form" hidden>
+                    <form class="admin_form resource_form" onsubmit="validate_input(event,'add','resource','')"   action="/admin/" method="post">
 
-                    <h2>Add New Resource</h2>
-                    <input type="hidden" name="action" value="add_resource">
-                    <br>
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" maxlength="25" value="">
-                    <br>
-                    <label for="url">URL: </label>
-                    <input type="text" name="url">
-                    <br>
-                    <label for="description">Description: </label>
-                    <textarea class="short_desc" name="description"></textarea>
-                    <br>
-                    <label for="category">Category: </label>
-                    <select name="category">
-                        <option value="social">Social</option>
-                        <option value="documents">Documents</option>
-                        <option value="development">Development</option>
-                    </select>
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
-                    <input type="submit" value="Submit">
-                    <button onclick="cancel_add(event,'resource')">Cancel</button>
-                </form>
+                        <h2>Add New Resource</h2>
+                        <input type="hidden" name="action" value="add_resource">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" id="title_add_resource" name="title" maxlength="25" value="">
+                        <br>
+                        <label for="url">URL: </label>
+                        <input type="text" name="url">
+                        <br>
+                        <label for="description">Description: </label>
+                        <textarea class="short_desc" name="description"></textarea>
+                        <br>
+                        <label for="category">Category: </label>
+                        <select name="category">
+                            <option value="social">Social</option>
+                            <option value="documents">Documents</option>
+                            <option value="development">Development</option>
+                        </select>
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_add(event,'resource')">Cancel</button>
+                    </form>
+                </div>
                 <?php
                 $sql = "SELECT * FROM resources";
                 $query = mysqli_query($conn,$sql);
@@ -900,46 +950,49 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form resource_form" id="form_resource_<?= $result['id'] ?>" action="/admin/" method="post" hidden>
+                    <div class="form_div" id="form_resource_<?= $result['id'] ?>" hidden>
+                        <form class="admin_form resource_form" onsubmit="validate_input(event,'edit','resource',<?= $result['id'] ?>)"  action="/admin/" method="post">
 
-                        <h2><?= $result['title'] ?></h2>
-                        <input type="hidden" name="action" value="edit_resource">
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <br>
-                        <label for="title">Title: </label>
-                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
-                        <br>
-                        <label for="url">URL: </label>
-                        <input type="text" name="url" value="<?= $result['url'] ?>">
-                        <br>
-                        <label for="description">Description: </label>
-                        <textarea class="short_desc" name="description"><?= $result['description'] ?></textarea>
-                        <br>
-                        <label for="category">Category: </label>
-                        <select name="category">
-                            <option value="social" <?= $result['category'] == 'social' ? 'selected' : '' ?>>Social</option>
-                            <option value="documents" <?= $result['category'] == 'documents' ? 'selected' : '' ?>>Documents</option>
-                            <option value="development" <?= $result['category'] == 'development' ? 'selected' : '' ?>>Development</option>
-                        </select>
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <input type="submit" value="Submit">
-                        <button onclick="cancel_edit(event,'resource',<?= $result['id'] ?>)">Cancel</button>
-                        <br>
-                        <hr>
-                        <br>
+                            <h2><?= $result['title'] ?></h2>
+                            <input type="hidden" name="action" value="edit_resource">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                            <br>
+                            <label for="title">Title: </label>
+                            <input type="text" id="title_edit_resource<?= $result['id'] ?>" name="title" maxlength="25" value="<?= $result['title'] ?>">
+                            <br>
+                            <label for="url">URL: </label>
+                            <input type="text" name="url" value="<?= $result['url'] ?>">
+                            <br>
+                            <label for="description">Description: </label>
+                            <textarea class="short_desc" name="description"><?= $result['description'] ?></textarea>
+                            <br>
+                            <label for="category">Category: </label>
+                            <select name="category">
+                                <option value="social" <?= $result['category'] == 'social' ? 'selected' : '' ?>>Social</option>
+                                <option value="documents" <?= $result['category'] == 'documents' ? 'selected' : '' ?>>Documents</option>
+                                <option value="development" <?= $result['category'] == 'development' ? 'selected' : '' ?>>Development</option>
+                            </select>
+                            <br>
+                            <label for="active">Active: </label>
+                            <select name="active">
+                                <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                                <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                            </select>
+                            <br>
+                            <input type="submit" value="Submit">
+                            <button onclick="cancel_edit(event,'resource',<?= $result['id'] ?>)">Cancel</button>
+                            <br>
+                            <hr>
+                            <br>
+
+                        </form>
                         <form class="delete_form" action="/admin/" method="post" >
                             <input type="submit" value="Delete Resource" style="background-color: red">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="type" value="resources">
                             <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         </form>
-                    </form>
+                    </div>
                     <?php
                 }
 
@@ -964,26 +1017,28 @@ if($action != ""){
                     <div class="div_overlay" onclick="add_div('photo')">
                     </div>
                 </div>
-                <form class="admin_form photo_form" id="add_photo_form" enctype="multipart/form-data" action="/admin/" method="post" hidden>
+                <div class="form_div" id="add_photo_form" hidden>
+                    <form class="admin_form photo_form" onsubmit="validate_input(event,'add','photo', '')"   enctype="multipart/form-data" action="/admin/" method="post">
 
-                    <h2>Add New Photo</h2>
-                    <input type="hidden" name="action" value="add_photo">
-                    <br>
-                    <label for="image">Upload Photo: </label>
-                    <input type="file" name="image">
-                    <br>
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" maxlength="25" value="">
-                    <br>
-                    <label for="active">Active: </label>
-                    <select name="active">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                    <br>
-                    <input type="submit" value="Submit">
-                    <button onclick="cancel_add(event,'photo')">Cancel</button>
-                </form>
+                        <h2>Add New Photo</h2>
+                        <input type="hidden" name="action" value="add_photo">
+                        <br>
+                        <label for="image">Upload Photo: </label>
+                        <input type="file" id="image_add_photo" name="image">
+                        <br>
+                        <label for="title">Title: </label>
+                        <input type="text" id="title_add_photo" name="title" maxlength="25" value="">
+                        <br>
+                        <label for="active">Active: </label>
+                        <select name="active">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <button onclick="cancel_add(event,'photo')">Cancel</button>
+                    </form>
+                </div>
                 <?php
                 $sql = "SELECT * FROM photos";
                 $query = mysqli_query($conn,$sql);
@@ -995,34 +1050,36 @@ if($action != ""){
                             <h3 class="click_to_edit">Click to Edit</h3>
                         </div>
                     </div>
-                    <form class="admin_form photo_form" id="form_photo_<?= $result['id'] ?>" action="/admin/"
-                          method="post" hidden>
-                        <img src="../includes/images/gallery/<?= $result['image'] ?>" style="height: 200px; width: 200px; margin: 20px;">
-                        <h2><?= $result['title'] ?></h2>
-                        <input type="hidden" name="action" value="delete_photo">
-                        <input type="hidden" name="id" value="<?= $result['id'] ?>">
-                        <br>
-                        <label for="title">Title: </label>
-                        <input type="text" name="title" maxlength="25" value="<?= $result['title'] ?>">
-                        <br>
-                        <label for="active">Active: </label>
-                        <select name="active">
-                            <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
-                            <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
-                        </select>
-                        <br>
-                        <input type="submit" value="Submit">
-                        <button onclick="cancel_edit(event,'photo',<?= $result['id'] ?>)">Cancel</button>
-                        <br>
-                        <hr>
-                        <br>
+                    <div class="form_div" id="form_photo_<?= $result['id'] ?>"  hidden>
+                        <form class="admin_form photo_form" onsubmit="validate_input(event,'edit','photo',<?= $result['id'] ?>)"  action="/admin/" method="post">
+                            <img src="../includes/images/gallery/<?= $result['image'] ?>" style="height: 200px; width: 200px; margin: 20px;">
+                            <h2><?= $result['title'] ?></h2>
+                            <input type="hidden" name="action" value="delete_photo">
+                            <input type="hidden" name="id" value="<?= $result['id'] ?>">
+                            <br>
+                            <label for="title">Title: </label>
+                            <input type="text" id="title_edit_photo<?= $result['id'] ?>" name="title" maxlength="25" value="<?= $result['title'] ?>">
+                            <br>
+                            <label for="active">Active: </label>
+                            <select name="active">
+                                <option value="yes" <?= $result['active'] == 'yes' ? "selected" : "" ?>>Yes</option>
+                                <option value="no" <?= $result['active'] == "no" ? "selected" : "" ?>>No</option>
+                            </select>
+                            <br>
+                            <input type="submit" value="Submit">
+                            <button onclick="cancel_edit(event,'photo',<?= $result['id'] ?>)">Cancel</button>
+                            <br>
+                            <hr>
+                            <br>
+
+                        </form>
                         <form class="delete_form" action="/admin/" method="post">
                             <input type="submit" value="Delete Photo" style="background-color: red">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="type" value="photos">
                             <input type="hidden" name="id" value="<?= $result['id'] ?>">
                         </form>
-                    </form>
+                    </div>
                     <?php
                 }
                     ?>
