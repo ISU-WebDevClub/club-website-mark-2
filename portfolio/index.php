@@ -45,7 +45,7 @@ include "../includes/php/base.php";
             </div>
         </div>
 
-        <div class="grid">
+        <div class="grid" hidden>
             <div class="grid-sizer" ></div>
             <?php
             //This is the sql for querying the projects, assuming the table name is projects.
@@ -110,6 +110,9 @@ include "../includes/php/base.php";
             item.className += classes[num];
         }
     }
+
+    //Takes each of the portfolio items, and gives a random size defined by the css attributes above, and squeezes them together
+    //Random every time.
     $('.grid').masonry({
         // options...
         itemSelector: '.grid-item',
@@ -117,6 +120,8 @@ include "../includes/php/base.php";
         isFitWidth: true
     });
 
+    //This way, the portfolio grid doesn't show up before masonry can adjust them.
+    $('.grid').show();
 
 
 </script>
