@@ -87,7 +87,20 @@ Lastly, restart apache
 sudo apachectl restart
 ```
 
-Now go to `localhost` to see if it works.
+Go to `localhost` on your mac to test if it shows your project as you would expect.
+
+Now, make sure your phone and mac are on the same network, and go to 
+
+```
+<username>s-imac.local
+```
+
+Example
+
+```
+gregorys-imac.local
+```
+
 
 If you have further questions, here are the links I got this information from
 
