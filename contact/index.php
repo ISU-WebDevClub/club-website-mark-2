@@ -73,7 +73,7 @@ if($action != ""){
             <hr>
 
             <div id="contact_title">
-                <h2>Want us to make your website?</h2>
+                <h1>Want us to make your website?</h1>
             </div>
             <div id="grid">
 
@@ -119,6 +119,7 @@ if($action != ""){
         </div>
     </div>
 </body>
+
 </html>
 
 <?php include "../includes/php/footer.php" ?>

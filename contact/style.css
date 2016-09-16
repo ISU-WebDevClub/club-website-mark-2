@@ -15,7 +15,6 @@ body{
 #grid{
     width: 100%;
     margin-top: 50px;
-    text-align: center;
     overflow:hidden;
     display: flex;
     display: -webkit-flex;
@@ -43,11 +42,11 @@ body{
 }
 #contact_title{
     text-align: center;
-    width: 400px;
+    width: 500px;
     height: 50px;
     position: absolute;
     left: 50%;
-    margin-left: -200px;
+    margin-left: -250px;
 }
 .email_input{
     width: 400px;

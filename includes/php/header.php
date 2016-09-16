@@ -40,7 +40,22 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUES
     </div>
     <img id="menu_icon" src="/includes/images/icons/menu.png">
 </header>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
 <script>
+
+    $(document).click(function() {
+        var menu = document.getElementById('navbar');
+        if(menu.classList.contains('visible')){
+            menu.classList.remove('visible');
+        }
+    });
+
+    $("#header").click(function(event) {
+
+        event.stopPropagation();
+    });
+
     toggle_menu_icon();
     window.onresize = function(){
         toggle_menu_icon();

@@ -53,7 +53,7 @@ include "../includes/php/base.php";
                 if(mysqli_num_rows($query) > 0){
                     while($result = mysqli_fetch_assoc($query)){
                         ?>
-                        <a href="<?= $result['url'] ?>">
+                        <a href="<?= $result['url'] ?>" target="_blank">
                             <h3 class="resource social"><?= $result['title'] ?></h3>
                         </a>
                         <?php

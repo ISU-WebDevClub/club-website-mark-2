@@ -5,9 +5,9 @@
  * Date: 7/1/2016
  * Time: 9:06 AM
  */
-ini_set('display_errors',1);
-error_reporting(E_ALL | E_STRICT);
-session_start();
+//ini_set('display_errors',1);
+//error_reporting(E_ALL | E_STRICT);
+//session_start();
 
 
 //$root = realpath($_SERVER["DOCUMENT_ROOT"]);
