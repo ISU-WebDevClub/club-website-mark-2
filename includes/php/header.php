@@ -38,7 +38,7 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUES
     <div id="contact_button_form">
         <button id="contact_us">Contact Us</button>
     </div>
-    <img id="menu_icon" src="/includes/images/icons/menu.png">
+    <img id="menu_icon" src="/includes/images/icons/menu.png" >
 </header>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
@@ -61,6 +61,9 @@ if(strpos($_SERVER['REQUEST_URI'], 'About') !== false || strpos($_SERVER['REQUES
     window.onresize = function(){
         toggle_menu_icon();
     };
+    $('#header_logo').click(function(){
+        window.location = "/";
+    });
     var menu_icon = document.getElementById('menu_icon');
 
     menu_icon.onclick = function(){
