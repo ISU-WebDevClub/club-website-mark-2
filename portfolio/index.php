@@ -35,7 +35,7 @@ include "../includes/php/base.php";
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
-
+        <script src="../includes/masonry-docs/masonry.pkgd.min.js" type="application/javascript"></script>
     </head>
 <?php include "../includes/php/header.php" ?>
 <body>

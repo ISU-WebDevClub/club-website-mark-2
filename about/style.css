@@ -47,6 +47,12 @@ body{
     text-align: center;
 }
 
+body.mobile .event_text{
+    min-width: 0;
+    width: 300px;
+}
+
+
 @media screen and (min-width: 1005px ){
     .event_left .event_img{
         position: absolute;

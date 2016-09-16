@@ -68,8 +68,8 @@ if(mysqli_num_rows($query) == 1){
                 <?php
                 if(mysqli_num_rows($query) == 1){
                 ?>
-                <div id="meeting-info" style="margin: 20px 0 50px 50px">
-                    <h3><span>When:&nbsp;</span>&nbsp;&nbsp;<?= $day. " from ".$start_time." - ".$end_time ?></h3>
+                <div id="meeting-info">
+                    <h3><span>When:</span>&nbsp;&nbsp;<?= $day. " from ".$start_time." - ".$end_time ?></h3>
 
                     <h3><span>Where:</span>&nbsp;&nbsp;<?= $room." ".$building  ?></h3>
                 </div>
@@ -114,8 +114,12 @@ if(mysqli_num_rows($query) == 1){
     </div>
 </div>
 
-
-
+<script src="/includes/js/shared.js" type="application/javascript"></script>
+<script>
+    if(is_mobile()){
+        $('body').addClass('mobile');
+    }
+</script>
 </body>
 <?php include "includes/php/footer.php" ?>
 </html>

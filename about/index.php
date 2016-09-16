@@ -62,6 +62,7 @@ include "../includes/php/base.php";
                 //TODO query capabilities and display them
             ?>
         </div>
+
         <div id="history">
             <h2>History</h2>
             <?php
@@ -125,6 +126,14 @@ include "../includes/php/base.php";
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
+<script src="/includes/js/shared.js" type="application/javascript"></script>
+
+<script>
+    if(is_mobile()){
+        $('body').addClass('mobile');
+    }
+</script>
 </body>
 </html>
 
