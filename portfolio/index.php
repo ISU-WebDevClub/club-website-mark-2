@@ -33,9 +33,7 @@ include "../includes/php/base.php";
         <link rel="stylesheet" href="../includes/css/footer.css">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
-        <script src="../includes/masonry-docs/masonry.pkgd.min.js" type="application/javascript"></script>
+
     </head>
 <?php include "../includes/php/header.php" ?>
 <body>
@@ -64,7 +62,6 @@ include "../includes/php/base.php";
                 </div>
                 <?php
 
-
             }
 
 
@@ -74,19 +71,35 @@ include "../includes/php/base.php";
 
     </div>
 </body>
-</html>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+<script src="../includes/js/shared.js" type="application/javascript"></script>
 <script>
+    if(!is_mobile()){
+        var classes = [
+            '',
+            '',
+            '',
+            '',
+            '',
+            ' grid-item--width2 grid-item--height2',
+            ' grid-item--width3 grid-item--height3'
 
-    var classes = [
-        '',
-        '',
-        '',
-        '',
-        '',
-        ' grid-item--width2 grid-item--height2',
-        ' grid-item--width3 grid-item--height3'
+        ];
 
-    ];
+    }else{
+        $('body').addClass('mobile');
+        var classes = [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ]
+    }
+
 
     $('.grid-item').each(function(){
         get_classes(this)
@@ -99,7 +112,6 @@ include "../includes/php/base.php";
             item.className += classes[num];
         }
     }
-
     $('.grid').masonry({
         // options...
         itemSelector: '.grid-item',

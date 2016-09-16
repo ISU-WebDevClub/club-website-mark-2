@@ -1,6 +1,6 @@
 * {
-    box-sizing: border-box;
-}
+     box-sizing: border-box;
+ }
 
 body{
     margin: 0px 0 75px 0;
@@ -119,4 +119,13 @@ body{
 }
 .grid-item--height3 .title{
     top: 35%;
+}
+
+body.mobile .title{
+    top: 0;
+    opacity:1;
+}
+body.mobile .description{
+    top: 40%;
+    opacity:1;
 }
