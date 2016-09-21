@@ -50,6 +50,7 @@ body{
     -o-transition: all .2s;
     transition: all .2s;
     opacity: 1;
+    border-radius: 5px;
 }
 
 
@@ -67,6 +68,8 @@ body{
     -o-transition: all .2s;
     transition: all .2s;
     opacity: 1;
+    border-radius: 5px;
+
 }
 .overlay_hover:hover{
     background-color: rgba(0,0,0,.6);
@@ -109,4 +112,9 @@ body{
 }
 .grid-item:hover .name{
     top: 50%;
+}
+.taphover{
+    color: white;
+    height: 100%;
+    width: 100%;
 }

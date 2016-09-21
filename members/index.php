@@ -53,20 +53,20 @@ $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
 
                 ?>
-                <a class="taphover" href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
-                    <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
+                <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
+                    <a class="taphover" href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
 
 
-                        <div class="overlay_hover">
-                            <div class="overlay"></div>
-                        </div>
-
-                        <h2 class="name"><?= $result['f_name'] ?>&nbsp<?=$result['l_name'] ?></h2>
-                        <p class="description"><?= $result['short_desc'] ?></p>
-
-
+                    <div class="overlay_hover">
+                        <div class="overlay"></div>
                     </div>
-                </a>
+
+                    <h2 class="name"><?= $result['f_name'] ?>&nbsp<?=$result['l_name'] ?></h2>
+                    <p class="description"><?= $result['short_desc'] ?></p>
+
+                    </a>
+                </div>
+
 
                 <?php
 
