@@ -51,7 +51,20 @@ if(mysqli_num_rows($query) == 1){
         <p id="back_link"><a href="/portfolio/"><img src="../includes/images/back_arrow.png">Back to Projects</a></p>
         <hr>
         <div id="project">
-            <img id="project_image" src="../includes/images/projects/<?= $img ?>">
+            <?php
+            if($result['url'] != "#" && $result['url'] != ""){
+                ?>
+
+                <a href="<?= $result['url']?>" target="_blank"><img id="project_image" src="../includes/images/projects/<?= $img ?>"></a>
+
+                <?php
+            }else {
+                ?>
+                <img id="project_image" src="../includes/images/projects/<?= $img ?>">
+
+                <?php
+            }
+            ?>
             <div id="project_text">
                 <p><?= $desc ?></p>
             </div>
