@@ -53,7 +53,7 @@ $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
 
                 ?>
-                <a href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
+                <a class="taphover" href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
                     <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
 
 
@@ -79,6 +79,22 @@ $query = mysqli_query($conn, $sql);
         </div>
     </div>
     </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
+
+<script>
+    $('a.taphover').on('touchend', function (e) {
+        'use strict'; //satisfy code inspectors
+        var link = $(this); //preselect the link
+        if (link.hasClass('hover')) {
+            return true;
+        } else {
+            link.addClass('hover');
+            $('a.taphover').not(this).removeClass('hover');
+            e.preventDefault();
+            return false; //extra, and to make sure the function has consistent return points
+        }
+    });
+</script>
 </html>
 
 <?php include

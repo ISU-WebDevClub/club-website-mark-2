@@ -70,6 +70,9 @@ body.mobile #side_by_side{
     text-align: center;
     margin: 0 auto;
 }
+#twitter_div{
+    pointer-events: all;
+}
 span{
     background-color: #55acee;
     padding: 10px;

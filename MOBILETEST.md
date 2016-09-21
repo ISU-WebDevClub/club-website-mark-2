@@ -1,3 +1,7 @@
+# Before trying my instructions, follow [these instructions](https://coolestguidesontheplanet.com/get-apache-mysql-php-and-phpmyadmin-working-on-osx-10-11-el-capitan/)
+
+
+
 # Serving your project to mobile
 If you have a mac, these instructions will show you how to serve your project files on your macs localhost so you can 
 view your website with a mobile phone.
@@ -103,6 +107,7 @@ gregorys-imac.local
 
 
 If you have further questions, here are the links I got this information from
+
 
 [stackoverflow.com](http://stackoverflow.com/questions/5891802/how-do-i-change-the-root-directory-of-an-apache-server)
 

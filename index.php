@@ -6,8 +6,8 @@
  * Time: 5:17 PM
  */
 
-include "includes/php/general.php";
 include "includes/php/base.php";
+include "includes/php/general.php";
 
 $sql = "SELECT * FROM meetings WHERE active='yes'";
 $query = mysqli_query($conn,$sql);

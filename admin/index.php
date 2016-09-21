@@ -1094,7 +1094,6 @@ if($action != ""){
 
 
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../includes/js/shared.js" type="application/javascript"></script>
 <script>
     if(is_mobile()){
@@ -1110,7 +1109,9 @@ if($action != ""){
         }
     });
 
-
+    $('#twitter_div').click(function(){
+       $('#twitter_div').css('pointer-events: ');
+    });
 
 </script>
 </html>

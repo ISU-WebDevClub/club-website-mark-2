@@ -52,15 +52,17 @@ include "../includes/php/base.php";
             $sql = "SELECT * FROM projects WHERE active='yes'";
             $query = mysqli_query($conn, $sql);
             while($result = mysqli_fetch_assoc($query)){
-                ?>
-                <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
-                    <a href="/focus/?id=<?= $result['id'] ?>">
-                        <div class="overlay"></div>
-                        <h2 class="title"><?= $result['title'] ?></h2>
-                        <p class="description"><?= $result['short_desc'] ?></p>
-                    </a>
-                </div>
-                <?php
+                for($i =0;$i<10;$i++){
+                    ?>
+                    <div class="grid-item " id="<?= $result['id'] ?>" style="background: url('/includes/images/projects/<?= $result['image'] ?>') center; background-size: cover;">
+                        <a href="/focus/?id=<?= $result['id'] ?>">
+                            <div class="overlay"></div>
+                            <h2 class="title"><?= $result['title'] ?></h2>
+                            <p class="description"><?= $result['short_desc'] ?></p>
+                        </a>
+                    </div>
+                    <?php
+                }
 
             }
 
@@ -70,7 +72,7 @@ include "../includes/php/base.php";
     </div>
 </body>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 <script src="../includes/js/shared.js" type="application/javascript"></script>
 <script>
     if(!is_mobile()){
@@ -82,7 +84,6 @@ include "../includes/php/base.php";
             '',
             ' grid-item--width2 grid-item--height2',
             ' grid-item--width3 grid-item--height3'
-
         ];
 
     }else{
@@ -94,7 +95,7 @@ include "../includes/php/base.php";
             '',
             '',
             '',
-            '',
+            ''
         ]
     }
 
