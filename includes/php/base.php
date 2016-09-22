@@ -29,6 +29,7 @@ if (file_exists($file))
 
 $json = json_decode($json);
 
+
 //TODO change this for when the server is live.
 $dbhost = $json->{'host'};
 $dbname = $json->{'database'}; // the name of the database that you are going to use for this project

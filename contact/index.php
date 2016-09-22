@@ -38,6 +38,16 @@ if($action != ""){
             $send = mail($account, $subject, $message,$headers);
             if($send === false){
                 echo "Failed to send email";
+            }else{
+                ?>
+                <div id="full_page_overlay"></div>
+                <div id="mail_sent">
+                    <h2>Email Sent!</h2>
+                    <p>Thank you for contacting us, we will get back with you as soon as we can.</p>
+                    <button id="close_email_success" class="button">Close</button>
+                </div>
+
+                <?php
             }
     }
 }
@@ -125,6 +135,37 @@ if($action != ""){
     if(is_mobile()){
         $('body').addClass('mobile');
     }
+    $('#close_email_success').click(function(){
+       $('#mail_sent').hide();
+        $('#full_page_overlay').hide();
+    });
+    $('#email_form').submit(function(event){
+        if($('#name').val() ==""){
+            event.preventDefault();
+            $('#name').css('border', "1px solid red");
+
+        }else{
+            $('#name').css('border', "1px solid black");
+        }
+
+        if($('#email').val() == ''){
+            event.preventDefault();
+            $('#email').css('border', "1px solid red");
+
+        }else{
+            $('#email').css('border', "1px solid black");
+
+        }
+
+        if($('#message').val() == ""){
+            event.preventDefault();
+            $('#message').css('border', "1px solid red");
+        }else{
+            $('#message').css('border', "1px solid black");
+
+        }
+
+    });
 </script>
 </html>
 

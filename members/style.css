@@ -80,7 +80,7 @@ body{
     text-align: center;
     position: absolute;
     pointer-events: none;
-    top: 65%;
+    top: 77%;
     width: 90%;
     left: 50%;
     margin-left: -45%;
@@ -92,7 +92,7 @@ body{
 
 }
 .grid-item:hover .description{
-    opacity:1;
+    opacity:.5;
 }
 .name{
     position: absolute;
@@ -111,7 +111,7 @@ body{
 
 }
 .grid-item:hover .name{
-    top: 50%;
+    top: 65%;
 }
 .taphover{
     color: white;

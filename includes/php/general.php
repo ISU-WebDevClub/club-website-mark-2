@@ -7,22 +7,31 @@
  */
 
 function upload_image($type, $name){
-    switch($type){
-        case 'event':
-            $target_dir = "../includes/images/events/";
-            break;
-        case 'project':
-            $target_dir = "../includes/images/projects/";
-            break;
-        case 'member':
-            $target_dir = "../includes/images/members/";
-            break;
-        case 'photo':
-            $target_dir = "../includes/images/gallery/";
-            break;
+    $path = getcwd();
+    $path = explode("/",$path);
+    $path_string = "";
+    for($i = 0;$i < sizeof($path) -1;$i++){
+        $path_string .= $path[$i]."/";
     }
 
+    switch($type){
+        case 'event':
+            $target_dir = "includes/images/events/";
+            break;
+        case 'project':
+            $target_dir = "includes/images/projects/";
+            break;
+        case 'member':
+            $target_dir = "includes/images/members/";
+            break;
+        case 'photo':
+            $target_dir = "includes/images/gallery/";
+            break;
+    }
+    $target_dir = $path_string.$target_dir;
+
     $target_file = basename($_FILES["image"]["name"]);
+
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     $temp_file = $target_dir.$name;

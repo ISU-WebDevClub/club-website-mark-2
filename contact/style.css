@@ -79,7 +79,60 @@ body{
     cursor: pointer;
     cursor: hand;
 }
+#submit_email:hover{
+    background-color: #454545;
+
+}
 #submit_email:focus{
     outline: 0px;
-    border: 1px solid #808080;
+    border: 1px solid #454545;
+}
+#full_page_overlay{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(100,100,100,.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+#mail_sent{
+    height: 200px;
+    width: 300px;
+    position: fixed;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -150px;
+    /*background-color: #353535;*/
+    background-color: #55acee;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid black;
+    -webkit-box-shadow: 5px 5px 25px black;
+    -moz-box-shadow:  5px 5px 25px black;
+    box-shadow:  5px 5px 25px black;
+}
+#close_email_success{
+    height: 30px;
+    width: 80px;
+    /*background-color: #353535;*/
+    background-color: #55acee;
+    border: 1px solid #353535;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    cursor: hand;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    margin-left: -40px;
+}
+#close_email_success:hover{
+    background-color: rgba(0,0,0,.2);
+}
+#close_email_success:focus{
+    outline: 0px;
+    border: 1px solid #454545;
 }
