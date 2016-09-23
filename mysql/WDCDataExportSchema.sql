@@ -33,7 +33,7 @@ CREATE TABLE `events` (
   `created` datetime DEFAULT NULL,
   `active` varchar(45) DEFAULT 'yes',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `meetings` (
   `semester` varchar(45) DEFAULT NULL,
   `active` varchar(45) DEFAULT 'no',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `meetings` (
 
 LOCK TABLES `meetings` WRITE;
 /*!40000 ALTER TABLE `meetings` DISABLE KEYS */;
-INSERT INTO `meetings` VALUES (1,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(2,'Tuesdays','18:00','20:00','1016','Coover Hall','2016','Fall','no'),(3,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(4,'Tuesday','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(5,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(6,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(7,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Spring','no'),(8,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','yes');
+INSERT INTO `meetings` VALUES (12,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(13,'Tuesdays','18:00','19:00','1016','Coover Hall','2017','Fall','no'),(14,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(15,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','no'),(16,'Tuesdays','18:00','19:00','1016','Coover Hall','2016','Fall','yes');
 /*!40000 ALTER TABLE `meetings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `members` (
   `active` varchar(45) DEFAULT 'yes',
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,8 +107,34 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'Gregory','Steenhagen','Senior','Software Engineering','WDC President. Web Developer. The Last Avatar.','','Steenhagen-Charlie-md.jpg','http://www.stonestreetsoftware.com','President','yes','2016-09-09 20:19:16'),(2,'Nathan','Karasch','Senior','Software Engineering','WDC Treasurer. Retired rockstar. US Marine. Cookie Monster',NULL,'Karasch-Nathan-md.jpg','#','Treasurer','yes','2016-09-09 20:19:16'),(3,'Leelabari','Fulbel',NULL,NULL,'WDC Vice President.',NULL,'Fulbel-Leelabari-md.jpg','#','Vice President','yes','2016-09-09 20:19:16'),(4,'Christine','Hicaro',NULL,NULL,'WDC Outreach Coordinator',NULL,'Hicaro-Christine-md.jpg','#','Outreach','yes','2016-09-09 20:19:16');
+INSERT INTO `members` VALUES (1,'Gregory','Steenhagen','Senior','Software Engineering','WDC President. Web Developer. The Last Avatar.','Long DEsc','Steenhagen-Charlie-md.jpg','http://www.stonestreetsoftware.com','President','yes','2016-09-09 20:19:16'),(2,'Nathan','Karasch','Senior','Software Engineering','WDC Treasurer. Retired rockstar. US Marine. Cookie Monster','','Karasch-Nathan-md.jpg','http://nkarasch.public.iastate.edu','Treasurer','yes','2016-09-09 20:19:16'),(3,'Leelabari','Fulbel',NULL,NULL,'WDC Vice President.',NULL,'Fulbel-Leelabari-md.jpg','#','Vice President','yes','2016-09-09 20:19:16'),(4,'Christine','Hicaro',NULL,NULL,'WDC Outreach Coordinator',NULL,'Hicaro-Christine-md.jpg','#','Outreach','yes','2016-09-09 20:19:16'),(11,'Nicholas','Cage','Super-Senior','Awesome','Honorary Member, Image Placeholder, Not a Demon.','Nicholas Cage is an honorary member of the WDC. He originally was used as a placeholder for images as the site was being created, and has evolved into a staple of the club. His wisdom and leadership has taken this club from a small gathering of 4 people to a dominating force to be reckoned with in the world of web development. ','nicholas_cage.jpg','#','King','yes',NULL),(12,'Jon','Snow','Graduate','Commanding','Lord Commander.',NULL,'jon_snow.jpg','http://gameofthrones.wikia.com/wiki/Jon_Snow','Lord Commander','yes',NULL);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `photos`
+--
+
+DROP TABLE IF EXISTS `photos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `image` varchar(100) NOT NULL,
+  `active` varchar(10) NOT NULL DEFAULT 'yes',
+  KEY `Index 1` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `photos`
+--
+
+LOCK TABLES `photos` WRITE;
+/*!40000 ALTER TABLE `photos` DISABLE KEYS */;
+INSERT INTO `photos` VALUES (1,'Nick Cage','cage-superman.jpg','yes'),(8,'Test','test_1.png','yes');
+/*!40000 ALTER TABLE `photos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -128,7 +154,7 @@ CREATE TABLE `projects` (
   `active` varchar(45) DEFAULT 'yes',
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +163,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow\'s website for their new dentist office located in Jewell, Iowa.','Dan and Meryl Scarrow first approached us in the spring of 2016 to develop the website for their new dental office in Jewell. They were renovating an historic brick building on the main street in Jewell, and wanted the website to reflect that. The site is fully responsive and shrinks with the browser. It also features an admin page to allow Dan and Meryl to upload photos, change the content, and activate and deactivate photos. It was built with PHP, CSS, HTML and Javascript.','WDC-logo.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
+INSERT INTO `projects` VALUES (1,'Jewell Family Dentistry','Dan and Meryl Scarrow\'s website for their new dentist office located in Jewell, Iowa.','Dan and Meryl Scarrow first approached us in the spring of 2016 to develop the website for their new dental office in Jewell. They were renovating an historic brick building on the main street in Jewell, and wanted the website to reflect that. The site is fully responsive and shrinks with the browser. It also features an admin page to allow Dan and Meryl to upload photos, change the content, and activate and deactivate photos. It was built with PHP, CSS, HTML and Javascript.','jewell_family_dentistry.png','http://www.jewellfamilydentistry.com','yes','2016-09-09 20:26:40');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +183,7 @@ CREATE TABLE `resources` (
   `active` varchar(45) DEFAULT 'yes',
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +192,7 @@ CREATE TABLE `resources` (
 
 LOCK TABLES `resources` WRITE;
 /*!40000 ALTER TABLE `resources` DISABLE KEYS */;
-INSERT INTO `resources` VALUES (1,'ISU Student Organization Database','The club\'s official student organization page for Iowa State University. TEST\r\n','https://www.stuorg.iastate.edu/site/web-dev-club','social','yes','2016-09-09 20:37:33'),(2,'Facebook',NULL,'https://www.facebook.com/ISUWebDevelopment','social','yes','2016-09-09 20:37:33'),(3,'Twitter',NULL,'https://twitter.com/ISU_Web_Dev','social','yes','2016-09-09 20:37:33'),(4,'Slack','A chat client for discussing projects, development, or random YouTube videos.','https://isuwdc.slack.com','social','yes','2016-09-09 20:37:33'),(5,'Operations Manual','','https://github.com/ISU-WebDevClub/club-documents/blob/master/operations-manual.md','documents','yes','2016-09-09 20:37:33'),(6,'Constitution','','https://github.com/ISU-WebDevClub/club-documents/blob/master/constitution.md','documents','yes','2016-09-09 20:37:33'),(7,'Github','The repository for all the club\'s code.','https://github.com/ISU-webdevclub','documents','yes','2016-09-09 20:37:33'),(8,'Google Drive','Primarily documents, meeting minutes, etc.','https://drive.google.com/a/iastate.edu/folderview?id=0B4rWlTKPygEyfkw1YVdEZUtBUVZ2cjFSeUZIVEFKMkZjRlJoWldDcWhJckNuMkkzUm1DZlE&usp=sharing#','documents','yes','2016-09-09 20:37:33'),(9,'W3School','A fine source of knowledge about HTML, XML, CSS, Bootstrap, JavaScript, JQuery, SQL, and PHP.','http://www.w3schools.com/','development','yes','2016-09-09 20:37:33'),(10,'Bootstrap','One of the most exhaustive sources of Bootstrap info.','http://getbootstrap.com/','development','yes','2016-09-09 20:37:33'),(11,'Github For Windows','A tutorial created by one of our own covering the basics of Git and GitHub in a Windows environment.',NULL,'development','yes','2016-09-09 20:37:33'),(12,'Stack Overflow','Got a question? Odds are, the answer\'s in here...','http://stackoverflow.com/','development','yes','2016-09-09 20:37:33'),(13,'Lynda','Learn technology, software development, creative skills, and business savvy from the professionals in these quality video courses. Free access for ISU students.','http://www.lynda.com/','development','yes','2016-09-09 20:37:33'),(14,'TheNewBoston','Watch thousands of free educational video tutorials.','https://www.thenewboston.com/','development','yes','2016-09-09 20:37:33'),(15,'Bento','Everything you need to be a self-taught expert developer.','https://www.bento.io/','development','yes','2016-09-09 20:37:33');
+INSERT INTO `resources` VALUES (1,'ISU Student Organization Database','The club\'s official student organization page for Iowa State University. TEST\r\n','https://www.stuorg.iastate.edu/site/web-dev-club','social','yes','2016-09-09 20:37:33'),(2,'Facebook',NULL,'https://www.facebook.com/ISUWebDevelopment','social','yes','2016-09-09 20:37:33'),(3,'Twitter','','https://twitter.com/ISU_Web_Dev','social','yes','2016-09-09 20:37:33'),(4,'Slack','A chat client for discussing projects, development, or random YouTube videos.','https://isuwdc.slack.com','social','yes','2016-09-09 20:37:33'),(5,'Operations Manual','','https://github.com/ISU-WebDevClub/club-documents/blob/master/operations-manual.md','documents','yes','2016-09-09 20:37:33'),(6,'Constitution','','https://github.com/ISU-WebDevClub/club-documents/blob/master/constitution.md','documents','yes','2016-09-09 20:37:33'),(7,'Github','The repository for all the club\'s code.','https://github.com/ISU-webdevclub','documents','yes','2016-09-09 20:37:33'),(8,'Google Drive','Primarily documents, meeting minutes, etc.','https://drive.google.com/a/iastate.edu/folderview?id=0B4rWlTKPygEyfkw1YVdEZUtBUVZ2cjFSeUZIVEFKMkZjRlJoWldDcWhJckNuMkkzUm1DZlE&usp=sharing#','documents','yes','2016-09-09 20:37:33'),(9,'W3School','A fine source of knowledge about HTML, XML, CSS, Bootstrap, JavaScript, JQuery, SQL, and PHP.','http://www.w3schools.com/','development','yes','2016-09-09 20:37:33'),(10,'Bootstrap','One of the most exhaustive sources of Bootstrap info.','http://getbootstrap.com/','development','yes','2016-09-09 20:37:33'),(11,'Github For Windows','A tutorial created by one of our own covering the basics of Git and GitHub in a Windows environment.',NULL,'development','yes','2016-09-09 20:37:33'),(12,'Stack Overflow','Got a question? Odds are, the answer\'s in here...','http://stackoverflow.com/','development','yes','2016-09-09 20:37:33'),(13,'Lynda','Learn technology, software development, creative skills, and business savvy from the professionals in these quality video courses. Free access for ISU students.','http://www.lynda.com/','development','yes','2016-09-09 20:37:33'),(14,'TheNewBoston','Watch thousands of free educational video tutorials.','https://www.thenewboston.com/','development','yes','2016-09-09 20:37:33'),(15,'Bento','Everything you need to be a self-taught expert developer.','https://www.bento.io/','development','yes','2016-09-09 20:37:33');
 /*!40000 ALTER TABLE `resources` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -179,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-14  1:41:25
+-- Dump completed on 2016-09-22 12:11:58

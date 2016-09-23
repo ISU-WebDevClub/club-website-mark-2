@@ -56,7 +56,6 @@ $query = mysqli_query($conn, $sql);
                 <div class="grid-item" style="background-image: url('../includes/images/members/<?= $result['image'] ?>')">
                     <a class="taphover" href="<?= $result['url'] ?>" <?= $result['url'] == '#' ? "" : 'target="_blank"' ?>>
 
-
                     <div class="overlay_hover">
                         <div class="overlay"></div>
                     </div>
@@ -67,13 +66,9 @@ $query = mysqli_query($conn, $sql);
                     </a>
                 </div>
 
-
                 <?php
 
             }
-
-
-
 
             ?>
         </div>
@@ -82,29 +77,11 @@ $query = mysqli_query($conn, $sql);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="application/javascript"></script>
 
 <script>
-    $('a.taphover').on('touchend', function (e) {
-        'use strict'; //satisfy code inspectors
-        var link = $(this); //preselect the link
-        if (link.hasClass('hover')) {
-            return true;
-        } else {
-            link.addClass('hover');
-            $('a.taphover').not(this).removeClass('hover');
-            e.preventDefault();
-            return false; //extra, and to make sure the function has consistent return points
-        }
-    });
+    d
 </script>
 </html>
 
 <?php include
 "../includes/php/footer.php";
-
-function random_pic($dir = '../includes/images/members/')
-{
-    $files = glob($dir . '/*-md.*');
-    $file = array_rand($files);
-    return $files[$file];
-}
 
 ?>
